@@ -3,7 +3,11 @@
 
 namespace NAI
 {
-	Action::Action(std::vector<std::shared_ptr<Predicate>>& predicates) : mPreconditions{ predicates }
+	Action::Action(
+		const std::vector<std::shared_ptr<Predicate>>& predicates,
+		const std::vector<std::shared_ptr<Predicate>>& postconditions) : 
+		mPreconditions{ predicates },
+		mPostconditions { postconditions }
 	{
 	}
 }

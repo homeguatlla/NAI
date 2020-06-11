@@ -36,6 +36,9 @@
     <ClInclude Include="source\goap\Predicate.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\Goal.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -51,6 +54,9 @@
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\Predicate.cpp">
+      <Filter>Archivos de origen\goap</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\Goal.cpp">
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
   </ItemGroup>

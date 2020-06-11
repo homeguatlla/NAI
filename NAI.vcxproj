@@ -154,6 +154,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="source\goap\Action.h" />
+    <ClInclude Include="source\goap\Goal.h" />
     <ClInclude Include="source\goap\GoapPlanner.h" />
     <ClInclude Include="source\goap\Predicate.h" />
   </ItemGroup>
@@ -166,6 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="source\goap\Action.cpp" />
+    <ClCompile Include="source\goap\Goal.cpp" />
     <ClCompile Include="source\goap\GoapPlanner.cpp" />
     <ClCompile Include="source\goap\Predicate.cpp" />
   </ItemGroup>

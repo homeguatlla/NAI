@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GoapPlanner.h"
+#include "Goal.h"
 #include "Action.h"
 #include "Predicate.h"
 
@@ -7,26 +8,59 @@
 
 namespace NAI
 {
-	std::vector<std::shared_ptr<Action>> GoapPlanner::GetPlan(const std::vector<std::shared_ptr<Action>>& actions, const std::vector<std::shared_ptr<Predicate>>& predicates) const
+	std::shared_ptr<Goal> GoapPlanner::GetPlan(std::vector<std::shared_ptr<Goal>>& inputGoals, std::vector<std::shared_ptr<Predicate>>& inputPredicates) const
 	{
-		std::vector<std::shared_ptr<Action>> plan;
-
-		if (!predicates.empty() && !actions.empty())
+		if (!inputPredicates.empty() && !inputGoals.empty())
 		{
-			for (auto&& action : actions)
+			for (auto&& goal : inputGoals)
 			{
-				auto preconditions = action->GetPreconditions();
-				if (SatifyPrecondition(preconditions, predicates))
+				if (SatisfyActions(goal->GetActions(), inputPredicates))
 				{
-					plan.push_back(action);
+					return goal;
 				}
 			}
 		}
 
-		return plan;
+		return {};
 	}
 
-	bool GoapPlanner::SatifyPrecondition(
+	bool GoapPlanner::SatisfyActions(const std::vector<std::shared_ptr<Action>>& inputActions, std::vector<std::shared_ptr<Predicate>>& inputPredicates) const
+	{
+		bool satisfied = false;
+
+		if (!inputPredicates.empty() && !inputActions.empty())
+		{
+			std::vector<std::shared_ptr<Predicate>> predicates = inputPredicates;
+			std::vector<std::shared_ptr<Action>> actions = inputActions;			
+
+			int lastPredicatesSize = predicates.size();
+			do
+			{
+				lastPredicatesSize = predicates.size();
+				for (auto it = actions.begin(); it != actions.end();)
+				{
+					auto action = *it;
+					auto preconditions = action->GetPreconditions();
+					if (SatisfyPrecondition(preconditions, predicates))
+					{
+						auto postconditions = action->GetPostconditions();
+						predicates.insert(end(predicates), begin(postconditions), end(postconditions));
+						it = actions.erase(it);
+					}
+					else
+					{
+						it++;
+					}
+				}
+			} while (predicates.size() > lastPredicatesSize);
+
+			satisfied = actions.empty();
+		}
+
+		return satisfied;
+	}
+
+	bool GoapPlanner::SatisfyPrecondition(
 		std::vector<std::shared_ptr<Predicate>>& preconditions, 
 		std::vector<std::shared_ptr<Predicate>>& predicates) const
 	{

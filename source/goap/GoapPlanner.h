@@ -4,8 +4,9 @@
 
 namespace NAI
 {
-	class Action;
+	class Goal;
 	class Predicate;
+	class Action;
 
 	class GoapPlanner
 	{
@@ -13,12 +14,16 @@ namespace NAI
 		GoapPlanner() = default;
 		~GoapPlanner() = default;
 
-		std::vector<std::shared_ptr<Action>> GetPlan(
-			const std::vector<std::shared_ptr<Action>>& actions, 
-			const std::vector<std::shared_ptr<Predicate>>& predicates) const;
+		std::shared_ptr<Goal> GetPlan(
+			std::vector<std::shared_ptr<Goal>>& inputGoals, 
+			std::vector<std::shared_ptr<Predicate>>& inputPredicates) const;
 
 	private:
-		bool SatifyPrecondition(
+		bool SatisfyActions(
+			const std::vector<std::shared_ptr<Action>>& inputActions,
+			std::vector<std::shared_ptr<Predicate>>& inputPredicates) const;
+
+		bool SatisfyPrecondition(
 			std::vector<std::shared_ptr<Predicate>>& preconditions, 
 			std::vector<std::shared_ptr<Predicate>>& predicates) const;
 	};
