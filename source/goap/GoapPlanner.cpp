@@ -12,13 +12,21 @@ namespace NAI
 	{
 		if (!inputPredicates.empty() && !inputGoals.empty())
 		{
+			std::shared_ptr<Goal> lessCostGoal = nullptr;
+
 			for (auto&& goal : inputGoals)
 			{
-				if (SatisfyActions(goal->GetActions(), inputPredicates))
+				if (lessCostGoal == nullptr || goal->GetCost() < lessCostGoal->GetCost())
 				{
-					return goal;
+					if (SatisfyActions(goal->GetActions(), inputPredicates))
+					{
+
+						lessCostGoal = goal;
+					}
 				}
 			}
+
+			return lessCostGoal;
 		}
 
 		return {};
@@ -52,7 +60,7 @@ namespace NAI
 						it++;
 					}
 				}
-			} while (predicates.size() > lastPredicatesSize);
+			} while (static_cast<int>(predicates.size()) > lastPredicatesSize);
 
 			satisfied = actions.empty();
 		}

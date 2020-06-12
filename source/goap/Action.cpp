@@ -5,9 +5,11 @@ namespace NAI
 {
 	Action::Action(
 		const std::vector<std::shared_ptr<Predicate>>& predicates,
-		const std::vector<std::shared_ptr<Predicate>>& postconditions) : 
+		const std::vector<std::shared_ptr<Predicate>>& postconditions,
+		unsigned int cost) : 
 		mPreconditions{ predicates },
-		mPostconditions { postconditions }
+		mPostconditions { postconditions },
+		mCost { cost }
 	{
 	}
 }
