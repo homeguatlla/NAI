@@ -27,16 +27,25 @@
     <ClInclude Include="pch.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\Action.h">
-      <Filter>Archivos de encabezado\goap</Filter>
-    </ClInclude>
     <ClInclude Include="source\goap\GoapPlanner.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\Predicate.h">
+    <ClInclude Include="source\goap\BasePredicate.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\Goal.h">
+    <ClInclude Include="source\goap\BaseAction.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\BaseGoal.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\IAction.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\IGoal.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\IPredicate.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,16 +56,16 @@
     <ClCompile Include="pch.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="source\goap\Action.cpp">
-      <Filter>Archivos de origen\goap</Filter>
-    </ClCompile>
     <ClCompile Include="source\goap\GoapPlanner.cpp">
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
-    <ClCompile Include="source\goap\Predicate.cpp">
+    <ClCompile Include="source\goap\BasePredicate.cpp">
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
-    <ClCompile Include="source\goap\Goal.cpp">
+    <ClCompile Include="source\goap\BaseAction.cpp">
+      <Filter>Archivos de origen\goap</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\BaseGoal.cpp">
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
   </ItemGroup>

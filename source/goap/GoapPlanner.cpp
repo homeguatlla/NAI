@@ -1,18 +1,18 @@
 #include "pch.h"
 #include "GoapPlanner.h"
-#include "Goal.h"
-#include "Action.h"
-#include "Predicate.h"
+#include "IGoal.h"
+#include "IAction.h"
+#include "IPredicate.h"
 
 #include <algorithm>
 
 namespace NAI
 {
-	std::shared_ptr<Goal> GoapPlanner::GetPlan(std::vector<std::shared_ptr<Goal>>& inputGoals, std::vector<std::shared_ptr<Predicate>>& inputPredicates) const
+	std::shared_ptr<IGoal> GoapPlanner::GetPlan(std::vector<std::shared_ptr<IGoal>>& inputGoals, std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
 	{
 		if (!inputPredicates.empty() && !inputGoals.empty())
 		{
-			std::shared_ptr<Goal> lessCostGoal = nullptr;
+			std::shared_ptr<IGoal> lessCostGoal = nullptr;
 
 			for (auto&& goal : inputGoals)
 			{
@@ -32,14 +32,14 @@ namespace NAI
 		return {};
 	}
 
-	bool GoapPlanner::SatisfyActions(const std::vector<std::shared_ptr<Action>>& inputActions, std::vector<std::shared_ptr<Predicate>>& inputPredicates) const
+	bool GoapPlanner::SatisfyActions(const std::vector<std::shared_ptr<IAction>>& inputActions, std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
 	{
 		bool satisfied = false;
 
 		if (!inputPredicates.empty() && !inputActions.empty())
 		{
-			std::vector<std::shared_ptr<Predicate>> predicates = inputPredicates;
-			std::vector<std::shared_ptr<Action>> actions = inputActions;			
+			std::vector<std::shared_ptr<IPredicate>> predicates = inputPredicates;
+			std::vector<std::shared_ptr<IAction>> actions = inputActions;			
 
 			int lastPredicatesSize = predicates.size();
 			do
@@ -69,11 +69,12 @@ namespace NAI
 	}
 
 	bool GoapPlanner::SatisfyPrecondition(
-		std::vector<std::shared_ptr<Predicate>>& preconditions, 
-		std::vector<std::shared_ptr<Predicate>>& predicates) const
+		std::vector<std::shared_ptr<IPredicate>>& preconditions, 
+		std::vector<std::shared_ptr<IPredicate>>& predicates) const
 	{
 		std::sort(preconditions.begin(), preconditions.end());
 		std::sort(predicates.begin(), predicates.end());
+
 		return std::includes(predicates.begin(), predicates.end(), preconditions.begin(), preconditions.end());
 	}
 }
