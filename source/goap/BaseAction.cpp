@@ -3,13 +3,21 @@
 
 namespace NAI
 {
-	BaseAction::BaseAction(
-		const std::vector<std::shared_ptr<IPredicate>>& predicates,
-		const std::vector<std::shared_ptr<IPredicate>>& postconditions,
-		unsigned int cost) : 
-		mPreconditions{ predicates },
-		mPostconditions { postconditions },
-		mCost { cost }
+	namespace Goap
 	{
+		BaseAction::BaseAction(
+			const std::vector<std::shared_ptr<IPredicate>>& preConditions,
+			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
+			unsigned int cost) :
+			mPreConditions{ preConditions },
+			mPostConditions{ postConditions },
+			mCost{ cost }
+		{
+		}
+
+		void BaseAction::Process(float elapsedTime)
+		{
+
+		}
 	}
 }

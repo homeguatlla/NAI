@@ -6,23 +6,26 @@
 
 namespace NAI
 {
-	class IAction;
-
-	class BaseGoal : public IGoal
+	namespace Goap
 	{
-	public:
-		BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions);
-		virtual ~BaseGoal() = default;
+		class IAction;
 
-		const std::vector<std::shared_ptr<IAction>>& GetActions() const override { return mActions; }
-		const unsigned int GetCost() const override { return mCost; }
+		class BaseGoal : public IGoal
+		{
+		public:
+			BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions);
+			virtual ~BaseGoal() = default;
 
-	private:
-		void CalculateCost();
+			const std::vector<std::shared_ptr<IAction>>& GetActions() const override { return mActions; }
+			const unsigned int GetCost() const override { return mCost; }
 
-	private:
-		std::vector<std::shared_ptr<IAction>> mActions;
-		unsigned int mCost;
-	};
+		private:
+			void CalculateCost();
+
+		private:
+			std::vector<std::shared_ptr<IAction>> mActions;
+			unsigned int mCost;
+		};
+	}
 }
 

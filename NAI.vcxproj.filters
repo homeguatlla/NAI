@@ -19,6 +19,45 @@
     <Filter Include="Archivos de origen\goap">
       <UniqueIdentifier>{e79424cc-0012-48d1-b69b-cc037caa7569}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\goap\actions">
+      <UniqueIdentifier>{47a8d4bd-eccb-4a19-9e57-797303d0618b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\action">
+      <UniqueIdentifier>{d249cb74-d90d-47a1-b200-4cfd5ef53469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\navigation">
+      <UniqueIdentifier>{3afd1832-1495-444c-a72e-b077c40baf87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\utils">
+      <UniqueIdentifier>{ddb88a68-9ec8-489a-bdf8-3ca3ca1aa2bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\utils\fsm">
+      <UniqueIdentifier>{e9b54296-8e7b-49e0-a661-c51dd6a59807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\agent">
+      <UniqueIdentifier>{73193cdc-ea48-4130-8887-18c8c4520941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\agent">
+      <UniqueIdentifier>{25f0ca3d-9dd5-4028-b424-048660c901f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\agent\fsm">
+      <UniqueIdentifier>{4dfb2ae6-27a4-43ca-a83d-053c310710d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\agent\fsm\states">
+      <UniqueIdentifier>{8301a3b2-b675-47db-97b6-d0c72cf6ec5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\agent\fsm\transitions">
+      <UniqueIdentifier>{745442db-baab-4093-8d6d-a0364737304b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\agent\fsm">
+      <UniqueIdentifier>{434ed50c-2749-4c18-8d5f-a68a238de3b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\agent\fsm\states">
+      <UniqueIdentifier>{bbcc6598-d469-4230-9561-fc1ac5f6a3a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\agent\fsm\transitions">
+      <UniqueIdentifier>{84018dd3-461f-48a3-ba8f-92056cd81962}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -48,6 +87,45 @@
     <ClInclude Include="source\goap\IPredicate.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\actions\GoToAction.h">
+      <Filter>Archivos de encabezado\goap\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\navigation\INavigationPoint.h">
+      <Filter>Archivos de encabezado\navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\fsm\BaseState.h">
+      <Filter>Archivos de encabezado\utils\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\fsm\BaseTransition.h">
+      <Filter>Archivos de encabezado\utils\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\fsm\IState.h">
+      <Filter>Archivos de encabezado\utils\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\fsm\ITransition.h">
+      <Filter>Archivos de encabezado\utils\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\fsm\StatesMachine.h">
+      <Filter>Archivos de encabezado\utils\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\types.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\AgentContext.h">
+      <Filter>Archivos de encabezado\goap\agent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\BaseAgent.h">
+      <Filter>Archivos de encabezado\goap\agent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\IAgent.h">
+      <Filter>Archivos de encabezado\goap\agent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\fsm\states\Idle.h">
+      <Filter>Archivos de encabezado\goap\agent\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\fsm\transitions\EnterIdle.h">
+      <Filter>Archivos de encabezado\goap\agent\fsm\transitions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -67,6 +145,21 @@
     </ClCompile>
     <ClCompile Include="source\goap\BaseGoal.cpp">
       <Filter>Archivos de origen\goap</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\actions\GoToAction.cpp">
+      <Filter>Archivos de origen\goap\action</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\AgentContext.cpp">
+      <Filter>Archivos de origen\agent</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\BaseAgent.cpp">
+      <Filter>Archivos de origen\agent</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\fsm\states\Idle.cpp">
+      <Filter>Archivos de origen\agent\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\fsm\transitions\EnterIdle.cpp">
+      <Filter>Archivos de origen\agent\fsm\transitions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

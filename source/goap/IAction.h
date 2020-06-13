@@ -5,15 +5,19 @@
 
 namespace NAI
 {
-	class IPredicate;
-
-	class IAction
+	namespace Goap
 	{
-	public:
-		virtual ~IAction() = default;
+		class IPredicate;
 
-		virtual const std::vector<std::shared_ptr<IPredicate>>& GetPreconditions() const = 0;
-		virtual const std::vector<std::shared_ptr<IPredicate>>& GetPostconditions() const = 0;
-		virtual unsigned int GetCost() const = 0;
-	};
+		class IAction
+		{
+		public:
+			virtual ~IAction() = default;
+
+			virtual const std::vector<std::shared_ptr<IPredicate>>& GetPreconditions() const = 0;
+			virtual const std::vector<std::shared_ptr<IPredicate>>& GetPostconditions() const = 0;
+			virtual unsigned int GetCost() const = 0;
+			virtual void Process(float elapsedTime) = 0;
+		};
+	}
 }

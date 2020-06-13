@@ -90,6 +90,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\;$(ProjectDir)\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -153,6 +154,12 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="source\goap\actions\GoToAction.h" />
+    <ClInclude Include="source\goap\agent\AgentContext.h" />
+    <ClInclude Include="source\goap\agent\BaseAgent.h" />
+    <ClInclude Include="source\goap\agent\fsm\states\Idle.h" />
+    <ClInclude Include="source\goap\agent\fsm\transitions\EnterIdle.h" />
+    <ClInclude Include="source\goap\agent\IAgent.h" />
     <ClInclude Include="source\goap\BaseAction.h" />
     <ClInclude Include="source\goap\BaseGoal.h" />
     <ClInclude Include="source\goap\GoapPlanner.h" />
@@ -160,6 +167,13 @@
     <ClInclude Include="source\goap\IAction.h" />
     <ClInclude Include="source\goap\IGoal.h" />
     <ClInclude Include="source\goap\IPredicate.h" />
+    <ClInclude Include="source\goap\types.h" />
+    <ClInclude Include="source\navigation\INavigationPoint.h" />
+    <ClInclude Include="source\utils\fsm\BaseState.h" />
+    <ClInclude Include="source\utils\fsm\BaseTransition.h" />
+    <ClInclude Include="source\utils\fsm\IState.h" />
+    <ClInclude Include="source\utils\fsm\ITransition.h" />
+    <ClInclude Include="source\utils\fsm\StatesMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp" />
@@ -169,6 +183,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="source\goap\actions\GoToAction.cpp" />
+    <ClCompile Include="source\goap\agent\AgentContext.cpp" />
+    <ClCompile Include="source\goap\agent\BaseAgent.cpp" />
+    <ClCompile Include="source\goap\agent\fsm\states\Idle.cpp" />
+    <ClCompile Include="source\goap\agent\fsm\transitions\EnterIdle.cpp" />
     <ClCompile Include="source\goap\BaseAction.cpp" />
     <ClCompile Include="source\goap\BaseGoal.cpp" />
     <ClCompile Include="source\goap\GoapPlanner.cpp" />

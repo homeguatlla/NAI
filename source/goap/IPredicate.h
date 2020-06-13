@@ -2,9 +2,13 @@
 
 namespace NAI
 {
-	class IPredicate
+	namespace Goap
 	{
-	public:
-		virtual ~IPredicate() = default;
-	};
+		class IPredicate
+		{
+		public:
+			virtual ~IPredicate() = default;
+		};
+	}
+
 }

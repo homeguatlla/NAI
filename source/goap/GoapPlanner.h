@@ -4,27 +4,30 @@
 
 namespace NAI
 {
-	class IGoal;
-	class IPredicate;
-	class IAction;
-
-	class GoapPlanner
+	namespace Goap
 	{
-	public:
-		GoapPlanner() = default;
-		~GoapPlanner() = default;
+		class IGoal;
+		class IPredicate;
+		class IAction;
 
-		std::shared_ptr<IGoal> GetPlan(
-			std::vector<std::shared_ptr<IGoal>>& inputGoals, 
-			std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const;
+		class GoapPlanner
+		{
+		public:
+			GoapPlanner() = default;
+			~GoapPlanner() = default;
 
-	private:
-		bool SatisfyActions(
-			const std::vector<std::shared_ptr<IAction>>& inputActions,
-			std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const;
+			std::shared_ptr<IGoal> GetPlan(
+				std::vector<std::shared_ptr<IGoal>>& inputGoals,
+				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const;
 
-		bool SatisfyPrecondition(
-			std::vector<std::shared_ptr<IPredicate>>& preconditions, 
-			std::vector<std::shared_ptr<IPredicate>>& predicates) const;
-	};
+		private:
+			bool SatisfyActions(
+				const std::vector<std::shared_ptr<IAction>>& inputActions,
+				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const;
+
+			bool SatisfyPrecondition(
+				std::vector<std::shared_ptr<IPredicate>>& preconditions,
+				std::vector<std::shared_ptr<IPredicate>>& predicates) const;
+		};
+	}
 }

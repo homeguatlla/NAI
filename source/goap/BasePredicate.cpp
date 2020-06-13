@@ -3,8 +3,11 @@
 
 namespace NAI
 {
-	BasePredicate::BasePredicate(const std::string& predicate) : mText{ predicate }
+	namespace Goap
 	{
+		BasePredicate::BasePredicate(const std::string& predicate) : mText{ predicate }
+		{
 
+		}
 	}
 }

@@ -4,13 +4,16 @@
 
 namespace NAI
 {
-	class BasePredicate : public IPredicate
+	namespace Goap
 	{
-	public:
-		explicit BasePredicate(const std::string& predicate);
-		~BasePredicate() = default;
+		class BasePredicate : public IPredicate
+		{
+		public:
+			explicit BasePredicate(const std::string& predicate);
+			~BasePredicate() = default;
 
-	private:
-		std::string mText;
-	};
+		private:
+			std::string mText;
+		};
+	}
 }

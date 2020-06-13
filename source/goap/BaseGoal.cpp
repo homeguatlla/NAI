@@ -4,17 +4,19 @@
 
 namespace NAI
 {
-	BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions) : mActions{ actions }, mCost {0}
+	namespace Goap
 	{
-		CalculateCost();
-	}
-
-	void BaseGoal::CalculateCost()
-	{
-		for (auto&& action : mActions)
+		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions) : mActions{ actions }, mCost{ 0 }
 		{
-			mCost += action->GetCost();
+			CalculateCost();
+		}
+
+		void BaseGoal::CalculateCost()
+		{
+			for (auto&& action : mActions)
+			{
+				mCost += action->GetCost();
+			}
 		}
 	}
-
 }
