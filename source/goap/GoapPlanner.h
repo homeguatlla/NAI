@@ -1,4 +1,5 @@
 #pragma once
+#include "IGoapPlanner.h"
 #include <vector>
 #include <memory>
 
@@ -10,7 +11,7 @@ namespace NAI
 		class IPredicate;
 		class IAction;
 
-		class GoapPlanner
+		class GoapPlanner : public IGoapPlanner
 		{
 		public:
 			GoapPlanner() = default;
@@ -18,8 +19,8 @@ namespace NAI
 
 			std::shared_ptr<IGoal> GetPlan(
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,
-				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const;
-			bool GetTest() const { return 1; }
+				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
+
 		private:
 			bool SatisfyActions(
 				const std::vector<std::shared_ptr<IAction>>& inputActions,

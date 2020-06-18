@@ -18,7 +18,7 @@ namespace NAI
 
 		bool EnterProcessing::CanPerformTransition() const
 		{
-			return true;
+			return GetContext()->HasPlan();
 		}
 	}
 }

@@ -22,6 +22,7 @@ namespace NAI
 			const std::vector<std::shared_ptr<IPredicate>>& GetPostconditions() const override { return mPostConditions; }
 			unsigned int GetCost() const override { return mCost; }
 			void Process(float elapsedTime) override;
+			bool HasAccomplished() const override { return true;}
 
 		private:
 			std::vector<std::shared_ptr<IPredicate>> mPreConditions;

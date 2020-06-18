@@ -12,11 +12,12 @@ namespace NAI
 	namespace Goap
 	{
 		class AgentContext;
-		
+		class IGoapPlanner;
+
 		class BaseAgent : public IAgent
 		{
 		public:
-			BaseAgent();
+			BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner);
 			virtual ~BaseAgent() = default;
 
 			AgentState GetCurrentState() const override;
@@ -28,6 +29,7 @@ namespace NAI
 		private:
 			std::unique_ptr<core::utils::FSM::StatesMachine<AgentState, AgentContext>> mStatesMachine;
 			std::shared_ptr<AgentContext> mAgentContext;
+			std::shared_ptr<IGoapPlanner> mGoapPlanner;
 		};
 	}
 }

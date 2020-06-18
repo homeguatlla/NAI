@@ -2,11 +2,14 @@
 #include "source/goap/agent/AgentContext.h"
 #include "source/utils/fsm/BaseState.h"
 #include "source/goap/GoapTypes.h"
+#include <vector>
 
 namespace NAI
 {
 	namespace Goap
 	{
+		class IAction;
+
 		class Processing : public core::utils::FSM::BaseState<AgentState, AgentContext>
 		{
 		public:
@@ -17,6 +20,15 @@ namespace NAI
 			void OnInit() override;
 			void OnEnter(float deltaTime) override;
 			void OnUpdate(float deltaTime) override;
+			void OnExit(float deltaTime) override;
+			
+		private:
+			std::shared_ptr<IAction> GetNextActionToProcess();
+			bool ThereAreActionsToProcess() const;
+
+		private:
+			std::vector<std::shared_ptr<IAction>> mCurrentPlanActions;
+			std::shared_ptr<IAction> mCurrentAction;
 		};
 	}
 }

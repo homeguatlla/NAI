@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Planning.h"
+#include "source/goap/IGoapPlanner.h"
 
 namespace NAI
 {
@@ -7,12 +8,11 @@ namespace NAI
 	{
 		void Planning::OnInit()
 		{
-
+			mGoapPlanner = GetContext()->GetGoapPlanner();
 		}
 		
 		void Planning::OnEnter(float deltaTime)
 		{
-
 		}
 
 		void Planning::OnUpdate(float deltaTime)
@@ -20,7 +20,11 @@ namespace NAI
 			std::vector<std::shared_ptr<IGoal>> goals;
 			std::vector<std::shared_ptr<IPredicate>> predicates;
 
-			auto plan = mGoapPlanner.GetPlan(goals, predicates);
+			auto plan = mGoapPlanner->GetPlan(goals, predicates);
+			if (plan)
+			{
+				GetContext()->SetPlan(plan);
+			}
 		}
 	}
 }

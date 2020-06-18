@@ -2,12 +2,13 @@
 #include "source/goap/agent/AgentContext.h"
 #include "source/utils/fsm/BaseState.h"
 #include "source/goap/GoapTypes.h"
-#include "source/goap/GoapPlanner.h"
 
 namespace NAI
 {
 	namespace Goap
 	{
+		class IGoapPlanner;
+
 		class Planning : public core::utils::FSM::BaseState<AgentState, AgentContext>
 		{
 		public:
@@ -20,7 +21,7 @@ namespace NAI
 			void OnUpdate(float deltaTime) override;
 
 		private:
-			GoapPlanner mGoapPlanner;
+			std::shared_ptr<IGoapPlanner> mGoapPlanner;
 		};
 	}
 }

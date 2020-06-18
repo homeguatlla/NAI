@@ -132,6 +132,9 @@
     <ClInclude Include="source\goap\GoapTypes.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\IGoapPlanner.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">

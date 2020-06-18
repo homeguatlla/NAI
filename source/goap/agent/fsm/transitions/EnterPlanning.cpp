@@ -18,7 +18,7 @@ namespace NAI
 
 		bool EnterPlanning::CanPerformTransition() const
 		{
-			return true;
+			return !GetContext()->HasPlan();
 		}
 	}
 }

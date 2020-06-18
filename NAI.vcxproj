@@ -168,6 +168,7 @@
     <ClInclude Include="source\goap\BasePredicate.h" />
     <ClInclude Include="source\goap\IAction.h" />
     <ClInclude Include="source\goap\IGoal.h" />
+    <ClInclude Include="source\goap\IGoapPlanner.h" />
     <ClInclude Include="source\goap\IPredicate.h" />
     <ClInclude Include="source\goap\GoapTypes.h" />
     <ClInclude Include="source\navigation\INavigationPoint.h" />

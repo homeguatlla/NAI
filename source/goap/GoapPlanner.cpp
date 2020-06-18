@@ -31,7 +31,7 @@ namespace NAI
 				return lessCostGoal;
 			}
 
-			return {};
+			return nullptr;
 		}
 
 		bool GoapPlanner::SatisfyActions(const std::vector<std::shared_ptr<IAction>>& inputActions, std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const

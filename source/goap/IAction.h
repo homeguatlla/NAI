@@ -18,6 +18,7 @@ namespace NAI
 			virtual const std::vector<std::shared_ptr<IPredicate>>& GetPostconditions() const = 0;
 			virtual unsigned int GetCost() const = 0;
 			virtual void Process(float elapsedTime) = 0;
+			virtual bool HasAccomplished() const = 0;
 		};
 	}
 }
