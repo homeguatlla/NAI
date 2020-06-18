@@ -1,18 +1,18 @@
 #pragma once
 #include "source/goap/agent/AgentContext.h"
 #include "source/utils/fsm/BaseState.h"
-#include "source/goap/types.h"
+#include "source/goap/GoapTypes.h"
 
 namespace NAI
 {
 	namespace Goap
 	{
-		class Idle : public core::utils::FSM::BaseState<AgentState, AgentContext>
+		class Processing : public core::utils::FSM::BaseState<AgentState, AgentContext>
 		{
 		public:
-			Idle() = default;
-			virtual ~Idle() = default;
-			AgentState GetID() const override { return AgentState::STATE_IDLE; }
+			Processing() = default;
+			virtual ~Processing() = default;
+			AgentState GetID() const override { return AgentState::STATE_PROCESSING; }
 
 			void OnInit() override;
 			void OnEnter(float deltaTime) override;

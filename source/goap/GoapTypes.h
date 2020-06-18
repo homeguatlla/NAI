@@ -6,7 +6,7 @@ namespace NAI
 	{
 		enum class AgentState
 		{
-			STATE_IDLE = 0,
+			STATE_PLANNING = 0,
 			STATE_PROCESSING = 1,
 		};
 	}

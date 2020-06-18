@@ -1,22 +1,22 @@
 #include "pch.h"
-#include "EnterIdle.h"
+#include "EnterPlanning.h"
 
 
 namespace NAI
 {
 	namespace Goap
 	{
-		EnterIdle::EnterIdle(StatePtr origin, StatePtr destination) :
+		EnterPlanning::EnterPlanning(StatePtr origin, StatePtr destination) :
 			core::utils::FSM::BaseTransition<AgentState, AgentContext>(origin, destination)
 		{
 		}
 
-		void EnterIdle::OnInit()
+		void EnterPlanning::OnInit()
 		{
 			
 		}
 
-		bool EnterIdle::CanPerformTransition() const
+		bool EnterPlanning::CanPerformTransition() const
 		{
 			return true;
 		}

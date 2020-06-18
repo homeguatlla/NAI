@@ -1,6 +1,5 @@
 #pragma once
-
-#include "source/goap/types.h"
+#include "source/goap/GoapTypes.h"
 #include <vector>
 #include <memory>
 

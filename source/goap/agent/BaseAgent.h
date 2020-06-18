@@ -1,8 +1,8 @@
 #pragma once
 #include "IAgent.h"
 #include "AgentContext.h"
-#include "../types.h"
-#include "../../utils/fsm/StatesMachine.h"
+#include "source/goap/GoapTypes.h"
+#include "source/utils/fsm/StatesMachine.h"
 #include <vector>
 #include <memory>
 
@@ -12,7 +12,7 @@ namespace NAI
 	namespace Goap
 	{
 		class AgentContext;
-
+		
 		class BaseAgent : public IAgent
 		{
 		public:

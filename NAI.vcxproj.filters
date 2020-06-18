@@ -108,9 +108,6 @@
     <ClInclude Include="source\utils\fsm\StatesMachine.h">
       <Filter>Archivos de encabezado\utils\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\types.h">
-      <Filter>Archivos de encabezado\goap</Filter>
-    </ClInclude>
     <ClInclude Include="source\goap\agent\AgentContext.h">
       <Filter>Archivos de encabezado\goap\agent</Filter>
     </ClInclude>
@@ -120,11 +117,20 @@
     <ClInclude Include="source\goap\agent\IAgent.h">
       <Filter>Archivos de encabezado\goap\agent</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\agent\fsm\states\Idle.h">
+    <ClInclude Include="source\goap\agent\fsm\states\Planning.h">
       <Filter>Archivos de encabezado\goap\agent\fsm\states</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\agent\fsm\transitions\EnterIdle.h">
+    <ClInclude Include="source\goap\agent\fsm\states\Processing.h">
+      <Filter>Archivos de encabezado\goap\agent\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\fsm\transitions\EnterPlanning.h">
       <Filter>Archivos de encabezado\goap\agent\fsm\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\agent\fsm\transitions\EnterProcessing.h">
+      <Filter>Archivos de encabezado\goap\agent\fsm\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\GoapTypes.h">
+      <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,10 +161,16 @@
     <ClCompile Include="source\goap\agent\BaseAgent.cpp">
       <Filter>Archivos de origen\agent</Filter>
     </ClCompile>
-    <ClCompile Include="source\goap\agent\fsm\states\Idle.cpp">
+    <ClCompile Include="source\goap\agent\fsm\states\Planning.cpp">
       <Filter>Archivos de origen\agent\fsm\states</Filter>
     </ClCompile>
-    <ClCompile Include="source\goap\agent\fsm\transitions\EnterIdle.cpp">
+    <ClCompile Include="source\goap\agent\fsm\states\Processing.cpp">
+      <Filter>Archivos de origen\agent\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\fsm\transitions\EnterPlanning.cpp">
+      <Filter>Archivos de origen\agent\fsm\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\fsm\transitions\EnterProcessing.cpp">
       <Filter>Archivos de origen\agent\fsm\transitions</Filter>
     </ClCompile>
   </ItemGroup>

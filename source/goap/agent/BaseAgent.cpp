@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "BaseAgent.h"
-#include "source/goap/agent/fsm/states/Idle.h"
-#include "source/goap/agent/fsm/transitions/EnterIdle.h"
+#include "source/goap/agent/fsm/states/Planning.h"
+#include "source/goap/agent/fsm/states/Processing.h"
+#include "source/goap/agent/fsm/transitions/EnterPlanning.h"
+#include "source/goap/agent/fsm/transitions/EnterProcessing.h"
 
 namespace NAI
 {
@@ -28,15 +30,16 @@ namespace NAI
 			mAgentContext = std::make_shared<AgentContext>();
 			mStatesMachine = std::make_unique<core::utils::FSM::StatesMachine<AgentState, AgentContext>>(mAgentContext);
 
-			auto idle = std::make_shared<Idle>();
+			auto planning = std::make_shared<Planning>();
+			auto processing = std::make_shared<Processing>();
 			
-			mStatesMachine->AddState(idle);
+			mStatesMachine->AddState(planning);
+			mStatesMachine->AddState(processing);
 
-
-			//from Idle
+			//from Planning
 			//mStatesMachine->AddTransition(std::make_unique<EnterWalk>(idle, walk));
 
-			mStatesMachine->SetInitialState(idle->GetID());
+			mStatesMachine->SetInitialState(planning->GetID());
 		}
 	}
 }

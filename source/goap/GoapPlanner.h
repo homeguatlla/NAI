@@ -19,7 +19,7 @@ namespace NAI
 			std::shared_ptr<IGoal> GetPlan(
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,
 				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const;
-
+			bool GetTest() const { return 1; }
 		private:
 			bool SatisfyActions(
 				const std::vector<std::shared_ptr<IAction>>& inputActions,

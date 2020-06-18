@@ -157,8 +157,10 @@
     <ClInclude Include="source\goap\actions\GoToAction.h" />
     <ClInclude Include="source\goap\agent\AgentContext.h" />
     <ClInclude Include="source\goap\agent\BaseAgent.h" />
-    <ClInclude Include="source\goap\agent\fsm\states\Idle.h" />
-    <ClInclude Include="source\goap\agent\fsm\transitions\EnterIdle.h" />
+    <ClInclude Include="source\goap\agent\fsm\states\Planning.h" />
+    <ClInclude Include="source\goap\agent\fsm\states\Processing.h" />
+    <ClInclude Include="source\goap\agent\fsm\transitions\EnterPlanning.h" />
+    <ClInclude Include="source\goap\agent\fsm\transitions\EnterProcessing.h" />
     <ClInclude Include="source\goap\agent\IAgent.h" />
     <ClInclude Include="source\goap\BaseAction.h" />
     <ClInclude Include="source\goap\BaseGoal.h" />
@@ -167,7 +169,7 @@
     <ClInclude Include="source\goap\IAction.h" />
     <ClInclude Include="source\goap\IGoal.h" />
     <ClInclude Include="source\goap\IPredicate.h" />
-    <ClInclude Include="source\goap\types.h" />
+    <ClInclude Include="source\goap\GoapTypes.h" />
     <ClInclude Include="source\navigation\INavigationPoint.h" />
     <ClInclude Include="source\utils\fsm\BaseState.h" />
     <ClInclude Include="source\utils\fsm\BaseTransition.h" />
@@ -186,8 +188,10 @@
     <ClCompile Include="source\goap\actions\GoToAction.cpp" />
     <ClCompile Include="source\goap\agent\AgentContext.cpp" />
     <ClCompile Include="source\goap\agent\BaseAgent.cpp" />
-    <ClCompile Include="source\goap\agent\fsm\states\Idle.cpp" />
-    <ClCompile Include="source\goap\agent\fsm\transitions\EnterIdle.cpp" />
+    <ClCompile Include="source\goap\agent\fsm\states\Planning.cpp" />
+    <ClCompile Include="source\goap\agent\fsm\states\Processing.cpp" />
+    <ClCompile Include="source\goap\agent\fsm\transitions\EnterPlanning.cpp" />
+    <ClCompile Include="source\goap\agent\fsm\transitions\EnterProcessing.cpp" />
     <ClCompile Include="source\goap\BaseAction.cpp" />
     <ClCompile Include="source\goap\BaseGoal.cpp" />
     <ClCompile Include="source\goap\GoapPlanner.cpp" />
