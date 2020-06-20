@@ -8,8 +8,7 @@ namespace NAI
 	{
 		class IGoal;
 		class IPredicate;
-		class IAction;
-
+		
 		class IGoapPlanner
 		{
 		public:

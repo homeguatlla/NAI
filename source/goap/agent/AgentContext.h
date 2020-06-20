@@ -8,7 +8,7 @@ namespace NAI
 		class AgentContext
 		{
 		public:
-			AgentContext(std::shared_ptr<IGoapPlanner> planner);
+			AgentContext(std::shared_ptr<IGoapPlanner> planner, std::vector<std::shared_ptr<IPredicate>>& predicates);
 
 			//Planner
 			std::shared_ptr<IGoapPlanner> GetGoapPlanner() const { return mGoapPlanner; }
@@ -18,11 +18,15 @@ namespace NAI
 			std::shared_ptr<IGoal> GetPlan() const { return mCurrentPlan; }
 			bool HasPlan() const { return mCurrentPlan != nullptr; }
 
+			//Predicates
+			std::vector<std::shared_ptr<IPredicate>> GetPredicates() { return mPredicates; }
+
 			virtual ~AgentContext() = default;
 
 			private:
 				std::shared_ptr<IGoapPlanner> mGoapPlanner;
 				std::shared_ptr<IGoal> mCurrentPlan;
+				std::vector<std::shared_ptr<IPredicate>> mPredicates;
 		};
 	}
 }

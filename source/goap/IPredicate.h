@@ -8,6 +8,7 @@ namespace NAI
 		{
 		public:
 			virtual ~IPredicate() = default;
+			virtual int GetID() const = 0;
 		};
 	}
 

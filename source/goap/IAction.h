@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <memory>
 
@@ -19,6 +18,7 @@ namespace NAI
 			virtual unsigned int GetCost() const = 0;
 			virtual void Process(float elapsedTime) = 0;
 			virtual bool HasAccomplished() const = 0;
+			virtual bool SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;
 		};
 	}
 }

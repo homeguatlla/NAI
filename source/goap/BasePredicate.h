@@ -9,10 +9,11 @@ namespace NAI
 		class BasePredicate : public IPredicate
 		{
 		public:
-			explicit BasePredicate(const std::string& predicate);
+			explicit BasePredicate(const std::string& text);
 			~BasePredicate() = default;
-
+			int GetID() const override { return mID; }
 		private:
+			int mID;
 			std::string mText;
 		};
 	}

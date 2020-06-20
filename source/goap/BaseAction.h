@@ -7,8 +7,6 @@ namespace NAI
 {
 	namespace Goap
 	{
-		class IPredicate;
-
 		class BaseAction : public IAction
 		{
 		public:
@@ -23,6 +21,7 @@ namespace NAI
 			unsigned int GetCost() const override { return mCost; }
 			void Process(float elapsedTime) override;
 			bool HasAccomplished() const override { return true;}
+			bool SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 
 		private:
 			std::vector<std::shared_ptr<IPredicate>> mPreConditions;

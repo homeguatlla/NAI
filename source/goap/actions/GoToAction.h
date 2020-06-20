@@ -1,5 +1,5 @@
 #pragma once
-#include "../BaseAction.h"
+#include "source/goap/BaseAction.h"
 #include <vector>
 #include <memory>
 #include <glm/glm.hpp>
@@ -8,8 +8,6 @@ namespace NAI
 {
 	namespace Goap
 	{
-		class IPredicate;
-
 		class GoToAction : public BaseAction
 		{
 		public:

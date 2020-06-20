@@ -5,7 +5,7 @@ namespace NAI
 {
 	namespace Goap
 	{
-		BasePredicate::BasePredicate(const std::string& predicate) : mText{ predicate }
+		BasePredicate::BasePredicate(const std::string& text) : mText {text}
 		{
 
 		}

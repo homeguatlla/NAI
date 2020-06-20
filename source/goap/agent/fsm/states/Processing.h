@@ -25,10 +25,13 @@ namespace NAI
 		private:
 			std::shared_ptr<IAction> GetNextActionToProcess();
 			bool ThereAreActionsToProcess() const;
+			void Accomplished();
+			void Abort();
 
 		private:
 			std::vector<std::shared_ptr<IAction>> mCurrentPlanActions;
 			std::shared_ptr<IAction> mCurrentAction;
+			std::vector<std::shared_ptr<IPredicate>> mPredicates;
 		};
 	}
 }

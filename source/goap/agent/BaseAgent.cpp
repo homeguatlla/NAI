@@ -1,17 +1,15 @@
 #include "pch.h"
 #include "BaseAgent.h"
-#include "source/goap/agent/fsm/states/Planning.h"
-#include "source/goap/agent/fsm/states/Processing.h"
-#include "source/goap/agent/fsm/transitions/EnterPlanning.h"
-#include "source/goap/agent/fsm/transitions/EnterProcessing.h"
+
 #include <cassert>
 
 namespace NAI
 {
 	namespace Goap
 	{
-		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner) :
-		mGoapPlanner {goapPlanner}
+		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, std::vector<std::shared_ptr<IPredicate>>& predicates) :
+			mGoapPlanner{ goapPlanner },
+			mPredicates{ predicates }
 		{
 			assert(goapPlanner);
 			CreateStatesMachine();
@@ -27,15 +25,14 @@ namespace NAI
 			return mStatesMachine->GetCurrentState()->GetID();
 		}
 
-
 		void BaseAgent::CreateStatesMachine()
 		{
-			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner);
+			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner, mPredicates);
 			mStatesMachine = std::make_unique<core::utils::FSM::StatesMachine<AgentState, AgentContext>>(mAgentContext);
 
 			auto planning = std::make_shared<Planning>();
 			auto processing = std::make_shared<Processing>();
-			
+
 			mStatesMachine->AddState(planning);
 			mStatesMachine->AddState(processing);
 
