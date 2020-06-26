@@ -18,7 +18,7 @@ namespace NAI
 
 			const std::vector<std::shared_ptr<IAction>>& GetActions() const override { return mActions; }
 			const unsigned int GetCost() const override { return mCost; }
-			bool SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
+			bool SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
 
 		private:
 			void CalculateCost();

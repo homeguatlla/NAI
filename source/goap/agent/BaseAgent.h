@@ -25,9 +25,12 @@ namespace NAI
 
 			AgentState GetCurrentState() const override;
 			void Update(float elapsedTime) override;
+			bool HasPredicate(int predicateID) const override;
+			void OnNewPredicate(std::shared_ptr<IPredicate> predicate) override;
 
 		private:
 			void CreateStatesMachine();
+			void NotifyNewPredicateToProcessState();
 
 		private:
 			std::unique_ptr<core::utils::FSM::StatesMachine<AgentState, AgentContext>> mStatesMachine;

@@ -5,7 +5,8 @@ namespace NAI
 {
 	namespace Goap
 	{
-		BasePredicate::BasePredicate(const std::string& text) : mText {text}
+		int BasePredicate::IDCounter = 0;
+		BasePredicate::BasePredicate(const std::string& text) : mID{ IDCounter++ }, mText {text}
 		{
 
 		}

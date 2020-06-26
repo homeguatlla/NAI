@@ -36,6 +36,8 @@ namespace NAI
 			}
 			else
 			{
+				AddActionPostConditionsToPredicatesList(mCurrentAction);
+
 				if(ThereAreActionsToProcess())
 				{ 
 					mCurrentAction = GetNextActionToProcess();
@@ -52,6 +54,15 @@ namespace NAI
 			
 		}
 
+		void Processing::OnNewPredicate()
+		{
+			if (mCurrentAction != nullptr)
+			{
+				mCurrentAction->Cancel();
+			}
+			Abort();
+		}
+
 		void Processing::Accomplished()
 		{
 			GetContext()->SetPlan(nullptr);
@@ -60,6 +71,14 @@ namespace NAI
 		void Processing::Abort()
 		{
 			GetContext()->SetPlan(nullptr);
+		}
+
+		void Processing::AddActionPostConditionsToPredicatesList(std::shared_ptr<IAction> action)
+		{
+			auto postConditions = action->GetPostconditions();
+			//TODO remove repeated predicates?
+			mPredicates.insert(mPredicates.end(), postConditions.begin(), postConditions.end());
+			GetContext()->SetPredicates(mPredicates);
 		}
 
 		std::shared_ptr<IAction> Processing::GetNextActionToProcess()

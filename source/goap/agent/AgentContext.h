@@ -20,7 +20,7 @@ namespace NAI
 
 			//Predicates
 			std::vector<std::shared_ptr<IPredicate>> GetPredicates() { return mPredicates; }
-
+			void  SetPredicates(std::vector<std::shared_ptr<IPredicate>> predicates) { mPredicates = predicates; }
 			virtual ~AgentContext() = default;
 
 			private:

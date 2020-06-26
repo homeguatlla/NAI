@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "BaseGoal.h"
 #include "IAction.h"
+#include <algorithm>
 
 namespace NAI
 {
@@ -19,14 +20,16 @@ namespace NAI
 			}
 		}
 
-		bool BaseGoal::SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
+		bool BaseGoal::SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates)
 		{
 			bool satisfied = false;
 
 			if (!inputPredicates.empty() && !mActions.empty())
 			{
 				std::vector<std::shared_ptr<IPredicate>> predicates = inputPredicates;
-				std::vector<std::shared_ptr<IAction>> actions = mActions;
+				std::vector<std::shared_ptr<IAction>> actions;
+
+				actions.swap(mActions);
 
 				int lastPredicatesSize = predicates.size();
 				do
@@ -35,10 +38,11 @@ namespace NAI
 					for (auto it = actions.begin(); it != actions.end();)
 					{
 						auto action = *it;
-						if (action->SatisfyPrecondition(predicates))
+						if (!action->SatisfyPostcondition(predicates) && action->SatisfyPrecondition(predicates))
 						{
 							auto postconditions = action->GetPostconditions();
 							predicates.insert(end(predicates), begin(postconditions), end(postconditions));
+							mActions.push_back(action);
 							it = actions.erase(it);
 						}
 						else

@@ -22,11 +22,14 @@ namespace NAI
 			void OnUpdate(float deltaTime) override;
 			void OnExit(float deltaTime) override;
 			
+			void OnNewPredicate();
+
 		private:
 			std::shared_ptr<IAction> GetNextActionToProcess();
 			bool ThereAreActionsToProcess() const;
 			void Accomplished();
 			void Abort();
+			void AddActionPostConditionsToPredicatesList(std::shared_ptr<IAction> action);
 
 		private:
 			std::vector<std::shared_ptr<IAction>> mCurrentPlanActions;

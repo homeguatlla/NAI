@@ -8,12 +8,14 @@ namespace NAI
 	{
 		class BasePredicate : public IPredicate
 		{
+		static int IDCounter;
+
 		public:
 			explicit BasePredicate(const std::string& text);
 			~BasePredicate() = default;
 			int GetID() const override { return mID; }
 		private:
-			int mID;
+			const int mID;
 			std::string mText;
 		};
 	}
