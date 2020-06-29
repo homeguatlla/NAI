@@ -13,6 +13,7 @@ namespace NAI
 		class BaseGoal : public IGoal
 		{
 		public:
+			BaseGoal() = default;
 			BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions);
 			virtual ~BaseGoal() = default;
 
@@ -23,7 +24,7 @@ namespace NAI
 		private:
 			void CalculateCost();
 
-		private:
+		protected:
 			std::vector<std::shared_ptr<IAction>> mActions;
 			unsigned int mCost;
 		};

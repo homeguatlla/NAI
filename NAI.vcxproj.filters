@@ -22,9 +22,6 @@
     <Filter Include="Archivos de encabezado\goap\actions">
       <UniqueIdentifier>{47a8d4bd-eccb-4a19-9e57-797303d0618b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\goap\action">
-      <UniqueIdentifier>{d249cb74-d90d-47a1-b200-4cfd5ef53469}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\navigation">
       <UniqueIdentifier>{3afd1832-1495-444c-a72e-b077c40baf87}</UniqueIdentifier>
     </Filter>
@@ -37,9 +34,6 @@
     <Filter Include="Archivos de encabezado\goap\agent">
       <UniqueIdentifier>{73193cdc-ea48-4130-8887-18c8c4520941}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\agent">
-      <UniqueIdentifier>{25f0ca3d-9dd5-4028-b424-048660c901f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\goap\agent\fsm">
       <UniqueIdentifier>{4dfb2ae6-27a4-43ca-a83d-053c310710d2}</UniqueIdentifier>
     </Filter>
@@ -49,14 +43,32 @@
     <Filter Include="Archivos de encabezado\goap\agent\fsm\transitions">
       <UniqueIdentifier>{745442db-baab-4093-8d6d-a0364737304b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\agent\fsm">
+    <Filter Include="Archivos de encabezado\goap\goals">
+      <UniqueIdentifier>{0879d6a7-0438-43c7-a064-815c01d1ff4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\goals">
+      <UniqueIdentifier>{54d7012f-783b-4d8e-accc-10bc3aefede8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\actions">
+      <UniqueIdentifier>{d249cb74-d90d-47a1-b200-4cfd5ef53469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\agent">
+      <UniqueIdentifier>{25f0ca3d-9dd5-4028-b424-048660c901f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\agent\fsm">
       <UniqueIdentifier>{434ed50c-2749-4c18-8d5f-a68a238de3b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\agent\fsm\states">
+    <Filter Include="Archivos de origen\goap\agent\fsm\states">
       <UniqueIdentifier>{bbcc6598-d469-4230-9561-fc1ac5f6a3a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\agent\fsm\transitions">
+    <Filter Include="Archivos de origen\goap\agent\fsm\transitions">
       <UniqueIdentifier>{84018dd3-461f-48a3-ba8f-92056cd81962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\predicates">
+      <UniqueIdentifier>{671ea003-bd51-4d59-b96b-8446f0dec96a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\predicates">
+      <UniqueIdentifier>{3ba1c6d8-d464-4a83-b1f0-9cca0f556ac0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="source\goap\IPredicate.h">
       <Filter>Archivos de encabezado\goap</Filter>
-    </ClInclude>
-    <ClInclude Include="source\goap\actions\GoToAction.h">
-      <Filter>Archivos de encabezado\goap\actions</Filter>
     </ClInclude>
     <ClInclude Include="source\navigation\INavigationPoint.h">
       <Filter>Archivos de encabezado\navigation</Filter>
@@ -135,6 +144,21 @@
     <ClInclude Include="source\goap\IGoapPlanner.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\actions\FindPathToAction.h">
+      <Filter>Archivos de encabezado\goap\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\actions\FollowPathAction.h">
+      <Filter>Archivos de encabezado\goap\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\goals\GoToGoal.h">
+      <Filter>Archivos de encabezado\goap\goals</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\predicates\GoToPredicate.h">
+      <Filter>Archivos de encabezado\goap\predicates</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\predicates\GoapPredicates.h">
+      <Filter>Archivos de encabezado\goap\predicates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -155,26 +179,35 @@
     <ClCompile Include="source\goap\BaseGoal.cpp">
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
-    <ClCompile Include="source\goap\actions\GoToAction.cpp">
-      <Filter>Archivos de origen\goap\action</Filter>
-    </ClCompile>
     <ClCompile Include="source\goap\agent\AgentContext.cpp">
-      <Filter>Archivos de origen\agent</Filter>
+      <Filter>Archivos de origen\goap\agent</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\agent\BaseAgent.cpp">
-      <Filter>Archivos de origen\agent</Filter>
+      <Filter>Archivos de origen\goap\agent</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\agent\fsm\states\Planning.cpp">
-      <Filter>Archivos de origen\agent\fsm\states</Filter>
+      <Filter>Archivos de origen\goap\agent\fsm\states</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\agent\fsm\states\Processing.cpp">
-      <Filter>Archivos de origen\agent\fsm\states</Filter>
+      <Filter>Archivos de origen\goap\agent\fsm\states</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\agent\fsm\transitions\EnterPlanning.cpp">
-      <Filter>Archivos de origen\agent\fsm\transitions</Filter>
+      <Filter>Archivos de origen\goap\agent\fsm\transitions</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\agent\fsm\transitions\EnterProcessing.cpp">
-      <Filter>Archivos de origen\agent\fsm\transitions</Filter>
+      <Filter>Archivos de origen\goap\agent\fsm\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\goals\GoToGoal.cpp">
+      <Filter>Archivos de origen\goap\goals</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\actions\FindPathToAction.cpp">
+      <Filter>Archivos de origen\goap\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\actions\FollowPathAction.cpp">
+      <Filter>Archivos de origen\goap\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\predicates\GoToPredicate.cpp">
+      <Filter>Archivos de origen\goap\predicates</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

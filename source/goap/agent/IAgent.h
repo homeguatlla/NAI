@@ -8,6 +8,7 @@ namespace NAI
 	namespace Goap
 	{
 		class IPredicate;
+		class IGoal;
 
 		class IAgent
 		{
@@ -18,6 +19,7 @@ namespace NAI
 			virtual AgentState GetCurrentState() const = 0;
 			virtual bool HasPredicate(int predicateID) const = 0;
 			virtual void OnNewPredicate(std::shared_ptr<IPredicate> predicate) = 0;
+			virtual std::vector<std::shared_ptr<IGoal>> GetGoals() const = 0;
 		};
 	}
 }

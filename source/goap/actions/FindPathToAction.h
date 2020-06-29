@@ -8,17 +8,15 @@ namespace NAI
 {
 	namespace Goap
 	{
-		class GoToAction : public BaseAction
+		class FindPathToAction : public BaseAction
 		{
 		public:
-			GoToAction(
+			FindPathToAction(
 				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
-				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
-				glm::vec3 destination);
-			virtual ~GoToAction() = default;
+				const std::vector<std::shared_ptr<IPredicate>>& postConditions);
+			virtual ~FindPathToAction() = default;
 
-		private:
-			glm::vec3 mDestination;
+			void Process(float elapsedTime) override;
 		};
 	}
 }

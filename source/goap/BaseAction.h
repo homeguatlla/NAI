@@ -34,6 +34,8 @@ namespace NAI
 			std::vector<std::shared_ptr<IPredicate>> mPreConditions;
 			std::vector<std::shared_ptr<IPredicate>> mPostConditions;
 			unsigned int mCost;
+
+		protected:
 			bool mHasAccomplished;
 		};
 	}

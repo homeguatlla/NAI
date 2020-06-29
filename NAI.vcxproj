@@ -154,7 +154,8 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="source\goap\actions\GoToAction.h" />
+    <ClInclude Include="source\goap\actions\FindPathToAction.h" />
+    <ClInclude Include="source\goap\actions\FollowPathAction.h" />
     <ClInclude Include="source\goap\agent\AgentContext.h" />
     <ClInclude Include="source\goap\agent\BaseAgent.h" />
     <ClInclude Include="source\goap\agent\fsm\states\Planning.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="source\goap\agent\IAgent.h" />
     <ClInclude Include="source\goap\BaseAction.h" />
     <ClInclude Include="source\goap\BaseGoal.h" />
+    <ClInclude Include="source\goap\goals\GoToGoal.h" />
     <ClInclude Include="source\goap\GoapPlanner.h" />
     <ClInclude Include="source\goap\BasePredicate.h" />
     <ClInclude Include="source\goap\IAction.h" />
@@ -171,6 +173,8 @@
     <ClInclude Include="source\goap\IGoapPlanner.h" />
     <ClInclude Include="source\goap\IPredicate.h" />
     <ClInclude Include="source\goap\GoapTypes.h" />
+    <ClInclude Include="source\goap\predicates\GoapPredicates.h" />
+    <ClInclude Include="source\goap\predicates\GoToPredicate.h" />
     <ClInclude Include="source\navigation\INavigationPoint.h" />
     <ClInclude Include="source\utils\fsm\BaseState.h" />
     <ClInclude Include="source\utils\fsm\BaseTransition.h" />
@@ -186,7 +190,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="source\goap\actions\GoToAction.cpp" />
+    <ClCompile Include="source\goap\actions\FindPathToAction.cpp" />
+    <ClCompile Include="source\goap\actions\FollowPathAction.cpp" />
     <ClCompile Include="source\goap\agent\AgentContext.cpp" />
     <ClCompile Include="source\goap\agent\BaseAgent.cpp" />
     <ClCompile Include="source\goap\agent\fsm\states\Planning.cpp" />
@@ -195,8 +200,10 @@
     <ClCompile Include="source\goap\agent\fsm\transitions\EnterProcessing.cpp" />
     <ClCompile Include="source\goap\BaseAction.cpp" />
     <ClCompile Include="source\goap\BaseGoal.cpp" />
+    <ClCompile Include="source\goap\goals\GoToGoal.cpp" />
     <ClCompile Include="source\goap\GoapPlanner.cpp" />
     <ClCompile Include="source\goap\BasePredicate.cpp" />
+    <ClCompile Include="source\goap\predicates\GoToPredicate.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

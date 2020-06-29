@@ -42,7 +42,7 @@ namespace NAI
 					return std::find_if(predicates.begin(), predicates.end(),
 						[predicateA](std::shared_ptr<IPredicate> predicateB)
 						{
-							return predicateA->GetID() == predicateB->GetID();
+							return predicateA->IsEqualTo(predicateB);
 						}) != predicates.end();
 				});
 		}

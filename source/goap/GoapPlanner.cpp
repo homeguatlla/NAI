@@ -21,7 +21,6 @@ namespace NAI
 					{
 						if (goal->SatisfyActions(inputPredicates))
 						{
-
 							lessCostGoal = goal;
 						}
 					}
@@ -30,6 +29,14 @@ namespace NAI
 				return lessCostGoal;
 			}
 
+			return nullptr;
+		}
+
+		std::shared_ptr<IGoal> GoapPlanner::GetPlanToReach(
+			std::vector<std::shared_ptr<IGoal>>& inputGoals,
+			std::vector<std::shared_ptr<IPredicate>>& inputPredicates,
+			std::vector<std::shared_ptr<IPredicate>>& desiredPredicates) const
+		{
 			return nullptr;
 		}
 	}

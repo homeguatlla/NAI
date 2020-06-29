@@ -1,16 +1,16 @@
 #include "pch.h"
-#include "GoToAction.h"
+#include "FollowPathAction.h"
 
 namespace NAI
 {
 	namespace Goap
 	{
-		GoToAction::GoToAction(
+		FollowPathAction::FollowPathAction(
 			const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
-			glm::vec3 destination) :
+			std::vector<glm::vec3>& path ) :
 			BaseAction(preConditions, postConditions, 0),
-			mDestination{ destination }
+			mPath{ path }
 		{
 		}
 	}

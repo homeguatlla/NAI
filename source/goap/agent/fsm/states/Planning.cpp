@@ -17,7 +17,7 @@ namespace NAI
 
 		void Planning::OnUpdate(float deltaTime)
 		{
-			std::vector<std::shared_ptr<IGoal>> goals;
+			auto goals = GetContext()->GetGoals();
 			auto predicates = GetContext()->GetPredicates();
 
 			auto plan = mGoapPlanner->GetPlan(goals, predicates);

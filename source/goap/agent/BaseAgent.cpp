@@ -8,9 +8,12 @@ namespace NAI
 {
 	namespace Goap
 	{
-		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, std::vector<std::shared_ptr<IPredicate>>& predicates) :
+		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, 
+			std::vector<std::shared_ptr<IGoal>>& goals, 
+			std::vector<std::shared_ptr<IPredicate>>& predicates) :
 			mGoapPlanner{ goapPlanner },
-			mPredicates{ predicates }
+			mPredicates{ predicates },
+			mGoals { goals }
 		{
 			assert(goapPlanner);
 			CreateStatesMachine();
@@ -57,7 +60,7 @@ namespace NAI
 
 		void BaseAgent::CreateStatesMachine()
 		{
-			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner, mPredicates);
+			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner, mPredicates, mGoals);
 			mStatesMachine = std::make_unique<core::utils::FSM::StatesMachine<AgentState, AgentContext>>(mAgentContext);
 
 			auto planning = std::make_shared<Planning>();
