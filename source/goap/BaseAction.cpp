@@ -24,6 +24,7 @@ namespace NAI
 
 		bool BaseAction::SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
+			ResetMatchedPreConditions();
 			return SatisfyConditions(mPreConditions, predicates);
 		}
 
@@ -37,14 +38,27 @@ namespace NAI
 		std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			return std::all_of(conditions.begin(), conditions.end(),
-				[&predicates](std::shared_ptr<IPredicate> predicateA)
+				[this, &predicates](std::shared_ptr<IPredicate> predicateA)
 				{
-					return std::find_if(predicates.begin(), predicates.end(),
+					auto it = std::find_if(predicates.begin(), predicates.end(),
 						[predicateA](std::shared_ptr<IPredicate> predicateB)
 						{
 							return predicateA->IsEqualTo(predicateB);
-						}) != predicates.end();
+						});
+
+					bool satisfy = it != predicates.end();
+					if (satisfy)
+					{
+						mMatchedPreConditions.push_back(*it);
+					}
+
+					return satisfy;
 				});
+		}
+
+		void BaseAction::ResetMatchedPreConditions()
+		{
+			mMatchedPreConditions.clear();
 		}
 
 		void BaseAction::Cancel()

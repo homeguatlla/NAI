@@ -54,7 +54,7 @@ namespace NAI
 			
 		}
 
-		void Processing::OnNewPredicate()
+		void Processing::OnPredicatesListChanged()
 		{
 			if (mCurrentAction != nullptr)
 			{
@@ -87,7 +87,10 @@ namespace NAI
 			mCurrentPlanActions.erase(mCurrentPlanActions.begin());
 
 			bool satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
-			int counter = mCurrentPlanActions.size();
+
+			return satisfyPrecondition ? action : nullptr;
+
+			/*int counter = mCurrentPlanActions.size();
 			while (!satisfyPrecondition && counter > 0)
 			{
 				mCurrentPlanActions.push_back(action);
@@ -107,7 +110,7 @@ namespace NAI
 			else
 			{
 				return action;
-			}
+			}*/
 		}
 
 		bool Processing::ThereAreActionsToProcess() const

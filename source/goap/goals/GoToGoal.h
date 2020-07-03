@@ -6,20 +6,33 @@
 
 namespace NAI
 {
+	namespace Navigation
+	{
+		class INavigationPlanner;
+		class INavigationPath;
+	}
+
 	namespace Goap
 	{
+		class IAgent;
+
 		class GoToGoal : public BaseGoal
 		{
 		public:
-			GoToGoal();
+			GoToGoal(std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
+			void Create(std::shared_ptr<IAgent> agent);
 			virtual ~GoToGoal() = default;
+			void OnNavigationPath(std::shared_ptr<Navigation::INavigationPath> path);
+			std::shared_ptr<Navigation::INavigationPath> GetNavigationPath() { return mNavigationPath; }
 
 		private:
 			std::shared_ptr<IAction> CreateFollowPathAction();
-			std::shared_ptr<IAction> CreateFindPathToAction();
-
+			std::shared_ptr<IAction> CreateFindPathToAction(std::shared_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
+		
 		private:
-			glm::vec3 mDestination;
+			std::shared_ptr<IAgent> mAgent;
+			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;
+			std::shared_ptr<Navigation::INavigationPath> mNavigationPath;
 		};
 	}
 }

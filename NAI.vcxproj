@@ -175,6 +175,8 @@
     <ClInclude Include="source\goap\GoapTypes.h" />
     <ClInclude Include="source\goap\predicates\GoapPredicates.h" />
     <ClInclude Include="source\goap\predicates\GoToPredicate.h" />
+    <ClInclude Include="source\navigation\INavigationPath.h" />
+    <ClInclude Include="source\navigation\INavigationPlanner.h" />
     <ClInclude Include="source\navigation\INavigationPoint.h" />
     <ClInclude Include="source\utils\fsm\BaseState.h" />
     <ClInclude Include="source\utils\fsm\BaseTransition.h" />

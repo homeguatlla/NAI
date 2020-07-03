@@ -159,6 +159,12 @@
     <ClInclude Include="source\goap\predicates\GoapPredicates.h">
       <Filter>Archivos de encabezado\goap\predicates</Filter>
     </ClInclude>
+    <ClInclude Include="source\navigation\INavigationPath.h">
+      <Filter>Archivos de encabezado\navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="source\navigation\INavigationPlanner.h">
+      <Filter>Archivos de encabezado\navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">

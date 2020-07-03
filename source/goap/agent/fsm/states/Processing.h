@@ -22,7 +22,7 @@ namespace NAI
 			void OnUpdate(float deltaTime) override;
 			void OnExit(float deltaTime) override;
 			
-			void OnNewPredicate();
+			void OnPredicatesListChanged();
 
 		private:
 			std::shared_ptr<IAction> GetNextActionToProcess();

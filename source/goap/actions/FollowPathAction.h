@@ -1,11 +1,13 @@
 #pragma once
 #include "source/goap/BaseAction.h"
-#include <vector>
 #include <memory>
-#include <glm/glm.hpp>
 
 namespace NAI
 {
+	namespace Navigation
+	{
+		class INavigationPath;
+	}
 	namespace Goap
 	{
 		class FollowPathAction : public BaseAction
@@ -14,11 +16,11 @@ namespace NAI
 			FollowPathAction(
 				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
-				std::vector<glm::vec3>& path);
+				std::shared_ptr<Navigation::INavigationPath> path);
 			virtual ~FollowPathAction() = default;
 
 		private:
-			std::vector<glm::vec3>& mPath;
+			std::shared_ptr<Navigation::INavigationPath> mPath;
 		};
 	}
 }

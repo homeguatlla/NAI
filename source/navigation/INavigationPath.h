@@ -5,14 +5,14 @@
 
 namespace NAI
 {
-	class IAction;
-
-	class IGoal
+	namespace Navigation
 	{
-	public:
-		virtual ~IGoal() = default;
-		virtual const std::vector<std::shared_ptr<IAction>>& GetActions() const = 0;
-		virtual const unsigned int GetCost() const = 0;
-	};
+		class INavigationPath
+		{
+		public:
+			virtual ~INavigationPath() = default;
+			virtual bool Empty() const  = 0;
+		};
+	}
 }
 

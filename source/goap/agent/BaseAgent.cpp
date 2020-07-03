@@ -10,10 +10,12 @@ namespace NAI
 	{
 		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, 
 			std::vector<std::shared_ptr<IGoal>>& goals, 
-			std::vector<std::shared_ptr<IPredicate>>& predicates) :
+			std::vector<std::shared_ptr<IPredicate>>& predicates,
+			const glm::vec3& position) :
 			mGoapPlanner{ goapPlanner },
 			mPredicates{ predicates },
-			mGoals { goals }
+			mGoals { goals },
+			mPosition { position }
 		{
 			assert(goapPlanner);
 			CreateStatesMachine();
@@ -39,17 +41,17 @@ namespace NAI
 			if (!HasPredicate(predicate->GetID()))
 			{
 				mPredicates.push_back(predicate);
-				NotifyNewPredicateToProcessState();
+				NotifyPredicatesListChangedToProcessState();
 			}
 		}
 
-		void BaseAgent::NotifyNewPredicateToProcessState()
+		void BaseAgent::NotifyPredicatesListChangedToProcessState()
 		{
 			auto currentState = mStatesMachine->GetCurrentState();
 			if (currentState->GetID() == AgentState::STATE_PROCESSING)
 			{
 				auto processingState = std::static_pointer_cast<Processing>(currentState);
-				processingState->OnNewPredicate();
+				processingState->OnPredicatesListChanged();
 			}
 		}
 

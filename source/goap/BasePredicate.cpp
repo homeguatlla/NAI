@@ -11,7 +11,7 @@ namespace NAI
 		{
 		}
 
-		bool BasePredicate::IsEqualTo(const std::shared_ptr<IPredicate>& predicate)
+		bool BasePredicate::IsEqualTo(const std::shared_ptr<IPredicate> predicate)
 		{
 			return GetID() == predicate->GetID();
 		}
