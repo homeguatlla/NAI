@@ -24,7 +24,7 @@ namespace NAI
 				std::shared_ptr<GoToGoal> goal,
 				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
-				std::shared_ptr<IAgent> agent,
+				std::weak_ptr<IAgent> agent,
 				std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
 			virtual ~FindPathToAction() = default;
 
@@ -33,8 +33,8 @@ namespace NAI
 		private:
 			std::string GetPlaceToGo() const;
 
-			std::shared_ptr<GoToGoal> mGoal;
-			std::shared_ptr<IAgent> mAgent;
+			std::weak_ptr<GoToGoal> mGoal;
+			std::weak_ptr<IAgent> mAgent;
 			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;
 		};
 	}

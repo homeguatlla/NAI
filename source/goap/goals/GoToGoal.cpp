@@ -27,15 +27,15 @@ namespace NAI
 			mNavigationPath = path;
 			if(!mNavigationPath->Empty())
 			{
-				//CreateFollowPathAction
+				mActions.push_back(CreateFollowPathAction(mNavigationPath));
 			}
 		}
 		
-		std::shared_ptr<IAction> GoToGoal::CreateFindPathToAction(std::shared_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner)
+		std::shared_ptr<IAction> GoToGoal::CreateFindPathToAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner)
 		{
 			std::vector<std::shared_ptr<IPredicate>> preconditions, postconditions;
-			preconditions.push_back(PREDICATE_GO_TO);
-			postconditions.push_back(PREDICATE_GOT_PATH);
+			preconditions.push_back(Predicates::PREDICATE_GO_TO);
+			postconditions.push_back(Predicates::PREDICATE_GOT_PATH);
 
 			auto goal = std::dynamic_pointer_cast<GoToGoal>(shared_from_this());
 			auto findPathTo = std::make_shared<FindPathToAction>(goal, preconditions, postconditions, agent, navigationPlanner);
@@ -43,15 +43,15 @@ namespace NAI
 			return findPathTo;
 		}
 
-		std::shared_ptr<IAction>  GoToGoal::CreateFollowPathAction()
+		std::shared_ptr<IAction> GoToGoal::CreateFollowPathAction(std::shared_ptr<Navigation::INavigationPath> navigationPath)
 		{
 			std::vector<std::shared_ptr<IPredicate>> preconditions, postconditions;
-			preconditions.push_back(PREDICATE_GOT_PATH);
-			postconditions.push_back(PREDICATE_AT_PLACE);
+			preconditions.push_back(Predicates::PREDICATE_GOT_PATH);
+			postconditions.push_back(Predicates::PREDICATE_AT_PLACE);
 
-			//auto followPathTo = std::make_shared<FollowPathAction>(preconditions, postconditions);
+			auto followPathTo = std::make_shared<FollowPathAction>(preconditions, postconditions, navigationPath);
 
-			return nullptr;
+			return followPathTo;
 		}
 	}
 }

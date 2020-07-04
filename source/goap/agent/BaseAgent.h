@@ -22,8 +22,7 @@ namespace NAI
 		public:
 			BaseAgent(	std::shared_ptr<IGoapPlanner> goapPlanner, 
 						std::vector<std::shared_ptr<IGoal>>& goals, 
-						std::vector<std::shared_ptr<IPredicate>>& predicates,
-						const glm::vec3& position = glm::vec3(0.0f));
+						std::vector<std::shared_ptr<IPredicate>>& predicates);
 			virtual ~BaseAgent() = default;
 
 			AgentState GetCurrentState() const override;
@@ -31,7 +30,7 @@ namespace NAI
 			bool HasPredicate(int predicateID) const override;
 			void OnNewPredicate(std::shared_ptr<IPredicate> predicate) override;
 			std::vector<std::shared_ptr<IGoal>> GetGoals() const override { return mGoals; }
-			glm::vec3 GetPosition() const override { return mPosition; }
+
 		private:
 			void CreateStatesMachine();
 			void NotifyPredicatesListChangedToProcessState();
@@ -42,7 +41,6 @@ namespace NAI
 			std::shared_ptr<IGoapPlanner> mGoapPlanner;
 			std::vector<std::shared_ptr<IPredicate>> mPredicates;
 			std::vector<std::shared_ptr<IGoal>> mGoals;
-			glm::vec3 mPosition;
 		};
 	}
 }

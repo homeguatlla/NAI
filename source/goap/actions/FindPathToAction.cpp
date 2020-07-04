@@ -15,7 +15,7 @@ namespace NAI
 			std::shared_ptr<GoToGoal> goal,
 			const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
-			std::shared_ptr<IAgent> agent,
+			std::weak_ptr<IAgent> agent,
 			std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner) :
 			BaseAction(preConditions, postConditions, 0),
 			mGoal { goal },
@@ -29,12 +29,18 @@ namespace NAI
 		{
 			auto placeName = GetPlaceToGo();
 			auto destination = mNavigationPlanner->GetLocationGivenAName(placeName);
-
-			mNavigationPlanner->GetPathFromTo(mAgent->GetPosition(), destination, 
-				[this](std::shared_ptr<Navigation::INavigationPath> path)
-				{
-					mGoal->OnNavigationPath(path);
-				});
+			if(auto agentPtr = mAgent.lock())
+			{
+				mNavigationPlanner->GetPathFromTo(agentPtr->GetPosition(), destination,
+					[this](std::shared_ptr<Navigation::INavigationPath> path)
+					{
+						if(auto goalPtr = mGoal.lock())
+						{ 
+							goalPtr->OnNavigationPath(path);
+							mHasAccomplished = true;
+						}
+					});
+			}
 		}
 
 		std::string FindPathToAction::GetPlaceToGo() const

@@ -10,12 +10,10 @@ namespace NAI
 	{
 		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, 
 			std::vector<std::shared_ptr<IGoal>>& goals, 
-			std::vector<std::shared_ptr<IPredicate>>& predicates,
-			const glm::vec3& position) :
+			std::vector<std::shared_ptr<IPredicate>>& predicates) :
 			mGoapPlanner{ goapPlanner },
 			mPredicates{ predicates },
-			mGoals { goals },
-			mPosition { position }
+			mGoals { goals }
 		{
 			assert(goapPlanner);
 			CreateStatesMachine();

@@ -215,5 +215,8 @@
     <ClCompile Include="source\goap\predicates\GoToPredicate.cpp">
       <Filter>Archivos de origen\goap\predicates</Filter>
     </ClCompile>
+    <ClCompile Include="source\goap\predicates\GoapPredicates.cpp">
+      <Filter>Archivos de origen\goap\predicates</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

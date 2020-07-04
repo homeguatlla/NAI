@@ -7,7 +7,17 @@ namespace NAI
 {
 	namespace Goap
 	{
-		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions) : mActions{ actions }, mCost{ 0 }
+		BaseGoal::BaseGoal() :
+			mCurrentActionIndex{ 0 },
+			mCost{ 0 }
+		{
+
+		}
+
+		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions) : 
+			mActions{ actions }, 
+			mCurrentActionIndex { 0 } , 
+			mCost{ 0 }
 		{
 			CalculateCost();
 		}
@@ -18,6 +28,11 @@ namespace NAI
 			{
 				mCost += action->GetCost();
 			}
+		}
+
+		std::shared_ptr<IAction> BaseGoal::GetNextAction()
+		{
+			return HasActions() ? mActions[mCurrentActionIndex++] : nullptr;
 		}
 
 		bool BaseGoal::SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates)

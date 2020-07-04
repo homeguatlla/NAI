@@ -32,7 +32,6 @@ namespace NAI
 			void AddActionPostConditionsToPredicatesList(std::shared_ptr<IAction> action);
 
 		private:
-			std::vector<std::shared_ptr<IAction>> mCurrentPlanActions;
 			std::shared_ptr<IAction> mCurrentAction;
 			std::vector<std::shared_ptr<IPredicate>> mPredicates;
 		};

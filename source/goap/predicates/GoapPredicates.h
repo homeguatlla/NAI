@@ -8,9 +8,13 @@ namespace NAI
 {
 	namespace Goap
 	{
-		static std::shared_ptr<IPredicate> PREDICATE_GO_TO = std::make_shared<GoToPredicate>("GoTo");
-		static std::shared_ptr<IPredicate> PREDICATE_GOT_PATH = std::make_shared<BasePredicate>("GotPath");
-		static std::shared_ptr<IPredicate> PREDICATE_AT_PLACE = std::make_shared<BasePredicate>("AtPlace");
+		class Predicates
+		{
+			public:
+				static std::shared_ptr<IPredicate> PREDICATE_GO_TO;
+				static std::shared_ptr<IPredicate> PREDICATE_GOT_PATH;
+				static std::shared_ptr<IPredicate> PREDICATE_AT_PLACE;
+		};
 	}
 }
 

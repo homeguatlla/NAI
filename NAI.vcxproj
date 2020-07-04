@@ -205,6 +205,7 @@
     <ClCompile Include="source\goap\goals\GoToGoal.cpp" />
     <ClCompile Include="source\goap\GoapPlanner.cpp" />
     <ClCompile Include="source\goap\BasePredicate.cpp" />
+    <ClCompile Include="source\goap\predicates\GoapPredicates.cpp" />
     <ClCompile Include="source\goap\predicates\GoToPredicate.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

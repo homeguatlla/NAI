@@ -16,11 +16,6 @@ namespace NAI
 		void Processing::OnEnter(float deltaTime)
 		{
 			mPredicates = GetContext()->GetPredicates();
-
-			auto plan = GetContext()->GetPlan();
-			mCurrentPlanActions = plan->GetActions();
-			
-			assert(!mCurrentPlanActions.empty());
 			mCurrentAction = GetNextActionToProcess();	
 		}
 
@@ -83,39 +78,35 @@ namespace NAI
 
 		std::shared_ptr<IAction> Processing::GetNextActionToProcess()
 		{
-			auto action = mCurrentPlanActions[0];
-			mCurrentPlanActions.erase(mCurrentPlanActions.begin());
-
-			bool satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
-
-			return satisfyPrecondition ? action : nullptr;
-
-			/*int counter = mCurrentPlanActions.size();
-			while (!satisfyPrecondition && counter > 0)
+			//After finish an action, the parent goal can add other actions to the list of actions
+			//we need to ask and get the current plan everytime.
+			auto plan = GetContext()->GetPlan();
+			if (plan)
 			{
-				mCurrentPlanActions.push_back(action);
+				auto action = plan->GetNextAction();
 
-				action = mCurrentPlanActions[0];
-				satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
+				bool satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
 
-				mCurrentPlanActions.erase(mCurrentPlanActions.begin());
+				return satisfyPrecondition ? action : nullptr;
 
-				counter--;
-			}
-
-			if (!satisfyPrecondition && counter == 0)
-			{
-				return nullptr;
 			}
 			else
 			{
-				return action;
-			}*/
+				return nullptr;
+			}
 		}
 
 		bool Processing::ThereAreActionsToProcess() const
 		{
-			return !mCurrentPlanActions.empty();
+			auto plan = GetContext()->GetPlan();
+			if(plan)
+			{
+				return plan->HasActions();
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }
