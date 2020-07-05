@@ -20,26 +20,37 @@ namespace NAI
 			BaseAction(preConditions, postConditions, 0),
 			mGoal { goal },
 			mAgent {agent},
-			mNavigationPlanner { navigationPlanner }
+			mNavigationPlanner { navigationPlanner },
+			mWaitingForPath {false}
 		{
 			mHasAccomplished = false;
 		}
 
 		void FindPathToAction::Process(float elapsedTime)
 		{
-			auto placeName = GetPlaceToGo();
-			auto destination = mNavigationPlanner->GetLocationGivenAName(placeName);
-			if(auto agentPtr = mAgent.lock())
+			if(!mWaitingForPath)
 			{
-				mNavigationPlanner->GetPathFromTo(agentPtr->GetPosition(), destination,
-					[this](std::shared_ptr<Navigation::INavigationPath> path)
-					{
-						if(auto goalPtr = mGoal.lock())
-						{ 
-							goalPtr->OnNavigationPath(path);
-							mHasAccomplished = true;
-						}
-					});
+				auto placeName = GetPlaceToGo();
+				auto destination = mNavigationPlanner->GetLocationGivenAName(placeName);
+				if(auto agentPtr = mAgent.lock())
+				{
+					mWaitingForPath = true;
+					mNavigationPlanner->GetPathFromTo(agentPtr->GetPosition(), destination,
+						[this](std::shared_ptr<Navigation::INavigationPath> path)
+						{
+							if(auto goalPtr = mGoal.lock())
+							{ 
+								goalPtr->OnNavigationPath(path);
+								mHasAccomplished = true;
+							}
+						});
+				}
+				else
+				{
+					//TODO ver como se cocina esto, igual puede devolver false
+					//igual no hay que hacer nada pues si no se puede hacer un lock es que el objeto no existe???
+					Cancel();
+				}
 			}
 		}
 

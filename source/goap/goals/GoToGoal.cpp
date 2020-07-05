@@ -24,10 +24,13 @@ namespace NAI
 
 		void GoToGoal::OnNavigationPath(std::shared_ptr<Navigation::INavigationPath> path)
 		{
-			mNavigationPath = path;
-			if(!mNavigationPath->Empty())
+			if(!path->Empty())
 			{
-				mActions.push_back(CreateFollowPathAction(mAgent, mNavigationPath));
+				mActions.push_back(CreateFollowPathAction(mAgent, path));
+			}
+			else
+			{
+				//TODO Cancel();
 			}
 		}
 		

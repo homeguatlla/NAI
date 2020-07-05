@@ -23,8 +23,7 @@ namespace NAI
 			void Create(std::shared_ptr<IAgent> agent);
 			virtual ~GoToGoal() = default;
 			void OnNavigationPath(std::shared_ptr<Navigation::INavigationPath> path);
-			std::shared_ptr<Navigation::INavigationPath> GetNavigationPath() { return mNavigationPath; }
-
+			
 		private:
 			std::shared_ptr<IAction> CreateFollowPathAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPath> navigationPath);
 			std::shared_ptr<IAction> CreateFindPathToAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
@@ -32,7 +31,6 @@ namespace NAI
 		private:
 			std::weak_ptr<IAgent> mAgent;
 			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;
-			std::shared_ptr<Navigation::INavigationPath> mNavigationPath;
 		};
 	}
 }
