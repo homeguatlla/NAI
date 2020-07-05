@@ -26,7 +26,7 @@ namespace NAI
 			std::shared_ptr<Navigation::INavigationPath> GetNavigationPath() { return mNavigationPath; }
 
 		private:
-			std::shared_ptr<IAction> CreateFollowPathAction(std::shared_ptr<Navigation::INavigationPath> navigationPath);
+			std::shared_ptr<IAction> CreateFollowPathAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPath> navigationPath);
 			std::shared_ptr<IAction> CreateFindPathToAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
 		
 		private:

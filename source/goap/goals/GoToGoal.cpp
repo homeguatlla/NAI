@@ -27,7 +27,7 @@ namespace NAI
 			mNavigationPath = path;
 			if(!mNavigationPath->Empty())
 			{
-				mActions.push_back(CreateFollowPathAction(mNavigationPath));
+				mActions.push_back(CreateFollowPathAction(mAgent, mNavigationPath));
 			}
 		}
 		
@@ -43,13 +43,13 @@ namespace NAI
 			return findPathTo;
 		}
 
-		std::shared_ptr<IAction> GoToGoal::CreateFollowPathAction(std::shared_ptr<Navigation::INavigationPath> navigationPath)
+		std::shared_ptr<IAction> GoToGoal::CreateFollowPathAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPath> navigationPath)
 		{
 			std::vector<std::shared_ptr<IPredicate>> preconditions, postconditions;
 			preconditions.push_back(Predicates::PREDICATE_GOT_PATH);
 			postconditions.push_back(Predicates::PREDICATE_AT_PLACE);
 
-			auto followPathTo = std::make_shared<FollowPathAction>(preconditions, postconditions, navigationPath);
+			auto followPathTo = std::make_shared<FollowPathAction>(preconditions, postconditions, agent, navigationPath);
 
 			return followPathTo;
 		}
