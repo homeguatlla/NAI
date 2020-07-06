@@ -39,6 +39,7 @@ namespace NAI
 			if (!HasPredicate(predicate->GetID()))
 			{
 				mPredicates.push_back(predicate);
+				mAgentContext->SetPredicates(mPredicates);
 				NotifyPredicatesListChangedToProcessState();
 			}
 		}

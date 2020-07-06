@@ -16,7 +16,7 @@ namespace NAI
 		void Processing::OnEnter(float deltaTime)
 		{
 			mPredicates = GetContext()->GetPredicates();
-			mCurrentAction = GetNextActionToProcess();	
+			mCurrentAction = GetNextActionToProcess();
 		}
 
 		void Processing::OnUpdate(float deltaTime)
@@ -65,6 +65,7 @@ namespace NAI
 
 		void Processing::Abort()
 		{
+			mCurrentAction = nullptr;
 			GetContext()->SetPlan(nullptr);
 		}
 
