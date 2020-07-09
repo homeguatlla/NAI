@@ -1,5 +1,5 @@
 #pragma once
-#include "source/goap/GoapPlanner.h"
+#include "source/goap/planners/DirectGoapPlanner.h"
 
 namespace NAI
 {

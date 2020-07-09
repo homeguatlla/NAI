@@ -51,10 +51,6 @@ namespace NAI
 
 		void Processing::OnPredicatesListChanged()
 		{
-			if (mCurrentAction != nullptr)
-			{
-				mCurrentAction->Cancel();
-			}
 			Abort();
 		}
 
@@ -65,7 +61,13 @@ namespace NAI
 
 		void Processing::Abort()
 		{
-			mCurrentAction = nullptr;
+			auto plan = GetContext()->GetPlan();
+			if (plan)
+			{
+				plan->Cancel();
+				mCurrentAction = nullptr;
+			}
+			
 			GetContext()->SetPlan(nullptr);
 		}
 

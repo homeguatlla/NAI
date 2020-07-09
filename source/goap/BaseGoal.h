@@ -21,6 +21,11 @@ namespace NAI
 			bool HasActions() const override { return mCurrentActionIndex < mActions.size(); }
 			const unsigned int GetCost() const override { return mCost; }
 			bool SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
+			void Cancel() final override;
+			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>>& desiredPredicates) override;
+			
+		protected:
+			virtual void DoCancel() {};
 
 		private:
 			void CalculateCost();

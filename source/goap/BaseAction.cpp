@@ -25,20 +25,29 @@ namespace NAI
 		bool BaseAction::SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			ResetMatchedPreConditions();
-			return SatisfyConditions(mPreConditions, predicates);
+			mMatchedPreConditions = SatisfyConditions(mPreConditions, predicates);
+
+			return !mMatchedPreConditions.empty();
 		}
 
 		bool BaseAction::SatisfyPostcondition(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
+			return !SatisfyConditions(mPostConditions, predicates).empty();
+		}
+
+		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPostconditions(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
 			return SatisfyConditions(mPostConditions, predicates);
 		}
 
-		bool BaseAction::SatisfyConditions(
+		std::vector<std::shared_ptr<IPredicate>> BaseAction::SatisfyConditions(
 		std::vector<std::shared_ptr<IPredicate>>& conditions, 
 		std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
-			return std::all_of(conditions.begin(), conditions.end(),
-				[this, &predicates](std::shared_ptr<IPredicate> predicateA)
+			std::vector<std::shared_ptr<IPredicate>> result;
+
+			std::all_of(conditions.begin(), conditions.end(),
+				[&result, &predicates](std::shared_ptr<IPredicate> predicateA)
 				{
 					auto it = std::find_if(predicates.begin(), predicates.end(),
 						[predicateA](std::shared_ptr<IPredicate> predicateB)
@@ -49,11 +58,13 @@ namespace NAI
 					bool satisfy = it != predicates.end();
 					if (satisfy)
 					{
-						mMatchedPreConditions.push_back(*it);
+						result.push_back(*it);
 					}
 
 					return satisfy;
 				});
+
+			return result;
 		}
 
 		void BaseAction::ResetMatchedPreConditions()

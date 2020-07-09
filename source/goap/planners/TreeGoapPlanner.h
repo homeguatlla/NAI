@@ -1,5 +1,5 @@
 #pragma once
-#include "IGoapPlanner.h"
+#include "source/goap/IGoapPlanner.h"
 #include <vector>
 #include <memory>
 
@@ -7,11 +7,11 @@ namespace NAI
 {
 	namespace Goap
 	{
-		class GoapPlanner : public IGoapPlanner
+		class TreeGoapPlanner : public IGoapPlanner
 		{
 		public:
-			GoapPlanner() = default;
-			~GoapPlanner() = default;
+			TreeGoapPlanner() = default;
+			~TreeGoapPlanner() = default;
 
 			std::shared_ptr<IGoal> GetPlan(
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,

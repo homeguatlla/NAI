@@ -70,6 +70,12 @@
     <Filter Include="Archivos de origen\goap\predicates">
       <UniqueIdentifier>{3ba1c6d8-d464-4a83-b1f0-9cca0f556ac0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\goap\planners">
+      <UniqueIdentifier>{0cb5b216-446d-4898-ae4b-4da8d51a3089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\planners">
+      <UniqueIdentifier>{55252b34-74d9-4261-9659-7afb2bcc869b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -77,9 +83,6 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="source\goap\GoapPlanner.h">
-      <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
     <ClInclude Include="source\goap\BasePredicate.h">
       <Filter>Archivos de encabezado\goap</Filter>
@@ -165,6 +168,15 @@
     <ClInclude Include="source\navigation\INavigationPlanner.h">
       <Filter>Archivos de encabezado\navigation</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\planners\DirectGoapPlanner.h">
+      <Filter>Archivos de encabezado\goap\planners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\planners\TreeGoapPlanner.h">
+      <Filter>Archivos de encabezado\goap\planners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\GoapUtils.h">
+      <Filter>Archivos de encabezado\goap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -172,9 +184,6 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="source\goap\GoapPlanner.cpp">
-      <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\BasePredicate.cpp">
       <Filter>Archivos de origen\goap</Filter>
@@ -217,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="source\goap\predicates\GoapPredicates.cpp">
       <Filter>Archivos de origen\goap\predicates</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\planners\DirectGoapPlanner.cpp">
+      <Filter>Archivos de origen\goap\planners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\planners\TreeGoapPlanner.cpp">
+      <Filter>Archivos de origen\goap\planners</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

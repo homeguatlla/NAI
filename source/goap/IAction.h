@@ -20,6 +20,7 @@ namespace NAI
 			virtual bool HasAccomplished() const = 0;
 			virtual bool SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;
 			virtual bool SatisfyPostcondition(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;
+			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPostconditions(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;
 			virtual void Cancel() = 0;
 		};
 	}

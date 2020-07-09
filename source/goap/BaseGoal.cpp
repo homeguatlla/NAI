@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "BaseGoal.h"
 #include "IAction.h"
+#include "GoapUtils.h"
 #include <algorithm>
 
 namespace NAI
@@ -53,7 +54,11 @@ namespace NAI
 					for (auto it = actions.begin(); it != actions.end();)
 					{
 						auto action = *it;
-						if (!action->SatisfyPostcondition(predicates) && action->SatisfyPrecondition(predicates))
+						if (action->SatisfyPostcondition(predicates))
+						{
+							it = actions.erase(it);
+						}
+						else if (action->SatisfyPrecondition(predicates))
 						{
 							auto postconditions = action->GetPostconditions();
 							predicates.insert(end(predicates), begin(postconditions), end(postconditions));
@@ -67,10 +72,42 @@ namespace NAI
 					}
 				} while (static_cast<int>(predicates.size()) > lastPredicatesSize);
 
-				satisfied = actions.empty();
+				satisfied = actions.empty() && !mActions.empty();
 			}
 
 			return satisfied;
+		}
+
+		void BaseGoal::Cancel()
+		{
+			if(HasActions())
+			{
+				mActions[mCurrentActionIndex]->Cancel();
+			}
+
+			mCurrentActionIndex = 0;
+			
+			DoCancel();
+		}
+
+		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesCanBeAccomplished(
+			std::vector<std::shared_ptr<IPredicate>>& desiredPredicates)
+		{
+			std::vector<std::shared_ptr<IPredicate>> result;
+
+			if(!desiredPredicates.empty())
+			{
+				for (auto&& action : mActions)
+				{
+					auto accomplishedPredicates = action->GetPredicatesSatisfyPostconditions(desiredPredicates);
+					if (!accomplishedPredicates.empty())
+					{
+						result = Utils::Concat(result, accomplishedPredicates);
+					}
+				}
+			}
+
+			return result;
 		}
 	}
 }
