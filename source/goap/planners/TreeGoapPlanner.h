@@ -17,10 +17,13 @@ namespace NAI
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,
 				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
 
-			std::shared_ptr<IGoal> GetPlanToReach(
+			std::vector<std::shared_ptr<IGoal>> GetPlanToReach(
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,
 				std::vector<std::shared_ptr<IPredicate>>& inputPredicates,
 				std::vector<std::shared_ptr<IPredicate>>& desiredPredicates) const override;
+			
+		private:
+			unsigned int UpdateGoalsResult(std::vector<std::shared_ptr<IGoal>>& newResult, std::vector<std::shared_ptr<IGoal>>& result) const;
 		};
 	}
 }

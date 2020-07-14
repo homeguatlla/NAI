@@ -24,8 +24,10 @@ namespace NAI
 			bool SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			bool SatisfyPostcondition(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPostconditions(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			void Cancel() override;
 			const std::shared_ptr<IPredicate> GetPredicateMatchedPreconditionWithIndex(unsigned int index) const { return mMatchedPreConditions[index]; }
+			
 		private:
 			std::vector<std::shared_ptr<IPredicate>> SatisfyConditions(
 				std::vector<std::shared_ptr<IPredicate>>& conditions,

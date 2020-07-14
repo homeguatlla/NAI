@@ -15,7 +15,7 @@ namespace NAI
 
 		}
 
-		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions) : 
+		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>> actions) : 
 			mActions{ actions }, 
 			mCurrentActionIndex { 0 } , 
 			mCost{ 0 }
@@ -91,7 +91,7 @@ namespace NAI
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesCanBeAccomplished(
-			std::vector<std::shared_ptr<IPredicate>>& desiredPredicates)
+			std::vector<std::shared_ptr<IPredicate>> desiredPredicates)
 		{
 			std::vector<std::shared_ptr<IPredicate>> result;
 
@@ -103,6 +103,27 @@ namespace NAI
 					if (!accomplishedPredicates.empty())
 					{
 						result = Utils::Concat(result, accomplishedPredicates);
+					}
+				}
+			}
+
+			return result;
+		}
+
+		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesSatisfyPreconditions(
+			std::vector<std::shared_ptr<IPredicate>> inputPredicates)
+		{
+			std::vector<std::shared_ptr<IPredicate>> result;
+
+			if (!inputPredicates.empty())
+			{
+				for (auto&& action : mActions)
+				{
+					auto accomplishedPredicates = action->GetPredicatesSatisfyPreconditions(inputPredicates);
+					if (!accomplishedPredicates.empty())
+					{
+						result = Utils::Concat(result, accomplishedPredicates);
+						inputPredicates = Utils::Concat(inputPredicates, action->GetPostconditions());
 					}
 				}
 			}

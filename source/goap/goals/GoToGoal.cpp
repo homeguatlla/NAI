@@ -4,7 +4,10 @@
 #include "source/goap/actions/FollowPathAction.h"
 #include "source/goap/predicates/GoToPredicate.h"
 #include "source/goap/predicates/GoapPredicates.h"
+#include "source/goap/agent/IAgent.h"
 #include "source/navigation/INavigationPath.h"
+#include "source/navigation/INavigationPlanner.h"
+
 #include <vector>
 
 namespace NAI
@@ -20,6 +23,18 @@ namespace NAI
 		{
 			mAgent = agent;
 			mActions.push_back(CreateFindPathToAction(mAgent, mNavigationPlanner));
+		}
+
+		const unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
+		{
+			if(auto agent = mAgent.lock())
+			{ 
+				return mNavigationPlanner->GetAproxCost(agent->GetPosition(), glm::vec3(0.0f));
+			}
+			else
+			{
+				return std::numeric_limits<unsigned int>::max();
+			}
 		}
 
 		void GoToGoal::OnNavigationPath(std::shared_ptr<Navigation::INavigationPath> path)

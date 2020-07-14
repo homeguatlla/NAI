@@ -18,7 +18,7 @@ namespace NAI
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,
 				std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const = 0;
 
-			virtual std::shared_ptr<IGoal> GetPlanToReach(
+			virtual std::vector<std::shared_ptr<IGoal>>  GetPlanToReach(
 				std::vector<std::shared_ptr<IGoal>>& inputGoals,
 				std::vector<std::shared_ptr<IPredicate>>& inputPredicates,
 				std::vector<std::shared_ptr<IPredicate>>& desiredPredicates) const = 0;

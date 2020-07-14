@@ -27,17 +27,24 @@ namespace NAI
 			ResetMatchedPreConditions();
 			mMatchedPreConditions = SatisfyConditions(mPreConditions, predicates);
 
-			return !mMatchedPreConditions.empty();
+			return mMatchedPreConditions.size() == mPreConditions.size();
 		}
 
 		bool BaseAction::SatisfyPostcondition(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
-			return !SatisfyConditions(mPostConditions, predicates).empty();
+			auto result = SatisfyConditions(mPostConditions, predicates);
+
+			return result.size() == mPostConditions.size();
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPostconditions(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			return SatisfyConditions(mPostConditions, predicates);
+		}
+
+		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
+			return SatisfyConditions(mPreConditions, predicates);
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseAction::SatisfyConditions(

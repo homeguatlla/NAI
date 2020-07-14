@@ -32,34 +32,14 @@ namespace NAI
 			return nullptr;
 		}
 
-		std::shared_ptr<IGoal> DirectGoapPlanner::GetPlanToReach(
+		std::vector<std::shared_ptr<IGoal>> DirectGoapPlanner::GetPlanToReach(
 			std::vector<std::shared_ptr<IGoal>>& inputGoals,
 			std::vector<std::shared_ptr<IPredicate>>& inputPredicates,
 			std::vector<std::shared_ptr<IPredicate>>& desiredPredicates) const
 		{
-			std::shared_ptr<IGoal> lessCostGoal = nullptr;
+			std::vector<std::shared_ptr<IGoal>> bestResult;
 
-			for(auto&& goal : inputGoals)
-			{
-				auto predicatesAccomplished = goal->GetPredicatesCanBeAccomplished(desiredPredicates);
-				if(!predicatesAccomplished.empty())
-				{
-					auto newDesiredPredicates = Utils::Substract(desiredPredicates, predicatesAccomplished);
-					auto newInputPredicates = Utils::Concat(inputPredicates, predicatesAccomplished);
-					
-					auto newGoals = inputGoals;
-					auto it = std::remove_if(newGoals.begin(), newGoals.end(), [&goal](std::shared_ptr<IGoal> g) { return g == goal;});
-					newGoals.erase(it);
-
-					auto plan = GetPlanToReach(newGoals, newInputPredicates, newDesiredPredicates);
-					if (lessCostGoal == nullptr || plan->GetCost() < lessCostGoal->GetCost())
-					{
-						lessCostGoal = plan;
-					}
-				}
-			}
-
-			return lessCostGoal;
+			return bestResult;
 		}
 	}
 }
