@@ -23,6 +23,9 @@ namespace NAI
 			auto plan = mGoapPlanner->GetPlan(goals, predicates);
 			if (plan)
 			{
+				//GetPlan, can change the order of the predicates putting the ones the goal needs to satisfy first
+				//depending on cost. Then, we need to SetPredicates
+				GetContext()->SetPredicates(predicates);
 				GetContext()->SetPlan(plan);
 			}
 		}

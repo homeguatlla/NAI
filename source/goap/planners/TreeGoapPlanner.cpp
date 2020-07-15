@@ -14,6 +14,8 @@ namespace NAI
 			if (!inputPredicates.empty() && !inputGoals.empty())
 			{
 				std::shared_ptr<IGoal> lessCostGoal = nullptr;
+				unsigned int lessCost = std::numeric_limits<unsigned int>::max();
+				std::vector<std::shared_ptr<IPredicate>> lessCostGoalPredicates;
 
 				for (auto&& goal : inputGoals)
 				{
@@ -26,15 +28,21 @@ namespace NAI
 
 						if(satisfyGoalPreconditions)
 						{
-							if(lessCostGoal == nullptr || goal->GetCost(predicatesAccomplished) < lessCostGoal->GetCost())
-							{ 
+							auto cost = goal->GetCost(predicatesAccomplished);
+							if(lessCostGoal == nullptr ||  cost < lessCost)
+							{
+								lessCost = cost;
 								lessCostGoal = goal;
+								lessCostGoalPredicates = predicatesAccomplished;
 							}
 							newPredicates = Utils::Substract(newPredicates, predicatesAccomplished);
 						}
 					} while(satisfyGoalPreconditions && !newPredicates.empty());
 				}
 				
+				inputPredicates = Utils::Substract(inputPredicates, lessCostGoalPredicates);
+				inputPredicates.insert(inputPredicates.begin(), lessCostGoalPredicates.begin(), lessCostGoalPredicates.end());
+
 				return lessCostGoal;
 			}
 

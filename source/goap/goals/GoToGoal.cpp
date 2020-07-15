@@ -27,9 +27,15 @@ namespace NAI
 
 		const unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
 		{
-			if(auto agent = mAgent.lock())
+			if(!inputPredicates.empty())
 			{ 
-				return mNavigationPlanner->GetAproxCost(agent->GetPosition(), glm::vec3(0.0f));
+				if(auto agent = mAgent.lock())
+				{
+					auto goToPredicate = std::static_pointer_cast<GoToPredicate>(inputPredicates[0]);
+					auto destination = mNavigationPlanner->GetLocationGivenAName(goToPredicate->GetPlaceName());
+
+					return mNavigationPlanner->GetAproxCost(agent->GetPosition(), destination);
+				}
 			}
 			else
 			{
