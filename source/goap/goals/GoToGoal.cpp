@@ -4,9 +4,12 @@
 #include "source/goap/actions/FollowPathAction.h"
 #include "source/goap/predicates/GoToPredicate.h"
 #include "source/goap/predicates/GoapPredicates.h"
+#include "source/goap/predicates/PlaceIamPredicate.h"
 #include "source/goap/agent/IAgent.h"
+#include "source/goap/GoapUtils.h"
 #include "source/navigation/INavigationPath.h"
 #include "source/navigation/INavigationPlanner.h"
+
 
 #include <vector>
 
@@ -37,17 +40,45 @@ namespace NAI
 					return mNavigationPlanner->GetAproxCost(agent->GetPosition(), destination);
 				}
 			}
-			else
-			{
-				return std::numeric_limits<unsigned int>::max();
-			}
+
+			return std::numeric_limits<unsigned int>::max();
 		}
 
-		void GoToGoal::OnNavigationPath(std::shared_ptr<Navigation::INavigationPath> path)
+		void GoToGoal::DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
+			std::shared_ptr<IPredicate> predicate;
+			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicate))
+			{
+				auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicate);
+				auto placeName = placeIamPredicate->GetPlaceName();
+
+				auto it = std::find_if(predicates.begin(), predicates.end(),
+					[&placeName](const std::shared_ptr<IPredicate> predicate)
+					{
+						if (predicate->GetText() == "GoTo")
+						{
+							auto goToPredicate = std::static_pointer_cast<GoToPredicate>(predicate);
+							return goToPredicate->GetPlaceName() == placeName;
+						}
+						else
+						{
+							return false;
+						}
+					});
+				if (it != predicates.end())
+				{
+					predicates.erase(it);
+				}
+			}
+
+			Utils::RemovePredicateWith(predicates, "GotPath");
+		}
+
+		void GoToGoal::OnNavigationPath(const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> path)
 		{
 			if(!path->Empty())
-			{
-				mActions.push_back(CreateFollowPathAction(mAgent, path));
+			{				
+				mActions.push_back(CreateFollowPathAction(mAgent, placeName, path));
 			}
 			else
 			{
@@ -67,11 +98,11 @@ namespace NAI
 			return findPathTo;
 		}
 
-		std::shared_ptr<IAction> GoToGoal::CreateFollowPathAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPath> navigationPath)
+		std::shared_ptr<IAction> GoToGoal::CreateFollowPathAction(std::weak_ptr<IAgent> agent, const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> navigationPath)
 		{
 			std::vector<std::shared_ptr<IPredicate>> preconditions, postconditions;
 			preconditions.push_back(Predicates::PREDICATE_GOT_PATH);
-			postconditions.push_back(Predicates::PREDICATE_AT_PLACE);
+			postconditions.push_back(std::make_shared<PlaceIamPredicate>("PlaceIam", placeName));
 
 			auto followPathTo = std::make_shared<FollowPathAction>(preconditions, postconditions, agent, navigationPath);
 

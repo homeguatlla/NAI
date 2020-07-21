@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace NAI
 {
@@ -19,6 +20,7 @@ namespace NAI
 			virtual void Update(float elapsedTime) = 0;
 			virtual AgentState GetCurrentState() const = 0;
 			virtual bool HasPredicate(int predicateID) const = 0;
+			virtual std::string WhereIam() const = 0;
 			virtual void OnNewPredicate(std::shared_ptr<IPredicate> predicate) = 0;
 			virtual std::vector<std::shared_ptr<IGoal>> GetGoals() const = 0;
 			virtual glm::vec3 GetPosition() const = 0;

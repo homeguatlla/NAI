@@ -13,7 +13,6 @@ namespace NAI
 			public:
 				static std::shared_ptr<IPredicate> PREDICATE_GO_TO;
 				static std::shared_ptr<IPredicate> PREDICATE_GOT_PATH;
-				static std::shared_ptr<IPredicate> PREDICATE_AT_PLACE;
 		};
 	}
 }

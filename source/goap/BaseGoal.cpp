@@ -78,6 +78,11 @@ namespace NAI
 			return satisfied;
 		}
 
+		void BaseGoal::Accomplished(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
+			DoAccomplished(predicates);
+		}
+
 		void BaseGoal::Cancel()
 		{
 			if(HasActions())

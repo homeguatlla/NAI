@@ -22,10 +22,12 @@ namespace NAI
 			const unsigned int GetCost() const override { return mCost; }
 			const unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override { return mCost; }
 			bool SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
+			void Accomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;
 			void Cancel() final override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
 		protected:
+			virtual void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) {};
 			virtual void DoCancel() {};
 
 		private:

@@ -36,11 +36,11 @@ namespace NAI
 				{
 					mWaitingForPath = true;
 					mNavigationPlanner->GetPathFromTo(agentPtr->GetPosition(), destination,
-						[this](std::shared_ptr<Navigation::INavigationPath> path)
+						[this, &placeName](std::shared_ptr<Navigation::INavigationPath> path)
 						{
 							if(auto goalPtr = mGoal.lock())
 							{ 
-								goalPtr->OnNavigationPath(path);
+								goalPtr->OnNavigationPath(placeName, path);
 								mHasAccomplished = true;
 							}
 						});

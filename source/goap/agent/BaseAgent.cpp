@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "BaseAgent.h"
 #include "source/goap/IPredicate.h"
+#include "source/goap/predicates/PlaceIamPredicate.h"
 
 #include <cassert>
 
@@ -32,6 +33,25 @@ namespace NAI
 			{
 				return predicate->GetID() == predicateID;
 			}) != mPredicates.end();
+		}
+
+		std::string BaseAgent::WhereIam() const
+		{
+			auto it = std::find_if(mPredicates.begin(), mPredicates.end(),
+				[](const std::shared_ptr<IPredicate> predicate)
+				{
+					return predicate->GetText() == "PlaceIam";
+				});
+
+			if (it != mPredicates.end())
+			{
+				auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(*it);
+				return placeIamPredicate->GetPlaceName();
+			}
+			else
+			{
+				return "";
+			}
 		}
 
 		void BaseAgent::OnNewPredicate(std::shared_ptr<IPredicate> predicate)

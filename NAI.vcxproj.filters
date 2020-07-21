@@ -177,6 +177,9 @@
     <ClInclude Include="source\goap\GoapUtils.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\predicates\PlaceIamPredicate.h">
+      <Filter>Archivos de encabezado\goap\predicates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -232,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="source\goap\planners\TreeGoapPlanner.cpp">
       <Filter>Archivos de origen\goap\planners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\predicates\PlaceIamPredicate.cpp">
+      <Filter>Archivos de origen\goap\predicates</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

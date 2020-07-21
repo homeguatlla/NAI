@@ -56,6 +56,13 @@ namespace NAI
 
 		void Processing::Accomplished()
 		{
+			auto plan = GetContext()->GetPlan();
+			if (plan)
+			{
+				auto newPredicates = GetContext()->GetPredicates();
+				plan->Accomplished(newPredicates);
+				GetContext()->SetPredicates(newPredicates);
+			}
 			GetContext()->SetPlan(nullptr);
 		}
 
@@ -87,11 +94,16 @@ namespace NAI
 			if (plan)
 			{
 				auto action = plan->GetNextAction();
+				if(action)
+				{
+					bool satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
 
-				bool satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
-
-				return satisfyPrecondition ? action : nullptr;
-
+					return satisfyPrecondition ? action : nullptr;
+				}
+				else
+				{
+					return nullptr;
+				}
 			}
 			else
 			{

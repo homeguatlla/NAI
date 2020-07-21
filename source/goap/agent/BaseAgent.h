@@ -28,6 +28,7 @@ namespace NAI
 			AgentState GetCurrentState() const override;
 			void Update(float elapsedTime) override;
 			bool HasPredicate(int predicateID) const override;
+			std::string WhereIam() const override;
 			void OnNewPredicate(std::shared_ptr<IPredicate> predicate) override;
 			std::vector<std::shared_ptr<IGoal>> GetGoals() const override { return mGoals; }
 

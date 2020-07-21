@@ -35,9 +35,49 @@ namespace NAI
 				for (auto&& predicate : v2)
 				{
 					auto it = std::remove_if(substraction.begin(), substraction.end(), [predicate](std::shared_ptr<IPredicate> p) { return p->GetID() == predicate->GetID(); });
-					substraction.erase(it);
+					if(it!= substraction.end())
+					{
+						substraction.erase(it);
+					}
 				}
 				return substraction;
+			}
+
+			static bool FindPredicateWith(
+				const std::vector<std::shared_ptr<IPredicate>> predicates,
+				const std::string& text,
+				std::shared_ptr<IPredicate>& predicateFound)
+			{
+				auto it = std::find_if(predicates.begin(), predicates.end(),
+					[&text](const std::shared_ptr<IPredicate> predicate)
+					{
+						return predicate->GetText() == text;
+					});
+
+				bool found = it != predicates.end();
+				if (found)
+				{
+					predicateFound = *it;
+				}
+
+				return found;
+			}
+
+			static void RemovePredicateWith(
+				std::vector<std::shared_ptr<IPredicate>>& predicates,
+				const std::string& text)
+			{
+				auto it = std::find_if(predicates.begin(), predicates.end(),
+					[&text](const std::shared_ptr<IPredicate> predicate)
+					{
+						return predicate->GetText() == text;
+					});
+
+				bool found = it != predicates.end();
+				if (found)
+				{
+					predicates.erase(it);
+				}
 			}
 		};
 	}
