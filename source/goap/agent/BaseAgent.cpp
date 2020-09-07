@@ -2,6 +2,7 @@
 #include "BaseAgent.h"
 #include "source/goap/IPredicate.h"
 #include "source/goap/predicates/PlaceIamPredicate.h"
+#include "source/goap/IGoal.h"
 
 #include <cassert>
 
@@ -18,6 +19,14 @@ namespace NAI
 		{
 			assert(goapPlanner);
 			CreateStatesMachine();
+		}
+
+		void BaseAgent::StartUp()
+		{
+			for (auto&& goal : mGoals)
+			{
+				goal->Create(shared_from_this());
+			}
 		}
 
 		void BaseAgent::Update(float elapsedTime)

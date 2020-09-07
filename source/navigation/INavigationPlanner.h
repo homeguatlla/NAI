@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <functional>
+#include <glm/glm.hpp>
 
 namespace NAI
 {

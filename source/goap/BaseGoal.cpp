@@ -23,6 +23,11 @@ namespace NAI
 			CalculateCost();
 		}
 
+		void BaseGoal::Create(std::shared_ptr<IAgent> agent)
+		{
+			DoCreate(agent);
+		}
+
 		void BaseGoal::CalculateCost()
 		{
 			for (auto&& action : mActions)
@@ -93,6 +98,14 @@ namespace NAI
 			mCurrentActionIndex = 0;
 			
 			DoCancel();
+		}
+
+		void BaseGoal::Reset()
+		{
+			mActions.clear();
+			mCurrentActionIndex = 0;
+
+			DoReset();
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesCanBeAccomplished(

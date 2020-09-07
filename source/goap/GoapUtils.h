@@ -2,6 +2,7 @@
 #include "source/Goap/IPredicate.h"
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 namespace NAI
 {
@@ -14,6 +15,7 @@ namespace NAI
 				const std::vector<std::shared_ptr<IPredicate>>& v1,
 				const std::vector<std::shared_ptr<IPredicate>>& v2)
 			{
+				//TODO remove repited predicates?  After concat we can order and then remove repeated?
 				std::vector<std::shared_ptr<IPredicate>> concat;
 
 				concat = v1;

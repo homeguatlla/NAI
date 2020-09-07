@@ -2,6 +2,7 @@
 #include "Processing.h"
 #include "source/goap/IGoal.h"
 #include "source/goap/IAction.h"
+#include "source/goap/GoapUtils.h"
 #include <cassert>
 
 namespace NAI
@@ -46,7 +47,12 @@ namespace NAI
 
 		void Processing::OnExit(float deltaTime)
 		{
-			
+			auto plan = GetContext()->GetPlan();
+			if (plan)
+			{
+				plan->Reset();
+			}
+			GetContext()->SetPlan(nullptr);
 		}
 
 		void Processing::OnPredicatesListChanged()
@@ -62,8 +68,8 @@ namespace NAI
 				auto newPredicates = GetContext()->GetPredicates();
 				plan->Accomplished(newPredicates);
 				GetContext()->SetPredicates(newPredicates);
+				plan->Reset();
 			}
-			GetContext()->SetPlan(nullptr);
 		}
 
 		void Processing::Abort()
@@ -81,8 +87,7 @@ namespace NAI
 		void Processing::AddActionPostConditionsToPredicatesList(std::shared_ptr<IAction> action)
 		{
 			auto postConditions = action->GetPostconditions();
-			//TODO remove repeated predicates?
-			mPredicates.insert(mPredicates.end(), postConditions.begin(), postConditions.end());
+			mPredicates = Utils::Concat(mPredicates, postConditions);
 			GetContext()->SetPredicates(mPredicates);
 		}
 

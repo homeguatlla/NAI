@@ -72,10 +72,10 @@ namespace NAI
 					auto newGoals = inputGoals;
 					auto it = std::remove_if(newGoals.begin(), newGoals.end(), [&goal](std::shared_ptr<IGoal> g) { return g == goal; });
 					newGoals.erase(it);
+					result.push_back(goal);
 
 					if(!newDesiredPredicates.empty())
-					{
-						result.push_back(goal);
+					{	
 						totalCost += goal->GetCost();
 
 						auto newResult = GetPlanToReach(newGoals, newInputPredicates, newDesiredPredicates);
@@ -93,7 +93,6 @@ namespace NAI
 					else
 					{
 						totalCost = result.empty() ? goal->GetCost() : totalCost + goal->GetCost();
-						result.push_back(goal);
 						isSolved = true;
 					}
 
