@@ -51,9 +51,13 @@ namespace NAI
 
 		void GoToGoal::DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
+			UpdatePlaceIamPredicate(predicates);
 			RemovePredicateGoTo(predicates);
 			Utils::RemovePredicateWith(predicates, "GotPath");
+		}
 
+		void GoToGoal::UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
 			std::shared_ptr<IPredicate> predicate;
 			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicate))
 			{

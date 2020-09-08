@@ -67,9 +67,10 @@ namespace NAI
 			{
 				auto newPredicates = GetContext()->GetPredicates();
 				plan->Accomplished(newPredicates);
-				GetContext()->SetPredicates(newPredicates);
 				plan->Reset();
+				GetContext()->SetPredicates(newPredicates);
 			}
+			GetContext()->SetPlan(nullptr);
 		}
 
 		void Processing::Abort()

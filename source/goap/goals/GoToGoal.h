@@ -34,6 +34,7 @@ namespace NAI
 			std::shared_ptr<IAction> CreateFollowPathAction(std::weak_ptr<IAgent> agent, const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> navigationPath);
 			std::shared_ptr<IAction> CreateFindPathToAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
 			void RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates);
+			void UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates);
 
 		private:
 			std::weak_ptr<IAgent> mAgent;
