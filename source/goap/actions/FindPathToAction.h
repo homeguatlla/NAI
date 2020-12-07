@@ -21,12 +21,12 @@ namespace NAI
 		{
 		public:
 			FindPathToAction(
-				std::shared_ptr<GoToGoal> goal,
+				const std::shared_ptr<GoToGoal>& goal,
 				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
-				std::weak_ptr<IAgent> agent,
-				std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
-			virtual ~FindPathToAction() = default;
+				const std::weak_ptr<IAgent>& agent,
+				const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner);
+			~FindPathToAction() override = default;
 
 			void Process(float elapsedTime) override;
 

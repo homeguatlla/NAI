@@ -17,12 +17,12 @@ namespace NAI
 {
 	namespace Goap
 	{
-		GoToGoal::GoToGoal(std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner) :
+		GoToGoal::GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner) :
 		mNavigationPlanner { navigationPlanner }
 		{
 		}
 
-		void GoToGoal::DoCreate(std::shared_ptr<IAgent> agent)
+		void GoToGoal::DoCreate(const std::shared_ptr<IAgent>& agent)
 		{
 			mAgent = agent;
 			Reset();
@@ -33,14 +33,14 @@ namespace NAI
 			mActions.push_back(CreateFindPathToAction(mAgent, mNavigationPlanner));
 		}
 
-		const unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
+		unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
 		{
 			if(!inputPredicates.empty())
 			{ 
-				if(auto agent = mAgent.lock())
+				if(const auto agent = mAgent.lock())
 				{
-					auto goToPredicate = std::static_pointer_cast<GoToPredicate>(inputPredicates[0]);
-					auto destination = mNavigationPlanner->GetLocationGivenAName(goToPredicate->GetPlaceName());
+					const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(inputPredicates[0]);
+					const auto destination = mNavigationPlanner->GetLocationGivenAName(goToPredicate->GetPlaceName());
 
 					return mNavigationPlanner->GetAproxCost(agent->GetPosition(), destination);
 				}
@@ -56,12 +56,12 @@ namespace NAI
 			Utils::RemovePredicateWith(predicates, "GotPath");
 		}
 
-		void GoToGoal::UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		void GoToGoal::UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates) const
 		{
 			std::shared_ptr<IPredicate> predicate;
 			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicate))
 			{
-				auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicate);
+				const auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicate);
 				if (placeIamPredicate->GetPlaceName() != mPlaceName)
 				{
 					Utils::RemovePredicateWith(predicates, "PlaceIam");
@@ -69,20 +69,20 @@ namespace NAI
 			}
 		}
 
-		void GoToGoal::RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		void GoToGoal::RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates) const
 		{
-			std::shared_ptr<IPredicate> predicate;
-			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicate))
+			std::shared_ptr<IPredicate> predicateFound;
+			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicateFound))
 			{
-				auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicate);
+				const auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicateFound);
 				auto placeName = placeIamPredicate->GetPlaceName();
 
-				auto it = std::find_if(predicates.begin(), predicates.end(),
-					[&placeName](const std::shared_ptr<IPredicate> predicate)
+				const auto it = std::find_if(predicates.begin(), predicates.end(),
+					[&placeName](const std::shared_ptr<IPredicate>& predicate)
 					{
 						if (predicate->GetText() == "GoTo")
 						{
-							auto goToPredicate = std::static_pointer_cast<GoToPredicate>(predicate);
+							const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(predicate);
 							return goToPredicate->GetPlaceName() == placeName;
 						}
 						else
@@ -97,7 +97,7 @@ namespace NAI
 			}
 		}
 
-		void GoToGoal::OnNavigationPath(const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> path)
+		void GoToGoal::OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path)
 		{
 			if(!path->Empty())
 			{
@@ -110,25 +110,25 @@ namespace NAI
 			}
 		}
 		
-		std::shared_ptr<IAction> GoToGoal::CreateFindPathToAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner)
+		std::shared_ptr<FindPathToAction> GoToGoal::CreateFindPathToAction(const std::weak_ptr<IAgent>& agent, const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner)
 		{
-			std::vector<std::shared_ptr<IPredicate>> preconditions, postconditions;
-			preconditions.push_back(Predicates::PREDICATE_GO_TO);
-			postconditions.push_back(Predicates::PREDICATE_GOT_PATH);
+			std::vector<std::shared_ptr<IPredicate>> preConditions, postConditions;
+			preConditions.push_back(Predicates::PREDICATE_GO_TO);
+			postConditions.push_back(Predicates::PREDICATE_GOT_PATH);
 
-			auto goal = std::static_pointer_cast<GoToGoal>(shared_from_this());
-			auto findPathTo = std::make_shared<FindPathToAction>(goal, preconditions, postconditions, agent, navigationPlanner);
+			const auto goal = std::static_pointer_cast<GoToGoal>(shared_from_this());
+			auto findPathTo = std::make_shared<FindPathToAction>(goal, preConditions, postConditions, agent, navigationPlanner);
 
 			return findPathTo;
 		}
 
-		std::shared_ptr<IAction> GoToGoal::CreateFollowPathAction(std::weak_ptr<IAgent> agent, const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> navigationPath)
+		std::shared_ptr<FollowPathAction> GoToGoal::CreateFollowPathAction(const std::weak_ptr<IAgent>& agent, const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& navigationPath) const
 		{
-			std::vector<std::shared_ptr<IPredicate>> preconditions, postconditions;
-			preconditions.push_back(Predicates::PREDICATE_GOT_PATH);
-			postconditions.push_back(std::make_shared<PlaceIamPredicate>("PlaceIam", placeName));
+			std::vector<std::shared_ptr<IPredicate>> preConditions, postConditions;
+			preConditions.push_back(Predicates::PREDICATE_GOT_PATH);
+			postConditions.push_back(std::make_shared<PlaceIamPredicate>("PlaceIam", placeName));
 
-			auto followPathTo = std::make_shared<FollowPathAction>(preconditions, postconditions, agent, navigationPath);
+			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath);
 
 			return followPathTo;
 		}

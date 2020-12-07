@@ -6,11 +6,11 @@ namespace NAI
 	namespace Goap
 	{
 		AgentContext::AgentContext(	std::shared_ptr<IGoapPlanner> planner, 
-									std::vector<std::shared_ptr<IPredicate>>& predicates,
+									const PredicatesHandler& predicatesHandler,
 									std::vector<std::shared_ptr<IGoal>>& goals) :
 			mGoapPlanner{ planner },
 			mCurrentPlan{ nullptr },
-			mPredicates{ predicates },
+			mPredicatesHandler{ predicatesHandler },
 			mGoals { goals }
 		{
 		}

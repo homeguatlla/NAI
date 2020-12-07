@@ -14,25 +14,25 @@ namespace NAI
 		{
 		public:
 			BaseGoal();
-			BaseGoal(const std::vector<std::shared_ptr<IAction>> actions);
+			BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions);
 			virtual ~BaseGoal() = default;
 
 			void Create(std::shared_ptr<IAgent> agent) override;
 			std::shared_ptr<IAction> GetNextAction() override;
 			bool HasActions() const override { return mCurrentActionIndex < mActions.size(); }
-			const unsigned int GetCost() const override { return mCost; }
-			const unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override { return mCost; }
-			bool SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
+			unsigned int GetCost() const override { return mCost; }
+			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override { return mCost; }
+			bool SatisfyActions(const std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
 			void Accomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;
 			void Cancel() final override;
 			void Reset() final override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
 		protected:
-			virtual void DoCreate(std::shared_ptr<IAgent> agent) {}
-			virtual void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) {};
-			virtual void DoCancel() {};
-			virtual void DoReset() {};
+			virtual void DoCreate(const std::shared_ptr<IAgent>& agent) {}
+			virtual void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
+			virtual void DoCancel() {}
+			virtual void DoReset() {}
 
 		private:
 			void CalculateCost();

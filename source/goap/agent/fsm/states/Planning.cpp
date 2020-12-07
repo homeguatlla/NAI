@@ -18,14 +18,15 @@ namespace NAI
 		void Planning::OnUpdate(float deltaTime)
 		{
 			auto goals = GetContext()->GetGoals();
-			auto predicates = GetContext()->GetPredicates();
+			const auto predicatesHandler = GetContext()->GetPredicatesHandler();
+			auto predicates = predicatesHandler.GetPredicatesList();
 
-			auto plan = mGoapPlanner->GetPlan(goals, predicates);
+			const auto plan = mGoapPlanner->GetPlan(goals, predicates);
 			if (plan)
 			{
 				//GetPlan, can change the order of the predicates putting the ones the goal needs to satisfy first
-				//depending on cost. Then, we need to SetPredicates
-				GetContext()->SetPredicates(predicates);
+				//depending on cost. Then, we need to SetPredicatesHandler
+				GetContext()->SetPredicatesHandler(predicatesHandler);
 				GetContext()->SetPlan(plan);
 			}
 		}

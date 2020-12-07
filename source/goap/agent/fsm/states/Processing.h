@@ -2,7 +2,7 @@
 #include "source/goap/agent/AgentContext.h"
 #include "source/utils/fsm/BaseState.h"
 #include "source/goap/GoapTypes.h"
-#include <vector>
+#include "source/goap/PredicatesHandler.h"
 
 namespace NAI
 {
@@ -25,7 +25,7 @@ namespace NAI
 			void OnPredicatesListChanged();
 
 		private:
-			std::shared_ptr<IAction> GetNextActionToProcess();
+			std::shared_ptr<IAction> GetNextActionToProcess() const;
 			bool ThereAreActionsToProcess() const;
 			void Accomplished();
 			void Abort();
@@ -33,7 +33,7 @@ namespace NAI
 
 		private:
 			std::shared_ptr<IAction> mCurrentAction;
-			std::vector<std::shared_ptr<IPredicate>> mPredicates;
+			PredicatesHandler mPredicatesHandler;
 		};
 	}
 }

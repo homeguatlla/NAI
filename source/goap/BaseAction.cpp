@@ -22,7 +22,7 @@ namespace NAI
 		{
 		}
 
-		bool BaseAction::SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		bool BaseAction::SatisfyPrecondition(const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			ResetMatchedPreConditions();
 			mMatchedPreConditions = SatisfyConditions(mPreConditions, predicates);
@@ -30,39 +30,39 @@ namespace NAI
 			return mMatchedPreConditions.size() == mPreConditions.size();
 		}
 
-		bool BaseAction::SatisfyPostcondition(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		bool BaseAction::SatisfyPostcondition(const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			auto result = SatisfyConditions(mPostConditions, predicates);
 
 			return result.size() == mPostConditions.size();
 		}
 
-		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPostconditions(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPostconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			return SatisfyConditions(mPostConditions, predicates);
 		}
 
-		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPreconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			return SatisfyConditions(mPreConditions, predicates);
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseAction::SatisfyConditions(
-		std::vector<std::shared_ptr<IPredicate>>& conditions, 
-		std::vector<std::shared_ptr<IPredicate>>& predicates)
+		const std::vector<std::shared_ptr<IPredicate>>& conditions, 
+		const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			std::vector<std::shared_ptr<IPredicate>> result;
 
 			std::all_of(conditions.begin(), conditions.end(),
-				[&result, &predicates](std::shared_ptr<IPredicate> predicateA)
+				[&result, &predicates](const std::shared_ptr<IPredicate>& predicateA)
 				{
-					auto it = std::find_if(predicates.begin(), predicates.end(),
-						[predicateA](std::shared_ptr<IPredicate> predicateB)
+					const auto it = std::find_if(predicates.begin(), predicates.end(),
+						[predicateA](const std::shared_ptr<IPredicate>& predicateB)
 						{
 							return predicateA->IsEqualTo(predicateB);
 						});
 
-					bool satisfy = it != predicates.end();
+					const auto satisfy = it != predicates.end();
 					if (satisfy)
 					{
 						result.push_back(*it);

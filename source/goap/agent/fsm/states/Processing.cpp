@@ -16,7 +16,7 @@ namespace NAI
 		
 		void Processing::OnEnter(float deltaTime)
 		{
-			mPredicates = GetContext()->GetPredicates();
+			mPredicatesHandler = GetContext()->GetPredicatesHandler();
 			mCurrentAction = GetNextActionToProcess();
 		}
 
@@ -65,10 +65,11 @@ namespace NAI
 			auto plan = GetContext()->GetPlan();
 			if (plan)
 			{
-				auto newPredicates = GetContext()->GetPredicates();
+				auto& newPredicates = mPredicatesHandler.GetPredicatesList();
 				plan->Accomplished(newPredicates);
 				plan->Reset();
-				GetContext()->SetPredicates(newPredicates);
+				mPredicatesHandler.Reset(newPredicates);
+				GetContext()->SetPredicatesHandler(mPredicatesHandler);
 			}
 			GetContext()->SetPlan(nullptr);
 		}
@@ -87,12 +88,13 @@ namespace NAI
 
 		void Processing::AddActionPostConditionsToPredicatesList(std::shared_ptr<IAction> action)
 		{
-			auto postConditions = action->GetPostconditions();
-			mPredicates = Utils::Concat(mPredicates, postConditions);
-			GetContext()->SetPredicates(mPredicates);
+			const auto postConditions = action->GetPostconditions();
+			const auto resultPredicates = Utils::Concat(mPredicatesHandler.GetPredicatesList(), postConditions);
+			mPredicatesHandler.Reset(resultPredicates);
+			GetContext()->SetPredicatesHandler(mPredicatesHandler);
 		}
 
-		std::shared_ptr<IAction> Processing::GetNextActionToProcess()
+		std::shared_ptr<IAction> Processing::GetNextActionToProcess() const
 		{
 			//After finish an action, the parent goal can add other actions to the list of actions
 			//we need to ask and get the current plan everytime.
@@ -102,7 +104,7 @@ namespace NAI
 				auto action = plan->GetNextAction();
 				if(action)
 				{
-					bool satisfyPrecondition = action->SatisfyPrecondition(mPredicates);
+					const auto satisfyPrecondition = action->SatisfyPrecondition(mPredicatesHandler.GetPredicatesList());
 
 					return satisfyPrecondition ? action : nullptr;
 				}
@@ -119,7 +121,7 @@ namespace NAI
 
 		bool Processing::ThereAreActionsToProcess() const
 		{
-			auto plan = GetContext()->GetPlan();
+			const auto plan = GetContext()->GetPlan();
 			if(plan)
 			{
 				return plan->HasActions();

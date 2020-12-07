@@ -14,10 +14,10 @@ namespace NAI
 			std::vector<std::shared_ptr<IGoal>>& goals, 
 			std::vector<std::shared_ptr<IPredicate>>& predicates) :
 			mGoapPlanner{ goapPlanner },
-			mPredicates{ predicates },
 			mGoals { goals }
 		{
 			assert(goapPlanner);
+			mPredicatesHandler.Reset(predicates);
 			CreateStatesMachine();
 		}
 
@@ -32,29 +32,23 @@ namespace NAI
 		void BaseAgent::Update(float elapsedTime)
 		{
 			mStatesMachine->Update(elapsedTime);
-			mPredicates = mAgentContext->GetPredicates();
+			mPredicatesHandler = mAgentContext->GetPredicatesHandler();
 		}
 
 		bool BaseAgent::HasPredicate(int predicateID) const
 		{
-			return std::find_if(mPredicates.begin(), mPredicates.end(), 
-			[&predicateID](const std::shared_ptr<IPredicate> predicate)
-			{
-				return predicate->GetID() == predicateID;
-			}) != mPredicates.end();
+			const auto predicateFound = mPredicatesHandler.FindById(predicateID);
+			
+			return predicateFound != nullptr;
 		}
 
 		std::string BaseAgent::WhereIam() const
 		{
-			auto it = std::find_if(mPredicates.begin(), mPredicates.end(),
-				[](const std::shared_ptr<IPredicate> predicate)
-				{
-					return predicate->GetText() == "PlaceIam";
-				});
-
-			if (it != mPredicates.end())
+			const auto predicateFound = mPredicatesHandler.FindByText(std::string("PlaceIam"));
+			
+			if (predicateFound != nullptr)
 			{
-				auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(*it);
+				const auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicateFound);
 				return placeIamPredicate->GetPlaceName();
 			}
 			else
@@ -67,8 +61,8 @@ namespace NAI
 		{
 			if (!HasPredicate(predicate->GetID()))
 			{
-				mPredicates.push_back(predicate);
-				mAgentContext->SetPredicates(mPredicates);
+				mPredicatesHandler.Add(predicate);
+				mAgentContext->SetPredicatesHandler(mPredicatesHandler);
 				NotifyPredicatesListChangedToProcessState();
 			}
 		}
@@ -90,7 +84,7 @@ namespace NAI
 
 		void BaseAgent::CreateStatesMachine()
 		{
-			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner, mPredicates, mGoals);
+			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner, mPredicatesHandler, mGoals);
 			mStatesMachine = std::make_unique<core::utils::FSM::StatesMachine<AgentState, AgentContext>>(mAgentContext);
 
 			auto planning = std::make_shared<Planning>();

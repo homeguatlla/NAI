@@ -18,7 +18,7 @@ namespace NAI
 			bool IsEqualTo(const std::shared_ptr<IPredicate> predicate) override;
 			
 			inline std::string GetText() const override { return mText; }
-
+			virtual inline std::string GetFullText() const override { return GetText(); }
 		private:
 			const int mID;
 			std::string mText;

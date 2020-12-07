@@ -15,7 +15,7 @@ namespace NAI
 
 		}
 
-		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>> actions) : 
+		BaseGoal::BaseGoal(const std::vector<std::shared_ptr<IAction>>& actions) : 
 			mActions{ actions }, 
 			mCurrentActionIndex { 0 } , 
 			mCost{ 0 }
@@ -41,13 +41,13 @@ namespace NAI
 			return HasActions() ? mActions[mCurrentActionIndex++] : nullptr;
 		}
 
-		bool BaseGoal::SatisfyActions(std::vector<std::shared_ptr<IPredicate>>& inputPredicates)
+		bool BaseGoal::SatisfyActions(const std::vector<std::shared_ptr<IPredicate>>& inputPredicates)
 		{
-			bool satisfied = false;
+			auto satisfied = false;
 
 			if (!inputPredicates.empty() && !mActions.empty())
 			{
-				std::vector<std::shared_ptr<IPredicate>> predicates = inputPredicates;
+				auto predicates = inputPredicates;
 				std::vector<std::shared_ptr<IAction>> actions;
 
 				actions.swap(mActions);
@@ -65,14 +65,14 @@ namespace NAI
 						}
 						else if (action->SatisfyPrecondition(predicates))
 						{
-							auto postconditions = action->GetPostconditions();
+							const auto postconditions = action->GetPostconditions();
 							predicates.insert(end(predicates), begin(postconditions), end(postconditions));
 							mActions.push_back(action);
 							it = actions.erase(it);
 						}
 						else
 						{
-							it++;
+							++it;
 						}
 					}
 				} while (static_cast<int>(predicates.size()) > lastPredicatesSize);

@@ -1,5 +1,6 @@
 #pragma once
 #include "source/goap/planners/DirectGoapPlanner.h"
+#include "source/goap/PredicatesHandler.h"
 
 namespace NAI
 {
@@ -9,7 +10,7 @@ namespace NAI
 		{
 		public:
 			AgentContext(	std::shared_ptr<IGoapPlanner> planner, 
-							std::vector<std::shared_ptr<IPredicate>>& predicates,
+							const PredicatesHandler& predicatesHandler,
 							std::vector<std::shared_ptr<IGoal>>& goals);
 
 			//Planner
@@ -21,8 +22,8 @@ namespace NAI
 			bool HasPlan() const { return mCurrentPlan != nullptr; }
 
 			//Predicates
-			std::vector<std::shared_ptr<IPredicate>> GetPredicates() { return mPredicates; }
-			void  SetPredicates(std::vector<std::shared_ptr<IPredicate>> predicates) { mPredicates = predicates; }
+			PredicatesHandler GetPredicatesHandler() const { return mPredicatesHandler; }
+			void  SetPredicatesHandler(const PredicatesHandler& predicatesHandler) { mPredicatesHandler = predicatesHandler; }
 
 			//Goals
 			std::vector<std::shared_ptr<IGoal>> GetGoals() const { return mGoals; }
@@ -32,7 +33,7 @@ namespace NAI
 			private:
 				std::shared_ptr<IGoapPlanner> mGoapPlanner;
 				std::shared_ptr<IGoal> mCurrentPlan;
-				std::vector<std::shared_ptr<IPredicate>> mPredicates;
+				PredicatesHandler mPredicatesHandler;
 				std::vector<std::shared_ptr<IGoal>> mGoals;
 		};
 	}

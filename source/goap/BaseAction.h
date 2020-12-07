@@ -21,17 +21,17 @@ namespace NAI
 			unsigned int GetCost() const override { return mCost; }
 			void Process(float elapsedTime) override;
 			bool HasAccomplished() const override { return mHasAccomplished;}
-			bool SatisfyPrecondition(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
-			bool SatisfyPostcondition(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
-			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPostconditions(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
-			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			bool SatisfyPrecondition(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			bool SatisfyPostcondition(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPostconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			void Cancel() override;
-			const std::shared_ptr<IPredicate> GetPredicateMatchedPreconditionWithIndex(unsigned int index) const { return mMatchedPreConditions[index]; }
+			const std::shared_ptr<IPredicate>& GetPredicateMatchedPreconditionWithIndex(unsigned int index) const { return mMatchedPreConditions[index]; }
 			
 		private:
 			std::vector<std::shared_ptr<IPredicate>> SatisfyConditions(
-				std::vector<std::shared_ptr<IPredicate>>& conditions,
-				std::vector<std::shared_ptr<IPredicate>>& predicates);
+				const std::vector<std::shared_ptr<IPredicate>>& conditions,
+				const std::vector<std::shared_ptr<IPredicate>>& predicates);
 			void ResetMatchedPreConditions();
 
 		private:

@@ -1,9 +1,11 @@
 #pragma once
 #include "source/goap/BaseGoal.h"
+#include "source/goap/actions/FollowPathAction.h"
+#include "source/goap/actions/FindPathToAction.h"
 #include <vector>
 #include <memory>
-#include <glm/glm.hpp>
 #include <string>
+
 
 namespace NAI
 {
@@ -20,21 +22,21 @@ namespace NAI
 		class GoToGoal : public BaseGoal
 		{
 		public:
-			GoToGoal(std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
-			virtual ~GoToGoal() = default;
-			void OnNavigationPath(const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> path);
-			const unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
+			GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner);
+			~GoToGoal() override = default;
+			void OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path);
+			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
 
 		protected:
-			void DoCreate(std::shared_ptr<IAgent> agent) override;
+			void DoCreate(const std::shared_ptr<IAgent>& agent) override;
 			void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			void DoReset() override;
 
 		private:
-			std::shared_ptr<IAction> CreateFollowPathAction(std::weak_ptr<IAgent> agent, const std::string& placeName, std::shared_ptr<Navigation::INavigationPath> navigationPath);
-			std::shared_ptr<IAction> CreateFindPathToAction(std::weak_ptr<IAgent> agent, std::shared_ptr<Navigation::INavigationPlanner> navigationPlanner);
-			void RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates);
-			void UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates);
+			std::shared_ptr<FollowPathAction> CreateFollowPathAction(const std::weak_ptr<IAgent>& agent, const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& navigationPath) const;
+			std::shared_ptr<FindPathToAction> CreateFindPathToAction(const std::weak_ptr<IAgent>& agent, const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner);
+			void RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates) const;
+			void UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates) const;
 
 		private:
 			std::weak_ptr<IAgent> mAgent;

@@ -24,7 +24,7 @@ namespace NAI
 		{
 			if (auto agent = mAgent.lock())
 			{
-				auto hasReachedPoint = mPath->HasReachedPoint(mCurrentPointIndex, agent->GetPosition(), 0.1f);
+				const auto hasReachedPoint = mPath->HasReachedPoint(mCurrentPointIndex, agent->GetPosition(), MOVEMENT_PRECISION);
 				if (hasReachedPoint)
 				{
 					if(mPath->IsEndOfPath(mCurrentPointIndex))
