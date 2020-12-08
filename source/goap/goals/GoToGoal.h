@@ -1,7 +1,7 @@
 #pragma once
-#include "source/goap/BaseGoal.h"
-#include "source/goap/actions/FollowPathAction.h"
-#include "source/goap/actions/FindPathToAction.h"
+#include "goap/BaseGoal.h"
+#include "goap/actions/FollowPathAction.h"
+#include "goap/actions/FindPathToAction.h"
 #include <vector>
 #include <memory>
 #include <string>

@@ -1,5 +1,5 @@
 #pragma once
-#include "source/goap/BaseAction.h"
+#include "goap/BaseAction.h"
 #include <vector>
 #include <memory>
 #include <glm/glm.hpp>

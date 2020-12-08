@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "source/goap/predicates/GoapPredicates.h"
+#include "goap/predicates/GoapPredicates.h"
 
 using namespace NAI::Goap;
 

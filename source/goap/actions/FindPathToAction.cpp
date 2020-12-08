@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "FindPathToAction.h"
-#include "source/goap/agent/IAgent.h"
-#include "source/goap/goals/GoToGoal.h"
-#include "source/goap/IPredicate.h"
-#include "source/goap/predicates/GoToPredicate.h"
-#include "source/navigation/INavigationPlanner.h"
+#include "goap/agent/IAgent.h"
+#include "goap/goals/GoToGoal.h"
+#include "goap/IPredicate.h"
+#include "goap/predicates/GoToPredicate.h"
+#include "navigation/INavigationPlanner.h"
 
 
 namespace NAI

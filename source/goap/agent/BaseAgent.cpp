@@ -1,10 +1,14 @@
 #include "pch.h"
 #include "BaseAgent.h"
-#include "source/goap/IPredicate.h"
-#include "source/goap/predicates/PlaceIamPredicate.h"
-#include "source/goap/IGoal.h"
+#include "goap/IPredicate.h"
+#include "goap/predicates/PlaceIamPredicate.h"
+#include "goap/IGoal.h"
 
 #include <cassert>
+
+#include "fsm/states/Processing.h"
+#include "fsm/transitions/EnterPlanning.h"
+#include "fsm/transitions/EnterProcessing.h"
 
 namespace NAI
 {

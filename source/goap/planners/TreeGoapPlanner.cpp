@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "TreeGoapPlanner.h"
-#include "source/goap/IGoal.h"
-#include "source/goap/IAction.h"
-#include "source/goap/IPredicate.h"
-#include "source/goap/GoapUtils.h"
+#include "goap/IGoal.h"
+#include "goap/IAction.h"
+#include "goap/IPredicate.h"
+#include "goap/GoapUtils.h"
 
 namespace NAI
 {

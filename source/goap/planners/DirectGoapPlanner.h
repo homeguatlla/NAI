@@ -1,5 +1,5 @@
 #pragma once
-#include "source/goap/IGoapPlanner.h"
+#include "goap/IGoapPlanner.h"
 #include <vector>
 #include <memory>
 

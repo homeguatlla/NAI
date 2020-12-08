@@ -1,5 +1,5 @@
 #pragma once
-#include "source/goap/BaseAction.h"
+#include "goap/BaseAction.h"
 #include <memory>
 
 namespace NAI

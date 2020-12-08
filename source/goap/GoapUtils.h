@@ -1,5 +1,5 @@
 #pragma once
-#include "source/Goap/IPredicate.h"
+#include "Goap/IPredicate.h"
 #include <vector>
 #include <memory>
 #include <algorithm>

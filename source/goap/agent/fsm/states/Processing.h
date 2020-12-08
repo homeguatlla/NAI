@@ -1,8 +1,8 @@
 #pragma once
-#include "source/goap/agent/AgentContext.h"
-#include "source/utils/fsm/BaseState.h"
-#include "source/goap/GoapTypes.h"
-#include "source/goap/PredicatesHandler.h"
+#include "goap/agent/AgentContext.h"
+#include "utils/fsm/BaseState.h"
+#include "goap/GoapTypes.h"
+#include "goap/PredicatesHandler.h"
 
 namespace NAI
 {

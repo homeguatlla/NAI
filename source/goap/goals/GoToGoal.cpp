@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "GoToGoal.h"
-#include "source/goap/actions/FindPathToAction.h"
-#include "source/goap/actions/FollowPathAction.h"
-#include "source/goap/predicates/GoToPredicate.h"
-#include "source/goap/predicates/GoapPredicates.h"
-#include "source/goap/predicates/PlaceIamPredicate.h"
-#include "source/goap/agent/IAgent.h"
-#include "source/goap/GoapUtils.h"
-#include "source/navigation/INavigationPath.h"
-#include "source/navigation/INavigationPlanner.h"
+#include "goap/actions/FindPathToAction.h"
+#include "goap/actions/FollowPathAction.h"
+#include "goap/predicates/GoToPredicate.h"
+#include "goap/predicates/GoapPredicates.h"
+#include "goap/predicates/PlaceIamPredicate.h"
+#include "goap/agent/IAgent.h"
+#include "goap/GoapUtils.h"
+#include "navigation/INavigationPath.h"
+#include "navigation/INavigationPlanner.h"
 
 
 #include <vector>

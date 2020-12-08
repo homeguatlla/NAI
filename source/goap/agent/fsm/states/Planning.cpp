@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Planning.h"
-#include "source/goap/IGoapPlanner.h"
+#include "goap/IGoapPlanner.h"
 
 namespace NAI
 {

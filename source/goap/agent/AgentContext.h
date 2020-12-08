@@ -1,6 +1,6 @@
 #pragma once
-#include "source/goap/planners/DirectGoapPlanner.h"
-#include "source/goap/PredicatesHandler.h"
+#include "goap/planners/DirectGoapPlanner.h"
+#include "goap/PredicatesHandler.h"
 
 namespace NAI
 {

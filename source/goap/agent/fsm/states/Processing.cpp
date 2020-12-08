@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Processing.h"
-#include "source/goap/IGoal.h"
-#include "source/goap/IAction.h"
-#include "source/goap/GoapUtils.h"
+#include "goap/IGoal.h"
+#include "goap/IAction.h"
+#include "goap/GoapUtils.h"
 #include <cassert>
 
 namespace NAI

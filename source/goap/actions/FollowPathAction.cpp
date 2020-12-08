@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "FollowPathAction.h"
-#include "source/goap/agent/IAgent.h"
-#include "source/navigation/INavigationPath.h"
+#include "goap/agent/IAgent.h"
+#include "navigation/INavigationPath.h"
 
 namespace NAI
 {

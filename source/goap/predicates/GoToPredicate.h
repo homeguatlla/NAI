@@ -1,5 +1,5 @@
 #pragma once
-#include "source/goap/BasePredicate.h"
+#include "goap/BasePredicate.h"
 
 namespace NAI
 {

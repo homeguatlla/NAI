@@ -1,6 +1,6 @@
 #pragma once
-#include "source/goap/BasePredicate.h"
-#include "source/goap/predicates/GoToPredicate.h"
+#include "goap/BasePredicate.h"
+#include "goap/predicates/GoToPredicate.h"
 #include <string>
 #include <memory>
 

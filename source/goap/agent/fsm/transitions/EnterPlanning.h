@@ -1,7 +1,7 @@
 #pragma once
-#include "source/utils/fsm/BaseTransition.h"
-#include "source/goap/GoapTypes.h"
-#include "source/goap/agent/AgentContext.h"
+#include "utils/fsm/BaseTransition.h"
+#include "goap/GoapTypes.h"
+#include "goap/agent/AgentContext.h"
 
 namespace NAI
 {

@@ -1,13 +1,10 @@
 #pragma once
 #include "IAgent.h"
 #include "AgentContext.h"
-#include "source/goap/GoapTypes.h"
-#include "source/utils/fsm/StatesMachine.h"
-#include "source/goap/agent/fsm/states/Planning.h"
-#include "source/goap/agent/fsm/states/Processing.h"
-#include "source/goap/agent/fsm/transitions/EnterPlanning.h"
-#include "source/goap/agent/fsm/transitions/EnterProcessing.h"
-#include "source/goap/PredicatesHandler.h"
+#include "goap/GoapTypes.h"
+#include "utils/fsm/StatesMachine.h"
+#include "goap/agent/fsm/states/Planning.h"
+#include "goap/PredicatesHandler.h"
 #include <vector>
 #include <memory>
 
