@@ -1,5 +1,5 @@
 #pragma once
-#include <memory>
+#include <glm/glm.hpp>
 
 namespace NAI
 {
@@ -8,7 +8,8 @@ namespace NAI
 		class IStimulus
 		{		
 		public:
-			
+			virtual std::string GetClassName() const = 0;
+			virtual glm::vec3 GetPosition() const = 0;
 		};
 	}
 }

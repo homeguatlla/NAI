@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "SensorySystem.h"
 #include "IThreshold.h"
+#include "IStimulus.h"
 
 namespace NAI
 {
@@ -12,13 +13,19 @@ namespace NAI
 		{
 		}
 
-		void SensorySystem::Update(float elapsedTime, std::shared_ptr<IThreshold> threshold)
+		void SensorySystem::Update(float elapsedTime, std::map<std::string, std::shared_ptr<IThreshold>> thresholds)
 		{
 			for(auto&& stimulus : mStimulusReceived)
 			{
-				if(threshold->IsStimulusPerceived(stimulus))
+				const auto name = stimulus->GetClassName();
+				auto it = thresholds.find(name);
+				if(it != thresholds.end())
 				{
-					mStimulusPerceived.push_back(stimulus);
+					auto threshold = it->second;
+					if(threshold->IsStimulusPerceived(stimulus))
+					{
+						mStimulusPerceived.push_back(stimulus);
+					}
 				}
 			}
 		}
