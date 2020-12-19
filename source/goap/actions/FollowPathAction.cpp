@@ -11,11 +11,13 @@ namespace NAI
 			const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 			std::weak_ptr<IAgent> agent,
-			std::shared_ptr<Navigation::INavigationPath> path ) :
+			std::shared_ptr<Navigation::INavigationPath> path,
+			float precision) :
 			BaseAction(preConditions, postConditions, 0),
 			mPath{ path },
 			mAgent { agent },
-			mCurrentPointIndex {1}
+			mCurrentPointIndex {1},
+			mPrecision { precision }
 		{
 			mHasAccomplished = false;
 		}
@@ -24,7 +26,7 @@ namespace NAI
 		{
 			if (auto agent = mAgent.lock())
 			{
-				const auto hasReachedPoint = mPath->HasReachedPoint(mCurrentPointIndex, agent->GetPosition(), MOVEMENT_PRECISION);
+				const auto hasReachedPoint = mPath->HasReachedPoint(mCurrentPointIndex, agent->GetPosition(), mPrecision);
 				if (hasReachedPoint)
 				{
 					if(mPath->IsEndOfPath(mCurrentPointIndex))

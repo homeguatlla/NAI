@@ -4,6 +4,7 @@
 #include <memory>
 #include <functional>
 #include <glm/glm.hpp>
+#include <string>
 
 namespace NAI
 {

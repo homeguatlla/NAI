@@ -22,7 +22,7 @@ namespace NAI
 		class GoToGoal : public BaseGoal
 		{
 		public:
-			GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner);
+			GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner, float precision = 0.01f);
 			~GoToGoal() override = default;
 			void OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path);
 			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
@@ -42,6 +42,7 @@ namespace NAI
 			std::weak_ptr<IAgent> mAgent;
 			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;
 			std::string mPlaceName;
+			float mPrecision;
 		};
 	}
 }

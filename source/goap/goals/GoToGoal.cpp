@@ -17,8 +17,9 @@ namespace NAI
 {
 	namespace Goap
 	{
-		GoToGoal::GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner) :
-		mNavigationPlanner { navigationPlanner }
+		GoToGoal::GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner, float precision) :
+		mNavigationPlanner { navigationPlanner },
+		mPrecision { precision }
 		{
 		}
 
@@ -128,7 +129,7 @@ namespace NAI
 			preConditions.push_back(Predicates::PREDICATE_GOT_PATH);
 			postConditions.push_back(std::make_shared<PlaceIamPredicate>("PlaceIam", placeName));
 
-			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath);
+			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath, mPrecision);
 
 			return followPathTo;
 		}

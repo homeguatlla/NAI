@@ -76,6 +76,12 @@
     <Filter Include="Archivos de encabezado\goap\planners">
       <UniqueIdentifier>{55252b34-74d9-4261-9659-7afb2bcc869b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\goap\sensory">
+      <UniqueIdentifier>{64e2a4fb-7f45-480c-bc7c-4ccc0af02347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\goap\sensory">
+      <UniqueIdentifier>{10bf4b2d-a616-475d-a4b0-e037c407ba40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -183,6 +189,21 @@
     <ClInclude Include="source\goap\PredicatesHandler.h">
       <Filter>Archivos de encabezado\goap</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\sensory\IStimulus.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\SensorySystem.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\ISensor.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\ISensorSuscriber.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\IThreshold.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -244,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="source\goap\PredicatesHandler.cpp">
       <Filter>Archivos de origen\goap</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\sensory\SensorySystem.cpp">
+      <Filter>Archivos de origen\goap\sensory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

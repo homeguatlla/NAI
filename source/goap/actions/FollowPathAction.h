@@ -19,7 +19,8 @@ namespace NAI
 				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 				std::weak_ptr<IAgent> agent,
-				std::shared_ptr<Navigation::INavigationPath> path);
+				std::shared_ptr<Navigation::INavigationPath> path,
+				float precision);
 			virtual ~FollowPathAction() = default;
 			void Process(float elapsedTime) override;
 
@@ -27,6 +28,7 @@ namespace NAI
 			std::shared_ptr<Navigation::INavigationPath> mPath;
 			std::weak_ptr<IAgent> mAgent;
 			unsigned int mCurrentPointIndex;
+			float mPrecision;
 		};
 	}
 }
