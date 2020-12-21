@@ -188,7 +188,7 @@
     <ClInclude Include="source\goap\predicates\GoToPredicate.h" />
     <ClInclude Include="source\goap\predicates\PlaceIamPredicate.h" />
     <ClInclude Include="source\goap\sensory\ISensor.h" />
-    <ClInclude Include="source\goap\sensory\ISensorSuscriber.h" />
+    <ClInclude Include="source\goap\sensory\ISensorSubscriber.h" />
     <ClInclude Include="source\goap\sensory\IStimulus.h" />
     <ClInclude Include="source\goap\sensory\IThreshold.h" />
     <ClInclude Include="source\goap\sensory\SensorySystem.h" />

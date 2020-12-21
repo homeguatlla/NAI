@@ -1,5 +1,5 @@
 #pragma once
-#include "ISensorSuscriber.h"
+#include "ISensorSubscriber.h"
 #include <vector>
 #include <memory>
 #include <map>

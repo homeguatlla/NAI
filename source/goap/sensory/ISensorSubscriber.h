@@ -5,10 +5,12 @@ namespace NAI
 {
 	namespace Goap
 	{
+		class IStimulus;
+		
 		class ISensorSubscriber
 		{		
 		public:
-			virtual void OnSensorNotification() = 0;
+			virtual void OnSensorNotification(std::shared_ptr<IStimulus> stimulus) = 0;
 		};
 	}
 }

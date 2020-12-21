@@ -198,10 +198,10 @@
     <ClInclude Include="source\goap\sensory\ISensor.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\sensory\ISensorSuscriber.h">
+    <ClInclude Include="source\goap\sensory\IThreshold.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\sensory\IThreshold.h">
+    <ClInclude Include="source\goap\sensory\ISensorSubscriber.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
   </ItemGroup>
