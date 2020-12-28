@@ -7,9 +7,11 @@ namespace NAI
 {
 	namespace Goap
 	{
+		const float RESIDENT_IN_MEMORY = 60.0f; // 1 min
+		
 		SensorySystem::SensorySystem() :
 		mStimulusReceived {},
-		mStimulusPerceived {}
+		mShortTermMemory {}
 		{
 		}
 
@@ -24,7 +26,7 @@ namespace NAI
 					auto threshold = it->second;
 					if(threshold->IsStimulusPerceived(stimulus))
 					{
-						mStimulusPerceived.push_back(stimulus);
+						mShortTermMemory.Add(stimulus, RESIDENT_IN_MEMORY);
 					}
 				}
 			}

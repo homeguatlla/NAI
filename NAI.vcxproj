@@ -181,6 +181,7 @@
     <ClInclude Include="source\goap\IGoapPlanner.h" />
     <ClInclude Include="source\goap\IPredicate.h" />
     <ClInclude Include="source\goap\GoapTypes.h" />
+    <ClInclude Include="source\goap\memory\Memory.h" />
     <ClInclude Include="source\goap\planners\DirectGoapPlanner.h" />
     <ClInclude Include="source\goap\planners\TreeGoapPlanner.h" />
     <ClInclude Include="source\goap\PredicatesHandler.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="source\goap\sensory\ISensorSubscriber.h" />
     <ClInclude Include="source\goap\sensory\IStimulus.h" />
     <ClInclude Include="source\goap\sensory\IThreshold.h" />
+    <ClInclude Include="source\goap\sensory\PerceptionSystem.h" />
     <ClInclude Include="source\goap\sensory\SensorySystem.h" />
     <ClInclude Include="source\navigation\INavigationPath.h" />
     <ClInclude Include="source\navigation\INavigationPlanner.h" />
@@ -221,12 +223,14 @@
     <ClCompile Include="source\goap\BaseGoal.cpp" />
     <ClCompile Include="source\goap\goals\GoToGoal.cpp" />
     <ClCompile Include="source\goap\BasePredicate.cpp" />
+    <ClCompile Include="source\goap\memory\Memory.cpp" />
     <ClCompile Include="source\goap\planners\DirectGoapPlanner.cpp" />
     <ClCompile Include="source\goap\planners\TreeGoapPlanner.cpp" />
     <ClCompile Include="source\goap\PredicatesHandler.cpp" />
     <ClCompile Include="source\goap\predicates\GoapPredicates.cpp" />
     <ClCompile Include="source\goap\predicates\GoToPredicate.cpp" />
     <ClCompile Include="source\goap\predicates\PlaceIamPredicate.cpp" />
+    <ClCompile Include="source\goap\sensory\PerceptionSystem.cpp" />
     <ClCompile Include="source\goap\sensory\SensorySystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

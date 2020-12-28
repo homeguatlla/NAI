@@ -5,6 +5,8 @@
 #include <map>
 #include <string>
 
+#include "goap/memory/Memory.h"
+
 namespace NAI
 {
 	namespace Goap
@@ -18,17 +20,18 @@ namespace NAI
 			SensorySystem();
 			~SensorySystem() = default;
 
-			std::vector<std::shared_ptr<IStimulus>> GetPerceivedStimulus() const { return mStimulusPerceived; }
 			void Update(float elapsedTime, std::map<std::string, std::shared_ptr<IThreshold>> thresholds);
 			
 			//ISensorSubscriber inherited
 			void OnSensorNotification(std::shared_ptr<IStimulus> stimulus) override;
 
 			//For test purposes
+			bool IsMemoryEmpty() const { return mShortTermMemory.IsEmpty(); }
 			std::vector<std::shared_ptr<IStimulus>> GetReceivedStimulus() const { return mStimulusReceived; }
+			
 		private:
 			std::vector<std::shared_ptr<IStimulus>> mStimulusReceived;
-			std::vector<std::shared_ptr<IStimulus>> mStimulusPerceived;
+			Memory<IStimulus> mShortTermMemory;
 		};
 	}
 }

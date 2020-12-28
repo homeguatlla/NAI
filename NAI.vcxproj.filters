@@ -82,6 +82,12 @@
     <Filter Include="Archivos de origen\goap\sensory">
       <UniqueIdentifier>{10bf4b2d-a616-475d-a4b0-e037c407ba40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\goap\memory">
+      <UniqueIdentifier>{6cc57da0-9e34-42de-b3e1-035d092c0fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\goap\memory">
+      <UniqueIdentifier>{50719104-101f-4dd1-863e-207799b0d590}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -204,6 +210,12 @@
     <ClInclude Include="source\goap\sensory\ISensorSubscriber.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\memory\Memory.h">
+      <Filter>Archivos de encabezado\goap\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\PerceptionSystem.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -267,6 +279,12 @@
       <Filter>Archivos de origen\goap</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\sensory\SensorySystem.cpp">
+      <Filter>Archivos de origen\goap\sensory</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\memory\Memory.cpp">
+      <Filter>Archivos de origen\goap\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\sensory\PerceptionSystem.cpp">
       <Filter>Archivos de origen\goap\sensory</Filter>
     </ClCompile>
   </ItemGroup>
