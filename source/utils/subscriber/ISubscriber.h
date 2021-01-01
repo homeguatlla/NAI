@@ -11,7 +11,7 @@ namespace core
 			class ISubscriber
 			{		
 			public:
-				virtual void OnNotification(std::shared_ptr<T> event) = 0;
+				virtual void OnNotification(std::shared_ptr<T>) = 0;
 			};
 		}
 	}

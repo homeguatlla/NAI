@@ -1,15 +1,14 @@
 #pragma once
 #include <memory>
 
+#include "ISubscriber.h"
+
 namespace core
 {
 	namespace utils
 	{
 		namespace subscriber
 		{
-			template<class T>
-			class ISubscriber;
-
 			template<class T>
 			class IPublisher
 			{		

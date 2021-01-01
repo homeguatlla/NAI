@@ -31,7 +31,8 @@ namespace NAI
 			void OnNewPredicate(std::shared_ptr<IPredicate> predicate) override;
 			const std::vector<std::shared_ptr<IGoal>>& GetGoals() const override { return mGoals; }
 			const std::vector<std::shared_ptr<IPredicate>>& GetPredicates() const override { return mPredicatesHandler.GetPredicatesList(); }
-		
+			const std::vector<std::shared_ptr<IPredicate>>& Evaluate(std::shared_ptr<IStimulus> stimulus) const override;
+			
 		private:
 			void CreateStatesMachine();
 			void NotifyPredicatesListChangedToProcessState();

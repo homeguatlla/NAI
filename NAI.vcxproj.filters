@@ -210,9 +210,6 @@
     <ClInclude Include="source\goap\sensory\IThreshold.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
-    <ClInclude Include="source\goap\sensory\ISensorSubscriber.h">
-      <Filter>Archivos de encabezado\goap\sensory</Filter>
-    </ClInclude>
     <ClInclude Include="source\goap\memory\Memory.h">
       <Filter>Archivos de encabezado\goap\memory</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="source\utils\subscriber\BasePublisher.h">
       <Filter>Archivos de encabezado\utils\subscriber</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\BaseSensor.h">
+      <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +289,6 @@
     </ClCompile>
     <ClCompile Include="source\goap\PredicatesHandler.cpp">
       <Filter>Archivos de origen\goap</Filter>
-    </ClCompile>
-    <ClCompile Include="source\goap\sensory\SensorySystem.cpp">
-      <Filter>Archivos de origen\goap\sensory</Filter>
     </ClCompile>
     <ClCompile Include="source\goap\memory\Memory.cpp">
       <Filter>Archivos de origen\goap\memory</Filter>

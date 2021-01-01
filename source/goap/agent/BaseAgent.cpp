@@ -71,6 +71,11 @@ namespace NAI
 			}
 		}
 
+		const std::vector<std::shared_ptr<IPredicate>>& BaseAgent::Evaluate(std::shared_ptr<IStimulus> stimulus) const
+		{
+			return {};
+		}
+
 		void BaseAgent::NotifyPredicatesListChangedToProcessState()
 		{
 			auto currentState = mStatesMachine->GetCurrentState();

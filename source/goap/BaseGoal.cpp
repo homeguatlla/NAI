@@ -108,6 +108,11 @@ namespace NAI
 			DoReset();
 		}
 
+		std::shared_ptr<IPredicate> BaseGoal::Evaluate(std::shared_ptr<IStimulus> stimulus) const
+		{
+			return nullptr;
+		}
+
 		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesCanBeAccomplished(
 			std::vector<std::shared_ptr<IPredicate>> desiredPredicates)
 		{
