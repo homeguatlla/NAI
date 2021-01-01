@@ -202,6 +202,9 @@
     <ClInclude Include="source\utils\fsm\IState.h" />
     <ClInclude Include="source\utils\fsm\ITransition.h" />
     <ClInclude Include="source\utils\fsm\StatesMachine.h" />
+    <ClInclude Include="source\utils\subscriber\BasePublisher.h" />
+    <ClInclude Include="source\utils\subscriber\IPublisher.h" />
+    <ClInclude Include="source\utils\subscriber\ISubscriber.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp" />

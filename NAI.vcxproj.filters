@@ -88,6 +88,9 @@
     <Filter Include="Archivos de encabezado\goap\memory">
       <UniqueIdentifier>{50719104-101f-4dd1-863e-207799b0d590}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\utils\subscriber">
+      <UniqueIdentifier>{ed993bc2-a7ad-4637-bab3-ecc12dfbeb22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -215,6 +218,15 @@
     </ClInclude>
     <ClInclude Include="source\goap\sensory\PerceptionSystem.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\subscriber\IPublisher.h">
+      <Filter>Archivos de encabezado\utils\subscriber</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\subscriber\ISubscriber.h">
+      <Filter>Archivos de encabezado\utils\subscriber</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\subscriber\BasePublisher.h">
+      <Filter>Archivos de encabezado\utils\subscriber</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
