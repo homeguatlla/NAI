@@ -28,7 +28,8 @@ namespace NAI
 			virtual const std::vector<std::shared_ptr<IPredicate>>& GetPredicates() const = 0;
 			virtual glm::vec3 GetPosition() const = 0;
 			virtual void MoveTo(float elapsedTime, const glm::vec3& point) = 0;
-			virtual const std::vector<std::shared_ptr<IPredicate>>& Evaluate(std::shared_ptr<IStimulus> stimulus) const = 0;
+			virtual bool IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const = 0;
+			virtual const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const = 0;
 		};
 	}
 }

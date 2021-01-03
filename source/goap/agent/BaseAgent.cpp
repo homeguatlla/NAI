@@ -71,9 +71,38 @@ namespace NAI
 			}
 		}
 
-		const std::vector<std::shared_ptr<IPredicate>>& BaseAgent::Evaluate(std::shared_ptr<IStimulus> stimulus) const
+
+		bool BaseAgent::IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const
 		{
-			return {};
+			for(auto&& goal : mGoals)
+			{
+				if(goal->IsStimulusAccepted(stimulus))
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const
+		{
+			std::vector<std::shared_ptr<IPredicate>> predicates;
+			
+			for(auto&& goal : mGoals)
+			{
+				if(goal->IsStimulusAccepted(stimulus))
+				{
+					const auto predicate = goal->TransformStimulusIntoPredicates(stimulus);
+				
+					if(predicate != nullptr)
+					{
+						predicates.push_back(predicate);
+					}
+				}
+			}
+
+			return predicates;
 		}
 
 		void BaseAgent::NotifyPredicatesListChangedToProcessState()

@@ -34,6 +34,11 @@ namespace NAI
 			mActions.push_back(CreateFindPathToAction(mAgent, mNavigationPlanner));
 		}
 
+		std::shared_ptr<IPredicate> GoToGoal::DoAccept(std::shared_ptr<IStimulus> stimulus) const
+		{
+			return {};
+		}
+
 		unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
 		{
 			if(!inputPredicates.empty())

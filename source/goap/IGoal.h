@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <string>
+#include <functional>
 
 namespace NAI
 {
@@ -26,7 +28,9 @@ namespace NAI
 			virtual void Reset() = 0;
 			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) = 0;
 			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) = 0;
-			virtual std::shared_ptr<IPredicate> Evaluate(std::shared_ptr<IStimulus> stimulus) const = 0;
+			virtual void AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>()> creator) = 0;
+			virtual bool IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const = 0;
+			virtual std::shared_ptr<IPredicate> TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const = 0;
 		};
 	}
 }

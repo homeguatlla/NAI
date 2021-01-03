@@ -4,6 +4,8 @@
 #include "GoapUtils.h"
 #include <algorithm>
 
+#include "sensory/IStimulus.h"
+
 namespace NAI
 {
 	namespace Goap
@@ -108,11 +110,6 @@ namespace NAI
 			DoReset();
 		}
 
-		std::shared_ptr<IPredicate> BaseGoal::Evaluate(std::shared_ptr<IStimulus> stimulus) const
-		{
-			return nullptr;
-		}
-
 		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesCanBeAccomplished(
 			std::vector<std::shared_ptr<IPredicate>> desiredPredicates)
 		{
@@ -152,6 +149,34 @@ namespace NAI
 			}
 
 			return result;
+		}
+
+		void BaseGoal::AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>()> creator)
+		{
+			auto found = mStimulusAccepted.find(stimulusClassName) != mStimulusAccepted.end();
+			if(!found)
+			{
+				mStimulusAccepted[stimulusClassName] = creator;
+			}
+		}
+
+		bool BaseGoal::IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const
+		{
+			return mStimulusAccepted.find(stimulus->GetClassName()) != mStimulusAccepted.end();
+		}
+
+		std::shared_ptr<IPredicate> BaseGoal::TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const
+		{
+			std::shared_ptr<IPredicate> predicate = nullptr;
+			
+			auto it = mStimulusAccepted.find(stimulus->GetClassName());
+			const auto found =  it!= mStimulusAccepted.end();
+			if(found)
+			{
+				predicate = it->second();
+			}
+			
+			return predicate;
 		}
 	}
 }
