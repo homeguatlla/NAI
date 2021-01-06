@@ -30,7 +30,7 @@ namespace NAI
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
 
-			void AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>()> creator) override;
+			void AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>(std::shared_ptr<IStimulus>)> creator) override;
 			bool IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const override;
 			std::shared_ptr<IPredicate>	TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const override;
 		
@@ -46,7 +46,7 @@ namespace NAI
 
 		protected:
 			std::vector<std::shared_ptr<IAction>> mActions;
-			std::map<std::string, std::function<std::shared_ptr<IPredicate>()>> mStimulusAccepted;
+			std::map<std::string, std::function<std::shared_ptr<IPredicate>(std::shared_ptr<IStimulus>)>> mStimulusAccepted;
 			unsigned int mCurrentActionIndex;
 			unsigned int mCost;
 		};

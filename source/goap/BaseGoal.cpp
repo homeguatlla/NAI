@@ -151,7 +151,7 @@ namespace NAI
 			return result;
 		}
 
-		void BaseGoal::AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>()> creator)
+		void BaseGoal::AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>(std::shared_ptr<IStimulus>)> creator)
 		{
 			auto found = mStimulusAccepted.find(stimulusClassName) != mStimulusAccepted.end();
 			if(!found)
@@ -173,7 +173,7 @@ namespace NAI
 			const auto found =  it!= mStimulusAccepted.end();
 			if(found)
 			{
-				predicate = it->second();
+				predicate = it->second(stimulus);
 			}
 			
 			return predicate;

@@ -189,6 +189,7 @@
     <ClInclude Include="source\goap\predicates\GoToPredicate.h" />
     <ClInclude Include="source\goap\predicates\PlaceIamPredicate.h" />
     <ClInclude Include="source\goap\sensory\BaseSensor.h" />
+    <ClInclude Include="source\goap\sensory\CognitiveSystem.h" />
     <ClInclude Include="source\goap\sensory\ISensor.h" />
     <ClInclude Include="source\goap\sensory\IStimulus.h" />
     <ClInclude Include="source\goap\sensory\IThreshold.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="source\goap\predicates\GoapPredicates.cpp" />
     <ClCompile Include="source\goap\predicates\GoToPredicate.cpp" />
     <ClCompile Include="source\goap\predicates\PlaceIamPredicate.cpp" />
+    <ClCompile Include="source\goap\sensory\CognitiveSystem.cpp" />
     <ClCompile Include="source\goap\sensory\PerceptionSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

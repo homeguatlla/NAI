@@ -70,6 +70,7 @@ namespace NAI
 			{
 				action(element);
 			}
+			
 			for(auto&& element : temporaryMemory)
 			{
 				action(element.first);
