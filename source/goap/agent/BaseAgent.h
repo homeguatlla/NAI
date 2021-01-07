@@ -33,7 +33,9 @@ namespace NAI
 			const std::vector<std::shared_ptr<IPredicate>>& GetPredicates() const override { return mPredicatesHandler.GetPredicatesList(); }
 			bool IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const override;
 			const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const override;
-			
+			std::map<std::string, std::shared_ptr<IThreshold>> GetSensoryThresholds() const override { return mThresholds; }
+			void AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold) override;
+		
 		private:
 			void CreateStatesMachine();
 			void NotifyPredicatesListChangedToProcessState();
@@ -44,6 +46,7 @@ namespace NAI
 			std::shared_ptr<IGoapPlanner> mGoapPlanner;
 			PredicatesHandler mPredicatesHandler;
 			std::vector<std::shared_ptr<IGoal>> mGoals;
+			std::map<std::string, std::shared_ptr<IThreshold>> mThresholds;
 		};
 	}
 }

@@ -120,6 +120,15 @@ namespace NAI
 			return mStatesMachine->GetCurrentState()->GetID();
 		}
 
+		void BaseAgent::AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold)
+		{
+			const auto found = mThresholds.find(stimulusClassName) != mThresholds.end();
+			if(!found)
+			{
+				mThresholds[stimulusClassName] = threshold;
+			}
+		}
+
 		void BaseAgent::CreateStatesMachine()
 		{
 			mAgentContext = std::make_shared<AgentContext>(mGoapPlanner, mPredicatesHandler, mGoals);

@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <map>
 
 namespace NAI
 {
@@ -12,7 +13,8 @@ namespace NAI
 		class IPredicate;
 		class IGoal;
 		class IStimulus;
-
+		class IThreshold;
+		
 		class IAgent
 		{
 		public:
@@ -30,6 +32,8 @@ namespace NAI
 			virtual void MoveTo(float elapsedTime, const glm::vec3& point) = 0;
 			virtual bool IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const = 0;
 			virtual const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const = 0;
+			virtual void AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold) = 0;
+			virtual std::map<std::string, std::shared_ptr<IThreshold>> GetSensoryThresholds() const = 0; 
 		};
 	}
 }

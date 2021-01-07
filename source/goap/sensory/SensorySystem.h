@@ -6,14 +6,13 @@
 #include <string>
 
 #include "goap/memory/Memory.h"
+#include "goap/sensory/IStimulus.h"
+#include "goap/sensory/IThreshold.h"
 
 namespace NAI
 {
 	namespace Goap
 	{
-		class IStimulus;
-		class IThreshold;
-
 		template<class T>
 		class SensorySystem : public core::utils::subscriber::ISubscriber<T>
 		{
@@ -21,31 +20,28 @@ namespace NAI
 			
 		public:
 			SensorySystem();
-			~SensorySystem() = default;
+			virtual ~SensorySystem() = default;
 
-			void Update(float elapsedTime, std::map<std::string, std::shared_ptr<IThreshold>> thresholds);
+			void Update(float elapsedTime, Memory<T>& shortTermMemory, std::map<std::string, std::shared_ptr<IThreshold>> thresholds);
 			
 			//ISubscriber inherited
 			void OnNotification(std::shared_ptr<T> stimulus) override;
 
 			//For test purposes
-			bool IsMemoryEmpty() const { return mShortTermMemory.IsEmpty(); }
 			std::vector<std::shared_ptr<T>> GetReceivedStimulus() const { return mStimulusReceived; }
 			
 		private:
 			std::vector<std::shared_ptr<T>> mStimulusReceived;
-			Memory<T> mShortTermMemory;
 		};
 
 		template<class T>
 		SensorySystem<T>::SensorySystem() :
-			mStimulusReceived{},
-			mShortTermMemory{}
+			mStimulusReceived{}
 		{
 		}
 
 		template<class T>
-		void SensorySystem<T>::Update(float elapsedTime, std::map<std::string, std::shared_ptr<IThreshold>> thresholds)
+		void SensorySystem<T>::Update(float elapsedTime, Memory<T>& shortTermMemory, std::map<std::string, std::shared_ptr<IThreshold>> thresholds)
 		{
 			for (auto&& stimulus : mStimulusReceived)
 			{
@@ -56,7 +52,7 @@ namespace NAI
 					auto threshold = it->second;
 					if (threshold->IsStimulusPerceived(stimulus))
 					{
-						mShortTermMemory.Add(stimulus, RESIDENT_IN_MEMORY);
+						shortTermMemory.Add(stimulus, RESIDENT_IN_MEMORY);
 					}
 				}
 			}
