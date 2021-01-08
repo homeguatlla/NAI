@@ -14,11 +14,20 @@ namespace NAI
 {
 	namespace Goap
 	{
-		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, 
-			const std::vector<std::shared_ptr<IGoal>>& goals, 
+		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner,
+			const std::vector<std::shared_ptr<IGoal>>& goals,
 			const std::vector<std::shared_ptr<IPredicate>>& predicates) :
+			BaseAgent(goapPlanner, goals, predicates, nullptr)
+		{
+		}
+
+		BaseAgent::BaseAgent(std::shared_ptr<IGoapPlanner> goapPlanner, 
+		                     const std::vector<std::shared_ptr<IGoal>>& goals, 
+		                     const std::vector<std::shared_ptr<IPredicate>>& predicates,
+		                     const std::shared_ptr<PerceptionSystem> perceptionSystem) :
 			mGoapPlanner{ goapPlanner },
-			mGoals { goals }
+			mGoals { goals },
+			mPerceptionSystem{perceptionSystem}
 		{
 			assert(goapPlanner);
 			mPredicatesHandler.Reset(predicates);
@@ -35,6 +44,10 @@ namespace NAI
 
 		void BaseAgent::Update(float elapsedTime)
 		{
+			if(mPerceptionSystem && mStatesMachine->GetCurrentState())
+			{
+				mPerceptionSystem->Update(elapsedTime, shared_from_this());
+			}
 			mStatesMachine->Update(elapsedTime);
 			mPredicatesHandler = mAgentContext->GetPredicatesHandler();
 		}

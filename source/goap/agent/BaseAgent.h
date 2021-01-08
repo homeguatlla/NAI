@@ -8,6 +8,8 @@
 #include <vector>
 #include <memory>
 
+#include "goap/sensory/PerceptionSystem.h"
+
 
 namespace NAI
 {
@@ -19,8 +21,14 @@ namespace NAI
 		{
 		public:
 			BaseAgent(	std::shared_ptr<IGoapPlanner> goapPlanner, 
+                        const std::vector<std::shared_ptr<IGoal>>& goals, 
+                        const std::vector<std::shared_ptr<IPredicate>>& predicates);
+			
+			BaseAgent(	std::shared_ptr<IGoapPlanner> goapPlanner, 
 						const std::vector<std::shared_ptr<IGoal>>& goals, 
-						const std::vector<std::shared_ptr<IPredicate>>& predicates);
+						const std::vector<std::shared_ptr<IPredicate>>& predicates,
+						const std::shared_ptr<PerceptionSystem> perceptionSystem);
+			
 			virtual ~BaseAgent() = default;
 
 			AgentState GetCurrentState() const override;
@@ -47,6 +55,7 @@ namespace NAI
 			PredicatesHandler mPredicatesHandler;
 			std::vector<std::shared_ptr<IGoal>> mGoals;
 			std::map<std::string, std::shared_ptr<IThreshold>> mThresholds;
+			std::shared_ptr<PerceptionSystem> mPerceptionSystem;
 		};
 	}
 }

@@ -32,5 +32,11 @@ namespace NAI
             mSensoryThresholds[stimulusClassName] = threshold;
             return *this;
         }
+
+        AgentBuilder& AgentBuilder::WithPerceptionSystem(std::shared_ptr<SensorySystem<IStimulus>> sensorySystem)
+        {
+            mSensorySystem = sensorySystem;
+            return *this;
+        }
     }
 }
