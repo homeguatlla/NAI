@@ -164,6 +164,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="source\goap\actions\FindPathToAction.h" />
     <ClInclude Include="source\goap\actions\FollowPathAction.h" />
+    <ClInclude Include="source\goap\agent\AgentBuilder.h" />
     <ClInclude Include="source\goap\agent\AgentContext.h" />
     <ClInclude Include="source\goap\agent\BaseAgent.h" />
     <ClInclude Include="source\goap\agent\fsm\states\Planning.h" />
@@ -217,6 +218,7 @@
     </ClCompile>
     <ClCompile Include="source\goap\actions\FindPathToAction.cpp" />
     <ClCompile Include="source\goap\actions\FollowPathAction.cpp" />
+    <ClCompile Include="source\goap\agent\AgentBuilder.cpp" />
     <ClCompile Include="source\goap\agent\AgentContext.cpp" />
     <ClCompile Include="source\goap\agent\BaseAgent.cpp" />
     <ClCompile Include="source\goap\agent\fsm\states\Planning.cpp" />

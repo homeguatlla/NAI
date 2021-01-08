@@ -19,8 +19,8 @@ namespace NAI
 		{
 		public:
 			BaseAgent(	std::shared_ptr<IGoapPlanner> goapPlanner, 
-						std::vector<std::shared_ptr<IGoal>>& goals, 
-						std::vector<std::shared_ptr<IPredicate>>& predicates);
+						const std::vector<std::shared_ptr<IGoal>>& goals, 
+						const std::vector<std::shared_ptr<IPredicate>>& predicates);
 			virtual ~BaseAgent() = default;
 
 			AgentState GetCurrentState() const override;
