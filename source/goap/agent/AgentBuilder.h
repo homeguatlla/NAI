@@ -59,7 +59,7 @@ namespace NAI {
                 return agent;
             }
 
-        private:
+        protected:
             std::vector<std::shared_ptr<IPredicate>> mPredicates;
             std::vector<std::shared_ptr<IGoal>> mGoals;
             std::shared_ptr<IGoapPlanner> mGoapPlanner;

@@ -228,6 +228,12 @@
     <ClInclude Include="source\goap\sensory\BaseSensor.h">
       <Filter>Archivos de encabezado\goap\sensory</Filter>
     </ClInclude>
+    <ClInclude Include="source\goap\agent\AgentBuilder.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="source\goap\sensory\CognitiveSystem.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NAI.cpp">
@@ -295,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="source\goap\sensory\PerceptionSystem.cpp">
       <Filter>Archivos de origen\goap\sensory</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\agent\AgentBuilder.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="source\goap\sensory\CognitiveSystem.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
