@@ -32,9 +32,9 @@ namespace NAI
 
 		bool BaseAction::SatisfyPostcondition(const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
-			auto result = SatisfyConditions(mPostConditions, predicates);
+			const auto result = SatisfyConditions(mPostConditions, predicates);
 
-			return result.size() == mPostConditions.size();
+			return result.size() == mPostConditions.size() && result.size() > 0;
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPostconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates)

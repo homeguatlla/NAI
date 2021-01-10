@@ -56,6 +56,7 @@ namespace NAI
 					}
 				}
 			}
+			mStimulusReceived.clear();
 		}
 
 		template<class T>

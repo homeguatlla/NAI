@@ -27,7 +27,9 @@ namespace NAI
                                 agent->OnNewPredicate(predicate);
                             }
                         }
+                        return true;
                     }
+                    return false;
                 });
 			
         }
