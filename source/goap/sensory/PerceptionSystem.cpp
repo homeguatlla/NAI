@@ -17,6 +17,7 @@ namespace NAI
 		{
 			mSensorySystem->Update(elapsedTime, mMemory, agent->GetSensoryThresholds());
 			mCognitiveSystem->Update(elapsedTime, mMemory, agent);
+			mMemory.Update(elapsedTime);
 		}
 
 		void PerceptionSystem::CreateCognitiveSystem()

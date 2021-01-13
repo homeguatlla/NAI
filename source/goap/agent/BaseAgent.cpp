@@ -76,12 +76,9 @@ namespace NAI
 
 		void BaseAgent::OnNewPredicate(std::shared_ptr<IPredicate> predicate)
 		{
-			if (!HasPredicate(predicate->GetID()))
-			{
-				mPredicatesHandler.Add(predicate);
-				mAgentContext->SetPredicatesHandler(mPredicatesHandler);
-				NotifyPredicatesListChangedToProcessState();
-			}
+			mPredicatesHandler.Add(predicate);
+			mAgentContext->SetPredicatesHandler(mPredicatesHandler);
+			NotifyPredicatesListChangedToProcessState();
 		}
 
 

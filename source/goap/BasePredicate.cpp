@@ -13,7 +13,7 @@ namespace NAI
 
 		bool BasePredicate::IsEqualTo(const std::shared_ptr<IPredicate> predicate)
 		{
-			return GetID() == predicate->GetID();
+			return mText == predicate->GetText(); //TODO ID quizá no hace falta pues?? igual solo para los test?. //GetID() == predicate->GetID();
 		}
 	}
 }
