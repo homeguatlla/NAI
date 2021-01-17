@@ -20,9 +20,9 @@ namespace NAI
 			
 			void Update(float elapsedTime);
 			void PerformActionForEach(std::function<bool(std::shared_ptr<T> element)> action) const;
-			
-			//Test purposes
+			size_t GetSize() const { return mMemory.size(); }
 			bool IsEmpty() const { return mMemory.empty(); }
+		
 		private:
 			void UpdateTemporaryMemory(float elapsedTime);
 			

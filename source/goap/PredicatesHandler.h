@@ -15,7 +15,7 @@ namespace NAI
 
 			const std::vector<std::shared_ptr<IPredicate>>& GetPredicatesList() const { return mPredicates; }
 			std::vector<std::shared_ptr<IPredicate>>& GetPredicatesList() { return mPredicates; }
-			void Add(const std::shared_ptr<IPredicate>& predicate);
+			void AddOrReplace(const std::shared_ptr<IPredicate>& predicate);
 			std::shared_ptr<IPredicate> FindByText(const std::string& predicateText) const;
 			std::shared_ptr<IPredicate> FindById(int predicateId) const;
 
