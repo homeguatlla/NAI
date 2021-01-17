@@ -151,32 +151,9 @@ namespace NAI
 			return result;
 		}
 
-		void BaseGoal::AddStimulusAcceptance(const std::string& stimulusClassName, std::function<std::shared_ptr<IPredicate>(std::shared_ptr<IStimulus>)> creator)
+		std::shared_ptr<IPredicate> BaseGoal::TransformStimulusIntoPredicates(const Memory<IStimulus>& memory) const
 		{
-			auto found = mStimulusAccepted.find(stimulusClassName) != mStimulusAccepted.end();
-			if(!found)
-			{
-				mStimulusAccepted[stimulusClassName] = creator;
-			}
-		}
-
-		bool BaseGoal::IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const
-		{
-			return mStimulusAccepted.find(stimulus->GetClassName()) != mStimulusAccepted.end();
-		}
-
-		std::shared_ptr<IPredicate> BaseGoal::TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const
-		{
-			std::shared_ptr<IPredicate> predicate = nullptr;
-			
-			auto it = mStimulusAccepted.find(stimulus->GetClassName());
-			const auto found =  it!= mStimulusAccepted.end();
-			if(found)
-			{
-				predicate = it->second(stimulus);
-			}
-			
-			return predicate;
+			return DoTransformStimulusIntoPredicates(memory);
 		}
 	}
 }

@@ -52,7 +52,10 @@ namespace NAI
 					auto threshold = it->second;
 					if (threshold->IsStimulusPerceived(stimulus))
 					{
-						shortTermMemory.Add(stimulus, RESIDENT_IN_MEMORY);
+						//TODO tenemos que decidir como se guarda un estimulo.
+						//por ahora serán todos instantaneos, duraran un frame.
+						shortTermMemory.Add(stimulus);
+						//shortTermMemory.Add(stimulus, RESIDENT_IN_MEMORY);
 					}
 				}
 			}

@@ -18,13 +18,15 @@ namespace NAI
 			void Add(std::shared_ptr<T> data);
 			void Add(std::shared_ptr<T> data, float time);
 			void Update(float elapsedTime);
-			void PerformActionForEach(std::function<bool(std::shared_ptr<T> element)> action);
+			void PerformActionForEach(std::function<bool(std::shared_ptr<T> element)> action) const;
 			
 			//Test purposes
-			bool IsEmpty() const { return mPermanentMemory.empty() && mTemporaryMemory.empty(); }
-
+			bool IsEmpty() const { return mInstantMemory.empty() && mTemporaryMemory.empty(); }
 		private:
-			std::list<std::shared_ptr<T>> mPermanentMemory;
+			void UpdateTemporaryMemory(float elapsedTime);
+			
+		private:
+			std::list<std::shared_ptr<T>> mInstantMemory;
 			std::list<std::pair<std::shared_ptr<T>, float>> mTemporaryMemory;
 		};
 
@@ -36,7 +38,7 @@ namespace NAI
 		template<class T>
 		void Memory<T>::Add(std::shared_ptr<T> data)
 		{
-			mPermanentMemory.push_back(data);
+			mInstantMemory.push_back(data);
 		}
 
 		template<class T>
@@ -44,9 +46,30 @@ namespace NAI
 		{
 			mTemporaryMemory.push_back(std::make_pair(data, time));
 		}
-		
+
 		template<class T>
 		void Memory<T>::Update(float elapsedTime)
+		{
+			UpdateTemporaryMemory(elapsedTime);
+			mInstantMemory.clear();
+		}
+		
+		template<class T>
+		void Memory<T>::PerformActionForEach(std::function<bool(std::shared_ptr<T> element)> action) const
+		{
+			for(auto&& element : mInstantMemory)
+			{
+				action(element);
+			}
+			
+			for(auto&& element : mTemporaryMemory)
+			{
+				action(element.first);
+			}
+		}
+
+		template <class T>
+        void Memory<T>::UpdateTemporaryMemory(float elapsedTime)
 		{
 			for(auto it = mTemporaryMemory.begin(); it != mTemporaryMemory.end();)
 			{
@@ -59,34 +82,6 @@ namespace NAI
 				else
 				{
 					++it;
-				}
-			}
-		}
-
-		template<class T>
-		void Memory<T>::PerformActionForEach(std::function<bool(std::shared_ptr<T> element)> action)
-		{
-			for(auto element = mPermanentMemory.begin(); element != mPermanentMemory.end();)
-			{
-				const auto used = action(*element);
-				if(used)
-				{
-					//if used removed from memory because we have generated a predicate instead.
-					element = mPermanentMemory.erase(element);
-				}
-				else
-				{
-					++element;
-				}
-			}
-			
-			for(auto&& element : mTemporaryMemory)
-			{
-				const auto used = action(element.first);
-				if(used)
-				{
-					//to be removed later because we have generated a predicate instead.
-					element.second = 0.0f;
 				}
 			}
 		}

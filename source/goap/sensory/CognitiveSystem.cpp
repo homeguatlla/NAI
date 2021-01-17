@@ -12,6 +12,17 @@ namespace NAI
             Memory<IStimulus>& memory,
             std::shared_ptr<IAgent> agent)
         {
+            const auto newPredicatesList = agent->TransformStimulusIntoPredicates(memory);
+            if(!newPredicatesList.empty())
+            {
+                //TODO we can evaluate each predicate to really see if we must add it or not into the
+                //predicates list of the agent.
+                for(auto&& predicate : newPredicatesList)
+                {
+                    agent->OnNewPredicate(predicate);
+                }
+            }
+            /*
             memory.PerformActionForEach(
                 [agent](std::shared_ptr<IStimulus> stimulus)
                 {
@@ -30,7 +41,7 @@ namespace NAI
                         return true;
                     }
                     return false;
-                });
+                });*/
 			
         }
     }

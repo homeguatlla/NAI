@@ -3,10 +3,10 @@
 #include "goap/IPredicate.h"
 #include "goap/predicates/PlaceIamPredicate.h"
 #include "goap/IGoal.h"
-
 #include <cassert>
 
 #include "fsm/states/Processing.h"
+#include "fsm/states/Planning.h"
 #include "fsm/transitions/EnterPlanning.h"
 #include "fsm/transitions/EnterProcessing.h"
 
@@ -81,34 +81,17 @@ namespace NAI
 			NotifyPredicatesListChangedToProcessState();
 		}
 
-
-		bool BaseAgent::IsStimulusAccepted(std::shared_ptr<IStimulus> stimulus) const
-		{
-			for(auto&& goal : mGoals)
-			{
-				if(goal->IsStimulusAccepted(stimulus))
-				{
-					return true;
-				}
-			}
-			
-			return false;
-		}
-
-		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(std::shared_ptr<IStimulus> stimulus) const
+		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(const Memory<IStimulus>& memory) const
 		{
 			std::vector<std::shared_ptr<IPredicate>> predicates;
 			
 			for(auto&& goal : mGoals)
-			{
-				if(goal->IsStimulusAccepted(stimulus))
+			{			
+				const auto predicate = goal->TransformStimulusIntoPredicates(memory);
+			
+				if(predicate != nullptr)
 				{
-					const auto predicate = goal->TransformStimulusIntoPredicates(stimulus);
-				
-					if(predicate != nullptr)
-					{
-						predicates.push_back(predicate);
-					}
+					predicates.push_back(predicate);
 				}
 			}
 
