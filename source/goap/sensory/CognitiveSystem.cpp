@@ -9,7 +9,7 @@ namespace NAI
     {
         void CognitiveSystem::Update(
             float elapsedTime,
-            Memory<IStimulus>& memory,
+            ShortTermMemory<IStimulus>& memory,
             std::shared_ptr<IAgent> agent)
         {
             const auto newPredicatesList = agent->TransformStimulusIntoPredicates(memory);

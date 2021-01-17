@@ -29,14 +29,14 @@ namespace NAI
 			void Reset() final override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
-			std::shared_ptr<IPredicate>	TransformStimulusIntoPredicates(const Memory<IStimulus>& memory) const override;
+			std::shared_ptr<IPredicate>	TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const override;
 		
 		protected:
 			virtual void DoCreate(const std::shared_ptr<IAgent>& agent) {}
 			virtual void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
 			virtual void DoCancel() {}
 			virtual void DoReset() {}
-			virtual std::shared_ptr<IPredicate>	DoTransformStimulusIntoPredicates(const Memory<IStimulus>& memory) const { return {}; }
+			virtual std::shared_ptr<IPredicate>	DoTransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const { return {}; }
 		private:
 			void CalculateCost();
 

@@ -81,7 +81,7 @@ namespace NAI
 			NotifyPredicatesListChangedToProcessState();
 		}
 
-		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(const Memory<IStimulus>& memory) const
+		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const
 		{
 			std::vector<std::shared_ptr<IPredicate>> predicates;
 			

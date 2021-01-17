@@ -186,7 +186,7 @@
     <ClInclude Include="source\goap\IGoapPlanner.h" />
     <ClInclude Include="source\goap\IPredicate.h" />
     <ClInclude Include="source\goap\GoapTypes.h" />
-    <ClInclude Include="source\goap\memory\Memory.h" />
+    <ClInclude Include="source\goap\memory\ShortTermMemory.h" />
     <ClInclude Include="source\goap\planners\DirectGoapPlanner.h" />
     <ClInclude Include="source\goap\planners\TreeGoapPlanner.h" />
     <ClInclude Include="source\goap\PredicatesHandler.h" />
@@ -233,7 +233,7 @@
     <ClCompile Include="source\goap\BaseGoal.cpp" />
     <ClCompile Include="source\goap\goals\GoToGoal.cpp" />
     <ClCompile Include="source\goap\BasePredicate.cpp" />
-    <ClCompile Include="source\goap\memory\Memory.cpp" />
+    <ClCompile Include="source\goap\memory\ShortTermMemory.cpp" />
     <ClCompile Include="source\goap\planners\DirectGoapPlanner.cpp" />
     <ClCompile Include="source\goap\planners\TreeGoapPlanner.cpp" />
     <ClCompile Include="source\goap\PredicatesHandler.cpp" />

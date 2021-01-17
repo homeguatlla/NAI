@@ -4,7 +4,7 @@
 #include <string>
 #include <functional>
 
-#include "memory/Memory.h"
+#include "memory/ShortTermMemory.h"
 
 namespace NAI
 {
@@ -30,7 +30,7 @@ namespace NAI
 			virtual void Reset() = 0;
 			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) = 0;
 			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) = 0;
-			virtual std::shared_ptr<IPredicate> TransformStimulusIntoPredicates(const Memory<IStimulus>& memory) const = 0;
+			virtual std::shared_ptr<IPredicate> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const = 0;
 		};
 	}
 }

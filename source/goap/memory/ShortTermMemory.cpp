@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Memory.h"
+#include "ShortTermMemory.h"
 
 namespace NAI
 {

@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include "goap/memory/Memory.h"
+#include "goap/memory/ShortTermMemory.h"
 #include "goap/sensory/IStimulus.h"
 #include "goap/sensory/IThreshold.h"
 
@@ -16,13 +16,11 @@ namespace NAI
 		template<class T>
 		class SensorySystem : public core::utils::subscriber::ISubscriber<T>
 		{
-			const float RESIDENT_IN_MEMORY = 60.0f; // 1 min
-			
 		public:
 			SensorySystem();
 			virtual ~SensorySystem() = default;
 
-			void Update(float elapsedTime, Memory<T>& shortTermMemory, std::map<std::string, std::shared_ptr<IThreshold>> thresholds);
+			void Update(float elapsedTime, ShortTermMemory<T>& shortTermMemory, std::map<std::string, std::shared_ptr<IThreshold>> thresholds);
 			
 			//ISubscriber inherited
 			void OnNotification(std::shared_ptr<T> stimulus) override;
@@ -41,7 +39,7 @@ namespace NAI
 		}
 
 		template<class T>
-		void SensorySystem<T>::Update(float elapsedTime, Memory<T>& shortTermMemory, std::map<std::string, std::shared_ptr<IThreshold>> thresholds)
+		void SensorySystem<T>::Update(float elapsedTime, ShortTermMemory<T>& shortTermMemory, std::map<std::string, std::shared_ptr<IThreshold>> thresholds)
 		{
 			for (auto&& stimulus : mStimulusReceived)
 			{
@@ -52,10 +50,8 @@ namespace NAI
 					auto threshold = it->second;
 					if (threshold->IsStimulusPerceived(stimulus))
 					{
-						//TODO tenemos que decidir como se guarda un estimulo.
-						//por ahora serán todos instantaneos, duraran un frame.
-						shortTermMemory.Add(stimulus);
-						//shortTermMemory.Add(stimulus, RESIDENT_IN_MEMORY);
+						//TODO hay que decidir si es un estímulo de tipo que se actualiza o no
+						shortTermMemory.Add(stimulus, stimulus->GetDurationInMemory());
 					}
 				}
 			}

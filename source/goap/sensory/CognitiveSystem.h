@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <goap/memory/Memory.h>
+#include <goap/memory/ShortTermMemory.h>
 #include <memory>
 
 namespace NAI
@@ -17,7 +17,7 @@ namespace NAI
 
             void Update(
                 float elapsedTime, 
-                Memory<IStimulus>& memory, 
+                ShortTermMemory<IStimulus>& memory, 
                 std::shared_ptr<IAgent> agent);
         };
     }
