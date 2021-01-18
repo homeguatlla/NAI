@@ -70,6 +70,8 @@ namespace NAI
 		template<class T>
 		void ShortTermMemory<T>::PerformActionForEach(std::function<bool(std::shared_ptr<T> element)> action) const
 		{
+			//TODO o borrar el bool, pues no lo estamos usando
+			//o, cuando action devuelva true, interrumpir el bucle
 			for(auto&& element : mMemory)
 			{
 				action(element.first);

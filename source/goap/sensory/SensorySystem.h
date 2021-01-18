@@ -51,7 +51,7 @@ namespace NAI
 					if (threshold->IsStimulusPerceived(stimulus))
 					{
 						//TODO hay que decidir si es un estímulo de tipo que se actualiza o no
-						shortTermMemory.Add(stimulus, stimulus->GetDurationInMemory());
+						shortTermMemory.AddOrReplace(stimulus, stimulus->GetDurationInMemory());
 					}
 				}
 			}
