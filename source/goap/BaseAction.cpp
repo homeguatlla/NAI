@@ -20,6 +20,7 @@ namespace NAI
 
 		void BaseAction::Process(float elapsedTime)
 		{
+			DoProcess(elapsedTime);
 		}
 
 		bool BaseAction::SatisfyPrecondition(const std::vector<std::shared_ptr<IPredicate>>& predicates)

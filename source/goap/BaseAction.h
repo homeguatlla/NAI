@@ -27,14 +27,16 @@ namespace NAI
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			void Cancel() override;
 			const std::shared_ptr<IPredicate>& GetPredicateMatchedPreconditionWithIndex(unsigned int index) const { return mMatchedPreConditions[index]; }
-			
+
+		protected:
+			virtual void DoProcess(float elapsedTime) {};
+		
 		private:
 			std::vector<std::shared_ptr<IPredicate>> SatisfyConditions(
 				const std::vector<std::shared_ptr<IPredicate>>& conditions,
 				const std::vector<std::shared_ptr<IPredicate>>& predicates);
 			void ResetMatchedPreConditions();
-
-		private:
+		
 			std::vector<std::shared_ptr<IPredicate>> mPreConditions;
 			std::vector<std::shared_ptr<IPredicate>> mPostConditions;
 			std::vector<std::shared_ptr<IPredicate>> mMatchedPreConditions;
