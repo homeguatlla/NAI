@@ -110,5 +110,24 @@ namespace NAI
 		void BaseAction::Cancel()
 		{
 		}
+
+		const std::shared_ptr<IPredicate>& BaseAction::GetPredicateMatchedPreconditionWithText(
+			const std::string& text) const
+		{
+			auto it = std::find_if(mMatchedPreConditions.begin(), mMatchedPreConditions.end(),
+				[text](const std::shared_ptr<IPredicate>& predicate)
+				{
+					return predicate->GetText() == text;
+				});
+
+			if(it != mMatchedPreConditions.end())
+			{
+				return *it;
+			}
+			else
+			{
+				return nullptr;
+			}
+		}
 	}
 }

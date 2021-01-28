@@ -28,6 +28,7 @@ namespace NAI
 			
 			void Cancel() override;
 			const std::shared_ptr<IPredicate>& GetPredicateMatchedPreconditionWithIndex(unsigned int index) const { return mMatchedPreConditions[index]; }
+			const std::shared_ptr<IPredicate>& GetPredicateMatchedPreconditionWithText(const std::string& text) const;
 
 		protected:
 			virtual void DoProcess(float elapsedTime) {};
