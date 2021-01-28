@@ -22,7 +22,7 @@ namespace NAI
 		public:
 			FindPathToAction(
 				const std::shared_ptr<GoToGoal>& goal,
-				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
+				const std::vector<std::string>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 				const std::weak_ptr<IAgent>& agent,
 				const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner);

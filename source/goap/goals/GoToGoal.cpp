@@ -113,8 +113,9 @@ namespace NAI
 		
 		std::shared_ptr<FindPathToAction> GoToGoal::CreateFindPathToAction(const std::weak_ptr<IAgent>& agent, const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner)
 		{
-			std::vector<std::shared_ptr<IPredicate>> preConditions, postConditions;
-			preConditions.push_back(Predicates::PREDICATE_GO_TO);
+			std::vector<std::string> preConditions;
+			std::vector<std::shared_ptr<IPredicate>> postConditions;
+			preConditions.push_back(Predicates::PREDICATE_GO_TO->GetText());
 			postConditions.push_back(Predicates::PREDICATE_GOT_PATH);
 
 			const auto goal = std::static_pointer_cast<GoToGoal>(shared_from_this());
@@ -125,8 +126,9 @@ namespace NAI
 
 		std::shared_ptr<FollowPathAction> GoToGoal::CreateFollowPathAction(const std::weak_ptr<IAgent>& agent, const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& navigationPath) const
 		{
-			std::vector<std::shared_ptr<IPredicate>> preConditions, postConditions;
-			preConditions.push_back(Predicates::PREDICATE_GOT_PATH);
+			std::vector<std::string> preConditions;
+			std::vector<std::shared_ptr<IPredicate>> postConditions;
+			preConditions.push_back(Predicates::PREDICATE_GOT_PATH->GetText());
 			postConditions.push_back(std::make_shared<PlaceIamPredicate>("PlaceIam", placeName));
 
 			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath, mPrecision);

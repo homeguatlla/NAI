@@ -11,12 +11,12 @@ namespace NAI
 		{
 		public:
 			BaseAction(
-				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
+				const std::vector<std::string>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 				unsigned int cost = 0);
 			virtual ~BaseAction() = default;
 
-			const std::vector<std::shared_ptr<IPredicate>>& GetPreconditions() const override { return mPreConditions; }
+			const std::vector<std::string>& GetPreconditions() const override { return mPreConditions; }
 			const std::vector<std::shared_ptr<IPredicate>>& GetPostconditions() const override { return mPostConditions; }
 			unsigned int GetCost() const override { return mCost; }
 			void Process(float elapsedTime) override;
@@ -25,6 +25,7 @@ namespace NAI
 			bool SatisfyPostcondition(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPostconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			
 			void Cancel() override;
 			const std::shared_ptr<IPredicate>& GetPredicateMatchedPreconditionWithIndex(unsigned int index) const { return mMatchedPreConditions[index]; }
 
@@ -35,9 +36,12 @@ namespace NAI
 			std::vector<std::shared_ptr<IPredicate>> SatisfyConditions(
 				const std::vector<std::shared_ptr<IPredicate>>& conditions,
 				const std::vector<std::shared_ptr<IPredicate>>& predicates);
+			std::vector<std::shared_ptr<IPredicate>> SatisfyConditions(
+				const std::vector<std::string>& conditions,
+                const std::vector<std::shared_ptr<IPredicate>>& predicates);
 			void ResetMatchedPreConditions();
 		
-			std::vector<std::shared_ptr<IPredicate>> mPreConditions;
+			std::vector<std::string> mPreConditions;
 			std::vector<std::shared_ptr<IPredicate>> mPostConditions;
 			std::vector<std::shared_ptr<IPredicate>> mMatchedPreConditions;
 			unsigned int mCost;

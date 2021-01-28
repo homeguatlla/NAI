@@ -16,7 +16,7 @@ namespace NAI
 		{
 		public:
 			FollowPathAction(
-				const std::vector<std::shared_ptr<IPredicate>>& preConditions,
+				const std::vector<std::string>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 				std::weak_ptr<IAgent> agent,
 				std::shared_ptr<Navigation::INavigationPath> path,

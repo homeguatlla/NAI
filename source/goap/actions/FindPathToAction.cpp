@@ -13,7 +13,7 @@ namespace NAI
 	{
 		FindPathToAction::FindPathToAction(
 			const std::shared_ptr<GoToGoal>& goal,
-			const std::vector<std::shared_ptr<IPredicate>>& preConditions,
+			const std::vector<std::string>& preConditions,
 			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 			const std::weak_ptr<IAgent>& agent,
 			const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner) :
@@ -56,8 +56,8 @@ namespace NAI
 
 		std::string FindPathToAction::GetPlaceToGo() const
 		{
-			//TODO presuponemos que las precondiciones y los matched predicates están en el mismo orden.
-			//quizá se podrían relacionar para no tener que presuponer esto.
+			//TODO presuponemos que las precondiciones y los matched predicates estï¿½n en el mismo orden.
+			//quizï¿½ se podrï¿½an relacionar para no tener que presuponer esto.
 			const auto goToPredicateMatch = GetPredicateMatchedPreconditionWithIndex(0);
 			const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(goToPredicateMatch);
 

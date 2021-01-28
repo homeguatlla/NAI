@@ -8,7 +8,7 @@ namespace NAI
 	namespace Goap
 	{
 		BaseAction::BaseAction(
-			const std::vector<std::shared_ptr<IPredicate>>& preConditions,
+			const std::vector<std::string>& preConditions,
 			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 			unsigned int cost) :
 			mPreConditions{ preConditions },
@@ -46,6 +46,33 @@ namespace NAI
 		std::vector<std::shared_ptr<IPredicate>> BaseAction::GetPredicatesSatisfyPreconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			return SatisfyConditions(mPreConditions, predicates);
+		}
+
+		std::vector<std::shared_ptr<IPredicate>> BaseAction::SatisfyConditions(
+        const std::vector<std::string>& conditions, 
+        const std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
+			std::vector<std::shared_ptr<IPredicate>> result;
+
+			std::all_of(conditions.begin(), conditions.end(),
+                [&result, &predicates](const std::string& predicateA)
+                {
+                    const auto it = std::find_if(predicates.begin(), predicates.end(),
+                        [predicateA](const std::shared_ptr<IPredicate>& predicateB)
+                        {
+                            return predicateA == predicateB->GetText();
+                        });
+
+                    const auto satisfy = it != predicates.end();
+                    if (satisfy)
+                    {
+                        result.push_back(*it);
+                    }
+
+                    return satisfy;
+                });
+
+			return result;
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseAction::SatisfyConditions(
