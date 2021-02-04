@@ -5,12 +5,12 @@ namespace NAI
 {
 	namespace Goap
 	{
-		PlaceIamPredicate::PlaceIamPredicate(const std::string& text) : PlaceIamPredicate(text, "")
+		PlaceIamPredicate::PlaceIamPredicate(int id, const std::string& text) : PlaceIamPredicate(id, text, "")
 		{
 		}
 
-		PlaceIamPredicate::PlaceIamPredicate(const std::string& text, const std::string& placeName) :
-		BasePredicate(text),
+		PlaceIamPredicate::PlaceIamPredicate(int id, const std::string& text, const std::string& placeName) :
+		BasePredicate(id, text),
 		mPlaceName { placeName }
 		{
 		}

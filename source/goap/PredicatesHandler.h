@@ -20,8 +20,9 @@ namespace NAI
 			std::shared_ptr<IPredicate> FindById(int predicateId) const;
 
 			void Reset(const std::vector<std::shared_ptr<IPredicate>>& predicates);
+			void Remove(int id);
 
-			private:
+		private:
 			std::vector<std::shared_ptr<IPredicate>> mPredicates;
 		};
 	}

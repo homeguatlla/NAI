@@ -19,9 +19,7 @@ namespace NAI
             {
                 //TODO we can evaluate each predicate to really see if we must add it or not into the
                 //predicates list of the agent.
-                //TODO we can validate is a new predicate before to notify to the agent.
-                //But I'm not sure how then to indicate news about an existing predicate.
-
+               
                 const auto predicatesList = agent->GetPredicates();
 
                 for(auto&& predicate : newPredicatesList)
@@ -34,6 +32,10 @@ namespace NAI
                     if(!found)
                     {
                         agent->OnNewPredicate(predicate);
+                    }
+                    else
+                    {
+                        agent->OnUpdatePredicate(predicate);
                     }
                 }
             }

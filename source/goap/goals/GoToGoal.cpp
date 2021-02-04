@@ -129,7 +129,7 @@ namespace NAI
 			std::vector<std::string> preConditions;
 			std::vector<std::shared_ptr<IPredicate>> postConditions;
 			preConditions.push_back(Predicates::PREDICATE_GOT_PATH->GetText());
-			postConditions.push_back(std::make_shared<PlaceIamPredicate>("PlaceIam", placeName));
+			postConditions.push_back(std::make_shared<PlaceIamPredicate>(PLACE_IAM_PREDICATE_ID, "PlaceIam", placeName));
 
 			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath, mPrecision);
 

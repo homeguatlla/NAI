@@ -81,6 +81,17 @@ namespace NAI
 			NotifyPredicatesListChangedToProcessState();
 		}
 
+		void BaseAgent::OnUpdatePredicate(std::shared_ptr<IPredicate> predicate)
+		{
+			mPredicatesHandler.AddOrReplace(predicate);	
+			mAgentContext->SetPredicatesHandler(mPredicatesHandler);
+		}
+
+		void BaseAgent::RemovePredicate(int id)
+		{
+			mPredicatesHandler.Remove(id);
+		}
+
 		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const
 		{
 			std::vector<std::shared_ptr<IPredicate>> predicates;
@@ -101,7 +112,7 @@ namespace NAI
 		void BaseAgent::NotifyPredicatesListChangedToProcessState()
 		{
 			auto currentState = mStatesMachine->GetCurrentState();
-			if (currentState->GetID() == AgentState::STATE_PROCESSING)
+			if (currentState != nullptr && currentState->GetID() == AgentState::STATE_PROCESSING)
 			{
 				auto processingState = std::static_pointer_cast<Processing>(currentState);
 				processingState->OnPredicatesListChanged();

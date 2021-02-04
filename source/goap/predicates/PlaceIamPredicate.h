@@ -8,8 +8,8 @@ namespace NAI
 		class PlaceIamPredicate : public BasePredicate
 		{
 		public:
-			explicit PlaceIamPredicate(const std::string& text);
-			explicit PlaceIamPredicate(const std::string& text, const std::string& placeName);
+			explicit PlaceIamPredicate(int id, const std::string& text);
+			explicit PlaceIamPredicate(int id, const std::string& text, const std::string& placeName);
 			~PlaceIamPredicate() = default;
 
 			bool IsEqualTo(const std::shared_ptr<IPredicate> predicate) override;

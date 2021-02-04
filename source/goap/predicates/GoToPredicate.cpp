@@ -5,18 +5,18 @@ namespace NAI
 {
 	namespace Goap
 	{
-		GoToPredicate::GoToPredicate(const std::string& text) : GoToPredicate(text, "")
+		GoToPredicate::GoToPredicate(int id, const std::string& text) : GoToPredicate(id, text, "")
 		{
 		}
 
-		GoToPredicate::GoToPredicate(const std::string& text, const std::string& placeName) : 
-		BasePredicate(text),
+		GoToPredicate::GoToPredicate(int id, const std::string& text, const std::string& placeName) : 
+		BasePredicate(id, text),
 		mPlaceName { placeName }
 		{
 		}
 
-		GoToPredicate::GoToPredicate(const std::string& text, const glm::vec3& position) : 
-        BasePredicate(text),
+		GoToPredicate::GoToPredicate(int id, const std::string& text, const glm::vec3& position) : 
+        BasePredicate(id, text),
         mPosition{position}
 		{
 		}

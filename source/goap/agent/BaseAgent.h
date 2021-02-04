@@ -20,8 +20,8 @@ namespace NAI
 		{
 		public:
 			BaseAgent(	std::shared_ptr<IGoapPlanner> goapPlanner, 
-                        const std::vector<std::shared_ptr<IGoal>>& goals, 
-                        const std::vector<std::shared_ptr<IPredicate>>& predicates);
+			            const std::vector<std::shared_ptr<IGoal>>& goals, 
+			            const std::vector<std::shared_ptr<IPredicate>>& predicates);
 			
 			BaseAgent(	std::shared_ptr<IGoapPlanner> goapPlanner, 
 						const std::vector<std::shared_ptr<IGoal>>& goals, 
@@ -36,6 +36,8 @@ namespace NAI
 			bool HasPredicate(int predicateID) const override;
 			std::string WhereIam() const override;
 			void OnNewPredicate(std::shared_ptr<IPredicate> predicate) override;
+			void OnUpdatePredicate(std::shared_ptr<IPredicate> predicate) override;
+			void RemovePredicate(int id) override;
 			const std::vector<std::shared_ptr<IGoal>>& GetGoals() const override { return mGoals; }
 			const std::vector<std::shared_ptr<IPredicate>>& GetPredicates() const override { return mPredicatesHandler.GetPredicatesList(); }
 			const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const override;

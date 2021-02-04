@@ -9,9 +9,9 @@ namespace NAI
 		class GoToPredicate : public BasePredicate
 		{
 		public:
-			explicit GoToPredicate(const std::string& text);
-			explicit GoToPredicate(const std::string& text, const std::string& placeName);
-			explicit GoToPredicate(const std::string& text, const glm::vec3& position);
+			explicit GoToPredicate(int id, const std::string& text);
+			explicit GoToPredicate(int id, const std::string& text, const std::string& placeName);
+			explicit GoToPredicate(int id, const std::string& text, const glm::vec3& position);
 
 			~GoToPredicate() = default;
 

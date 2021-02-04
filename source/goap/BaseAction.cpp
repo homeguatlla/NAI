@@ -111,7 +111,7 @@ namespace NAI
 		{
 		}
 
-		const std::shared_ptr<IPredicate>& BaseAction::GetPredicateMatchedPreconditionWithText(
+		const std::shared_ptr<IPredicate> BaseAction::GetPredicateMatchedPreconditionWithText(
 			const std::string& text) const
 		{
 			auto it = std::find_if(mMatchedPreConditions.begin(), mMatchedPreConditions.end(),

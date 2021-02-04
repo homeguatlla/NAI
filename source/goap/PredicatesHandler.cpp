@@ -49,5 +49,20 @@ namespace NAI
 		{
 			mPredicates = predicates;
 		}
+
+		void PredicatesHandler::Remove(int id)
+		{
+			const auto it = std::find_if(mPredicates.begin(), mPredicates.end(),
+                [id](const std::shared_ptr<IPredicate>& predicate)
+                {
+                    return predicate->GetID() == id;
+                });
+
+			if(it != mPredicates.end())
+			{
+				mPredicates.erase(it);
+			}
+		}
+
 	}
 }
