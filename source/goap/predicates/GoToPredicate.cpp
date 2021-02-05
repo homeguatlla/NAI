@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GoToPredicate.h"
+#include <glm/gtx/string_cast.hpp>
 
 namespace NAI
 {
@@ -15,9 +16,10 @@ namespace NAI
 		{
 		}
 
-		GoToPredicate::GoToPredicate(int id, const std::string& text, const glm::vec3& position) : 
+		GoToPredicate::GoToPredicate(int id, const std::string& text, const glm::vec3& location) : 
         BasePredicate(id, text),
-        mPosition{position}
+		mPlaceName{glm::to_string(location)},
+        mLocation{location}
 		{
 		}
 		

@@ -31,7 +31,12 @@ namespace NAI
 			if(!mWaitingForPath)
 			{
 				auto placeName = GetPlaceToGo();
-				const auto destination = mNavigationPlanner->GetLocationGivenAName(placeName);
+				glm::vec3 destination;
+				
+				if(auto goalPtr = mGoal.lock())
+				{
+					destination = goalPtr->GetDestination(GetPredicateMatchedPreconditionWithIndex(0));
+				}
 				if(const auto agentPtr = mAgent.lock())
 				{
 					mWaitingForPath = true;

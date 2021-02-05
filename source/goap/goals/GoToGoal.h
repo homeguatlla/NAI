@@ -26,7 +26,8 @@ namespace NAI
 			~GoToGoal() override = default;
 			void OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path);
 			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
-
+			glm::vec3 GetDestination(const std::shared_ptr<IPredicate> predicate) const;
+		
 		protected:
 			void DoCreate(const std::shared_ptr<IAgent>& agent) override;
 			void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
@@ -36,8 +37,8 @@ namespace NAI
 			std::shared_ptr<FollowPathAction> CreateFollowPathAction(const std::weak_ptr<IAgent>& agent, const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& navigationPath) const;
 			std::shared_ptr<FindPathToAction> CreateFindPathToAction(const std::weak_ptr<IAgent>& agent, const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner);
 			void RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates) const;
-			void UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates) const;
-
+			void UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates) const;			
+		
 		private:
 			std::weak_ptr<IAgent> mAgent;
 			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;

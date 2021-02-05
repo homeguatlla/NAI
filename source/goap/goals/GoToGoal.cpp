@@ -41,8 +41,8 @@ namespace NAI
 				if(const auto agent = mAgent.lock())
 				{
 					const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(inputPredicates[0]);
-					const auto destination = mNavigationPlanner->GetLocationGivenAName(goToPredicate->GetPlaceName());
-
+					const glm::vec3 destination = GetDestination(goToPredicate);
+					
 					return mNavigationPlanner->GetAproxCost(agent->GetPosition(), destination);
 				}
 			}
@@ -134,6 +134,20 @@ namespace NAI
 			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath, mPrecision);
 
 			return followPathTo;
+		}
+
+		glm::vec3 GoToGoal::GetDestination(const std::shared_ptr<IPredicate> predicate) const
+		{
+			const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(predicate);
+			glm::vec3 destination(0.0f);
+			const auto hasDestination = mNavigationPlanner->FillWithLocationGivenAName(goToPredicate->GetPlaceName(), destination);
+
+			if(!hasDestination)
+			{
+				destination = goToPredicate->GetLocation();
+			}
+
+			return destination;
 		}
 	}
 }

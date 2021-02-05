@@ -32,7 +32,7 @@ namespace NAI
 
 		private:
 			std::string GetPlaceToGo() const;
-
+			
 			std::weak_ptr<GoToGoal> mGoal;
 			std::weak_ptr<IAgent> mAgent;
 			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;
