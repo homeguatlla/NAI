@@ -76,10 +76,15 @@ namespace NAI
 
 		void Processing::Abort()
 		{
+			//we should update the predicates handler if abort is because a new predicate.
+			mPredicatesHandler = GetContext()->GetPredicatesHandler();
 			auto plan = GetContext()->GetPlan();
 			if (plan)
 			{
-				plan->Cancel();
+				auto& newPredicates = mPredicatesHandler.GetPredicatesList();
+				plan->Cancel(newPredicates);
+				mPredicatesHandler.Reset(newPredicates);
+				GetContext()->SetPredicatesHandler(mPredicatesHandler);
 				mCurrentAction = nullptr;
 			}
 			

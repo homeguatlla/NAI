@@ -90,7 +90,7 @@ namespace NAI
 			DoAccomplished(predicates);
 		}
 
-		void BaseGoal::Cancel()
+		void BaseGoal::Cancel(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			if(HasActions())
 			{
@@ -99,7 +99,7 @@ namespace NAI
 
 			mCurrentActionIndex = 0;
 			
-			DoCancel();
+			DoCancel(predicates);
 		}
 
 		void BaseGoal::Reset()

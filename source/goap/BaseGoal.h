@@ -25,7 +25,7 @@ namespace NAI
 			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override { return mCost; }
 			bool SatisfyActions(const std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
 			void Accomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;
-			void Cancel() final override;
+			void Cancel(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;
 			void Reset() final override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
@@ -34,7 +34,7 @@ namespace NAI
 		protected:
 			virtual void DoCreate(const std::shared_ptr<IAgent>& agent) {}
 			virtual void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
-			virtual void DoCancel() {}
+			virtual void DoCancel(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
 			virtual void DoReset() {}
 			virtual std::shared_ptr<IPredicate>	DoTransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const { return {}; }
 		private:

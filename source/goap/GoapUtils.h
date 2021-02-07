@@ -69,16 +69,16 @@ namespace NAI
 				std::vector<std::shared_ptr<IPredicate>>& predicates,
 				const std::string& text)
 			{
-				auto it = std::find_if(predicates.begin(), predicates.end(),
-					[&text](const std::shared_ptr<IPredicate> predicate)
-					{
-						return predicate->GetText() == text;
-					});
-
-				bool found = it != predicates.end();
-				if (found)
+				for(auto it = predicates.begin(); it != predicates.end();)
 				{
-					predicates.erase(it);
+					if((*it)->GetText() == text)
+					{
+						it = predicates.erase(it);
+					}
+					else
+					{
+						++it;
+					}
 				}
 			}
 		};
