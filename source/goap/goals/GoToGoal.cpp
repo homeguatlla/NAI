@@ -26,12 +26,18 @@ namespace NAI
 		void GoToGoal::DoCreate(const std::shared_ptr<IAgent>& agent)
 		{
 			mAgent = agent;
-			Reset();
+			mActions.push_back(CreateFindPathToAction(mAgent, mNavigationPlanner));
 		}
 
-		void GoToGoal::DoReset()
+		void GoToGoal::DoReset(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
+			Utils::RemovePredicateWith(predicates, "GotPath");
 			mActions.push_back(CreateFindPathToAction(mAgent, mNavigationPlanner));
+		}
+
+		void GoToGoal::DoCancel(std::vector<std::shared_ptr<IPredicate>>& predicates)
+		{
+			Utils::RemovePredicateWith(predicates, "GotPath");
 		}
 
 		unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const

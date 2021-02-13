@@ -31,7 +31,8 @@ namespace NAI
 		protected:
 			void DoCreate(const std::shared_ptr<IAgent>& agent) override;
 			void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
-			void DoReset() override;
+			void DoReset(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
+			void DoCancel(std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 		
 		private:
 			std::shared_ptr<FollowPathAction> CreateFollowPathAction(const std::weak_ptr<IAgent>& agent, const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& navigationPath) const;

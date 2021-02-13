@@ -10,7 +10,7 @@ namespace NAI
 			auto it = std::find_if(mPredicates.begin(), mPredicates.end(),
                 [predicate](const std::shared_ptr<IPredicate>& p)
                 {
-                    return p->GetText() == predicate->GetText();
+                    return p->GetID() == predicate->GetID();
                 });
 			if(it == mPredicates.end())
 			{

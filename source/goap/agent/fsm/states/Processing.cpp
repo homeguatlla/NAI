@@ -50,7 +50,10 @@ namespace NAI
 			auto plan = GetContext()->GetPlan();
 			if (plan)
 			{
-				plan->Reset();
+				auto& newPredicates = mPredicatesHandler.GetPredicatesList();
+				plan->Reset(newPredicates);
+				mPredicatesHandler.Reset(newPredicates);
+				GetContext()->SetPredicatesHandler(mPredicatesHandler);
 			}
 			GetContext()->SetPlan(nullptr);
 		}
@@ -67,7 +70,7 @@ namespace NAI
 			{
 				auto& newPredicates = mPredicatesHandler.GetPredicatesList();
 				plan->Accomplished(newPredicates);
-				plan->Reset();
+				plan->Reset(newPredicates);
 				mPredicatesHandler.Reset(newPredicates);
 				GetContext()->SetPredicatesHandler(mPredicatesHandler);
 			}

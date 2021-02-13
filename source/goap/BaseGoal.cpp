@@ -54,7 +54,7 @@ namespace NAI
 
 				actions.swap(mActions);
 
-				int lastPredicatesSize = predicates.size();
+				auto lastPredicatesSize = predicates.size();
 				do
 				{
 					lastPredicatesSize = predicates.size();
@@ -102,12 +102,12 @@ namespace NAI
 			DoCancel(predicates);
 		}
 
-		void BaseGoal::Reset()
+		void BaseGoal::Reset(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
 			mActions.clear();
 			mCurrentActionIndex = 0;
 
-			DoReset();
+			DoReset(predicates);
 		}
 
 		std::vector<std::shared_ptr<IPredicate>> BaseGoal::GetPredicatesCanBeAccomplished(
@@ -142,7 +142,12 @@ namespace NAI
 					auto accomplishedPredicates = action->GetPredicatesSatisfyPreconditions(inputPredicates);
 					if (!accomplishedPredicates.empty())
 					{
-						result = Utils::Concat(result, accomplishedPredicates);
+						if(result.size() == 0)
+						{
+							//Only the first action accomplishedPredicates are needed into result.
+							//The other accomplished predicates will be achieved once actions are done.
+							result = Utils::Concat(result, accomplishedPredicates);
+						}
 						inputPredicates = Utils::Concat(inputPredicates, action->GetPostconditions());
 					}
 				}
