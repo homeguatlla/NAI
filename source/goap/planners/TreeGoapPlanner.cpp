@@ -14,21 +14,21 @@ namespace NAI
 			if (!inputPredicates.empty() && !inputGoals.empty())
 			{
 				std::shared_ptr<IGoal> lessCostGoal = nullptr;
-				unsigned int lessCost = std::numeric_limits<unsigned int>::max();
+				auto lessCost = std::numeric_limits<unsigned int>::max();
 				std::vector<std::shared_ptr<IPredicate>> lessCostGoalPredicates;
 
 				for (auto&& goal : inputGoals)
 				{
 					auto newPredicates = inputPredicates;
-					bool satisfyGoalPreconditions = false;
+					auto goalSatisfied = false;
 					do 
 					{
-						auto predicatesAccomplished = goal->GetPredicatesSatisfyPreconditions(newPredicates);
-						satisfyGoalPreconditions = !predicatesAccomplished.empty();
-
-						if(satisfyGoalPreconditions)
+						goalSatisfied = goal->SatisfyActions(newPredicates);
+						
+						if(goalSatisfied)
 						{
-							auto cost = goal->GetCost(predicatesAccomplished);
+							auto predicatesAccomplished = goal->GetPredicatesSatisfyPreconditions(newPredicates);
+							const auto cost = goal->GetCost(predicatesAccomplished);
 							if(lessCostGoal == nullptr ||  cost < lessCost)
 							{
 								lessCost = cost;
@@ -37,9 +37,10 @@ namespace NAI
 							}
 							newPredicates = Utils::Substract(newPredicates, predicatesAccomplished);
 						}
-					} while(satisfyGoalPreconditions && !newPredicates.empty());
+					} while(goalSatisfied && !newPredicates.empty());
 				}
-				
+
+				//Changing the priority of the predicates, putting first the ones the goal should use
 				inputPredicates = Utils::Substract(inputPredicates, lessCostGoalPredicates);
 				inputPredicates.insert(inputPredicates.begin(), lessCostGoalPredicates.begin(), lessCostGoalPredicates.end());
 
@@ -54,9 +55,9 @@ namespace NAI
 			std::vector<std::shared_ptr<IPredicate>>& inputPredicates,
 			std::vector<std::shared_ptr<IPredicate>>& desiredPredicates) const
 		{
-			unsigned int bestCost = std::numeric_limits<unsigned int>::max();
+			auto bestCost = std::numeric_limits<unsigned int>::max();
 			std::vector<std::shared_ptr<IGoal>> bestResult;
-			bool isSolved = false;
+			auto isSolved = false;
 
 			for (auto&& goal : inputGoals)
 			{
@@ -70,7 +71,7 @@ namespace NAI
 					auto newInputPredicates = Utils::Concat(inputPredicates, predicatesAccomplished);
 
 					auto newGoals = inputGoals;
-					auto it = std::remove_if(newGoals.begin(), newGoals.end(), [&goal](std::shared_ptr<IGoal> g) { return g == goal; });
+					const auto it = std::remove_if(newGoals.begin(), newGoals.end(), [&goal](std::shared_ptr<IGoal> g) { return g == goal; });
 					newGoals.erase(it);
 					result.push_back(goal);
 
@@ -113,7 +114,7 @@ namespace NAI
 			std::vector<std::shared_ptr<IGoal>>& result) const
 		{
 			unsigned int cost = 0;
-			for (auto plan : newResult)
+			for (const auto plan : newResult)
 			{
 				cost += plan->GetCost();
 			}

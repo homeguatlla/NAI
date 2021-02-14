@@ -50,9 +50,7 @@ namespace NAI
 			if (!inputPredicates.empty() && !mActions.empty())
 			{
 				auto predicates = inputPredicates;
-				std::vector<std::shared_ptr<IAction>> actions;
-
-				actions.swap(mActions);
+				std::vector<std::shared_ptr<IAction>> actions = mActions, actionsSatisfy;
 
 				auto lastPredicatesSize = predicates.size();
 				do
@@ -69,7 +67,7 @@ namespace NAI
 						{
 							const auto postconditions = action->GetPostconditions();
 							predicates.insert(end(predicates), begin(postconditions), end(postconditions));
-							mActions.push_back(action);
+							actionsSatisfy.push_back(action);
 							it = actions.erase(it);
 						}
 						else
@@ -79,7 +77,7 @@ namespace NAI
 					}
 				} while (static_cast<int>(predicates.size()) > lastPredicatesSize);
 
-				satisfied = actions.empty() && !mActions.empty();
+				satisfied = actions.empty() && !actionsSatisfy.empty();
 			}
 
 			return satisfied;
@@ -140,19 +138,21 @@ namespace NAI
 				for (auto&& action : mActions)
 				{
 					auto accomplishedPredicates = action->GetPredicatesSatisfyPreconditions(inputPredicates);
-					if (!accomplishedPredicates.empty())
+					if (accomplishedPredicates.size() == action->GetPreconditions().size())
 					{
-						if(result.size() == 0)
-						{
-							//Only the first action accomplishedPredicates are needed into result.
-							//The other accomplished predicates will be achieved once actions are done.
-							result = Utils::Concat(result, accomplishedPredicates);
-						}
-						inputPredicates = Utils::Concat(inputPredicates, action->GetPostconditions());
+						result = Utils::Concat(result, accomplishedPredicates);
+						//esto no se puede hacer pues devolverá predicados nuevos que no estaban al inicio
+						//si no quitamos los que se han añadido como postcondición.
+						//De momento pues, este método solo devolverá aquellos predicados de la lista inicial
+						//que se satisfacen alguna precondición
+						//inputPredicates = Utils::Concat(inputPredicates, action->GetPostconditions());
 					}
 				}
 			}
 
+			//solo devuelve los predicados de la lista inicial que cumplen alguna precondición de alguna acción.
+			//a partir de ahí, si se ha validado que se puede ejecutar el goal,
+			//se supone que se podrá ejecutar esa acción y por tanto las demás.
 			return result;
 		}
 
