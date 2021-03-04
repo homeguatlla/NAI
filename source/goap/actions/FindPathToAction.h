@@ -14,14 +14,14 @@ namespace NAI
 
 	namespace Goap
 	{
-		class GoToGoal;
+		class IGoToGoal;
 		class IAgent;
 		
 		class FindPathToAction : public BaseAction
 		{
 		public:
 			FindPathToAction(
-				const std::shared_ptr<GoToGoal>& goal,
+				const std::shared_ptr<IGoToGoal>& goal,
 				const std::vector<std::string>& preConditions,
 				const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 				const std::weak_ptr<IAgent>& agent,
@@ -33,7 +33,7 @@ namespace NAI
 		private:
 			std::string GetPlaceToGo() const;
 			
-			std::weak_ptr<GoToGoal> mGoal;
+			std::weak_ptr<IGoToGoal> mGoal;
 			std::weak_ptr<IAgent> mAgent;
 			std::shared_ptr<Navigation::INavigationPlanner> mNavigationPlanner;
 			bool mWaitingForPath;

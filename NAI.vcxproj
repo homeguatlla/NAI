@@ -180,6 +180,7 @@
     <ClInclude Include="source\goap\BaseGoal.h" />
     <ClInclude Include="source\goap\goals\GoToGoal.h" />
     <ClInclude Include="source\goap\BasePredicate.h" />
+    <ClInclude Include="source\goap\goals\IGoToGoal.h" />
     <ClInclude Include="source\goap\GoapUtils.h" />
     <ClInclude Include="source\goap\IAction.h" />
     <ClInclude Include="source\goap\IGoal.h" />

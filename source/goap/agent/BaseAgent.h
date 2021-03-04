@@ -43,7 +43,8 @@ namespace NAI
 			const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const override;
 			std::map<std::string, std::shared_ptr<IThreshold>> GetSensoryThresholds() const override { return mThresholds; }
 			void AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold) override;
-		
+			void AddNewGoal(std::shared_ptr<IGoal> goal) override;
+			
 		private:
 			void CreateStatesMachine();
 			void NotifyPredicatesListChangedToProcessState();
@@ -56,6 +57,7 @@ namespace NAI
 			std::vector<std::shared_ptr<IGoal>> mGoals;
 			std::map<std::string, std::shared_ptr<IThreshold>> mThresholds;
 			std::shared_ptr<PerceptionSystem> mPerceptionSystem;
+			bool mIsAgentStartedUp;
 		};
 	}
 }

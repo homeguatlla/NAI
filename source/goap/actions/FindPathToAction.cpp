@@ -3,6 +3,7 @@
 #include "goap/agent/IAgent.h"
 #include "goap/goals/GoToGoal.h"
 #include "goap/IPredicate.h"
+#include "goap/goals/IGoToGoal.h"
 #include "goap/predicates/GoToPredicate.h"
 #include "navigation/INavigationPlanner.h"
 
@@ -12,7 +13,7 @@ namespace NAI
 	namespace Goap
 	{
 		FindPathToAction::FindPathToAction(
-			const std::shared_ptr<GoToGoal>& goal,
+			const std::shared_ptr<IGoToGoal>& goal,
 			const std::vector<std::string>& preConditions,
 			const std::vector<std::shared_ptr<IPredicate>>& postConditions,
 			const std::weak_ptr<IAgent>& agent,
@@ -64,9 +65,16 @@ namespace NAI
 			//TODO presuponemos que las precondiciones y los matched predicates est�n en el mismo orden.
 			//quiz� se podr�an relacionar para no tener que presuponer esto.
 			const auto goToPredicateMatch = GetPredicateMatchedPreconditionWithIndex(0);
-			const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(goToPredicateMatch);
+			const auto goToPredicate = std::dynamic_pointer_cast<GoToPredicate>(goToPredicateMatch);
 
-			return goToPredicate->GetPlaceName();
+			if(goToPredicate)
+			{
+				return goToPredicate->GetPlaceName();
+			}
+			else
+			{
+				return std::string("-");
+			}
 		}
 	}
 }

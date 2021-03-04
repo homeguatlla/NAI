@@ -6,6 +6,8 @@
 #include <memory>
 #include <string>
 
+#include "IGoToGoal.h"
+
 
 namespace NAI
 {
@@ -19,14 +21,14 @@ namespace NAI
 	{
 		class IAgent;
 
-		class GoToGoal : public BaseGoal
+		class GoToGoal : public BaseGoal, public IGoToGoal
 		{
 		public:
 			GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner, float precision = 0.01f);
 			~GoToGoal() override = default;
-			void OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path);
+			void OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path) override;
 			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
-			glm::vec3 GetDestination(const std::shared_ptr<IPredicate> predicate) const;
+			glm::vec3 GetDestination(const std::shared_ptr<IPredicate> predicate) const override;
 		
 		protected:
 			void DoCreate(const std::shared_ptr<IAgent>& agent) override;

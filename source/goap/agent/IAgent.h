@@ -38,6 +38,7 @@ namespace NAI
 			virtual const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const = 0;
 			virtual void AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold) = 0;
 			virtual std::map<std::string, std::shared_ptr<IThreshold>> GetSensoryThresholds() const = 0;
+			virtual void AddNewGoal(std::shared_ptr<IGoal> goal) = 0;
 		};
 	}
 }

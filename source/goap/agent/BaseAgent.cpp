@@ -27,7 +27,8 @@ namespace NAI
 		                     const std::shared_ptr<PerceptionSystem> perceptionSystem) :
 			mGoapPlanner{ goapPlanner },
 			mGoals { goals },
-			mPerceptionSystem{perceptionSystem}
+			mPerceptionSystem{perceptionSystem},
+			mIsAgentStartedUp{false}
 		{
 			assert(goapPlanner);
 			mPredicatesHandler.Reset(predicates);
@@ -40,6 +41,7 @@ namespace NAI
 			{
 				goal->Create(shared_from_this());
 			}
+			mIsAgentStartedUp = true;
 		}
 
 		void BaseAgent::Update(float elapsedTime)
@@ -130,6 +132,17 @@ namespace NAI
 			if(!found)
 			{
 				mThresholds[stimulusClassName] = threshold;
+			}
+		}
+
+		void BaseAgent::AddNewGoal(std::shared_ptr<IGoal> goal)
+		{
+			mGoals.push_back(goal);
+			mAgentContext->SetGoals(mGoals);
+			
+			if(mIsAgentStartedUp)
+			{
+				goal->Create(shared_from_this());
 			}
 		}
 

@@ -27,7 +27,8 @@ namespace NAI
 
 			//Goals
 			std::vector<std::shared_ptr<IGoal>> GetGoals() const { return mGoals; }
-
+			void SetGoals(std::vector<std::shared_ptr<IGoal>>& goals) { mGoals = goals;}
+			
 			virtual ~AgentContext() = default;
 
 			private:
