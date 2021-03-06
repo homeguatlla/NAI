@@ -63,7 +63,7 @@ namespace NAI
 
 		std::string BaseAgent::WhereIam() const
 		{
-			const auto predicateFound = mPredicatesHandler.FindByText(std::string("PlaceIam"));
+			const auto predicateFound = mPredicatesHandler.FindByText(PLACE_IAM_PREDICATE_NAME);
 			
 			if (predicateFound != nullptr)
 			{

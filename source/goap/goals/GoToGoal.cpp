@@ -3,7 +3,6 @@
 #include "goap/actions/FindPathToAction.h"
 #include "goap/actions/FollowPathAction.h"
 #include "goap/predicates/GoToPredicate.h"
-#include "goap/predicates/GoapPredicates.h"
 #include "goap/predicates/PlaceIamPredicate.h"
 #include "goap/agent/IAgent.h"
 #include "goap/GoapUtils.h"
@@ -31,13 +30,13 @@ namespace NAI
 
 		void GoToGoal::DoReset(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
-			Utils::RemovePredicateWith(predicates, "GotPath");
+			Utils::RemovePredicateWith(predicates, PREDICATE_GOT_PATH_NAME);
 			mActions.push_back(CreateFindPathToAction(mAgent, mNavigationPlanner));
 		}
 
 		void GoToGoal::DoCancel(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
-			Utils::RemovePredicateWith(predicates, "GotPath");
+			Utils::RemovePredicateWith(predicates, PREDICATE_GOT_PATH_NAME);
 		}
 
 		unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
@@ -58,20 +57,22 @@ namespace NAI
 
 		void GoToGoal::DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates)
 		{
+			predicates.push_back(std::make_shared<PlaceIamPredicate>(PLACE_IAM_PREDICATE_ID, PLACE_IAM_PREDICATE_NAME, mPlaceName));
 			UpdatePlaceIamPredicate(predicates);
 			RemovePredicateGoTo(predicates);
-			Utils::RemovePredicateWith(predicates, "GotPath");
+			Utils::RemovePredicateWith(predicates, PREDICATE_GOT_PATH_NAME);
+			
 		}
 
 		void GoToGoal::UpdatePlaceIamPredicate(std::vector<std::shared_ptr<IPredicate>>& predicates) const
 		{
 			std::shared_ptr<IPredicate> predicate;
-			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicate))
+			if (Utils::FindPredicateWith(predicates, PLACE_IAM_PREDICATE_NAME, predicate))
 			{
 				const auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicate);
 				if (placeIamPredicate->GetPlaceName() != mPlaceName)
 				{
-					Utils::RemovePredicateWith(predicates, "PlaceIam");
+					Utils::RemovePredicateWith(predicates, PLACE_IAM_PREDICATE_NAME);
 				}
 			}
 		}
@@ -79,7 +80,7 @@ namespace NAI
 		void GoToGoal::RemovePredicateGoTo(std::vector<std::shared_ptr<IPredicate>>& predicates) const
 		{
 			std::shared_ptr<IPredicate> predicateFound;
-			if (Utils::FindPredicateWith(predicates, "PlaceIam", predicateFound))
+			if (Utils::FindPredicateWith(predicates, PLACE_IAM_PREDICATE_NAME, predicateFound))
 			{
 				const auto placeIamPredicate = std::static_pointer_cast<PlaceIamPredicate>(predicateFound);
 				auto placeName = placeIamPredicate->GetPlaceName();
@@ -87,7 +88,7 @@ namespace NAI
 				const auto it = std::find_if(predicates.begin(), predicates.end(),
 					[&placeName](const std::shared_ptr<IPredicate>& predicate)
 					{
-						if (predicate->GetText() == "GoTo")
+						if (predicate->GetText() == PREDICATE_GO_TO_NAME)
 						{
 							const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(predicate);
 							return goToPredicate->GetPlaceName() == placeName;
@@ -121,8 +122,8 @@ namespace NAI
 		{
 			std::vector<std::string> preConditions;
 			std::vector<std::shared_ptr<IPredicate>> postConditions;
-			preConditions.push_back(Predicates::PREDICATE_GO_TO->GetText());
-			postConditions.push_back(Predicates::PREDICATE_GOT_PATH);
+			preConditions.push_back(PREDICATE_GO_TO_NAME);
+			postConditions.push_back(std::make_shared<BasePredicate>(PREDICATE_GOT_PATH_ID, PREDICATE_GOT_PATH_NAME));
 
 			const auto goal = std::static_pointer_cast<GoToGoal>(shared_from_this());
 			auto findPathTo = std::make_shared<FindPathToAction>(goal, preConditions, postConditions, agent, navigationPlanner);
@@ -134,9 +135,8 @@ namespace NAI
 		{
 			std::vector<std::string> preConditions;
 			std::vector<std::shared_ptr<IPredicate>> postConditions;
-			preConditions.push_back(Predicates::PREDICATE_GOT_PATH->GetText());
-			postConditions.push_back(std::make_shared<PlaceIamPredicate>(PLACE_IAM_PREDICATE_ID, "PlaceIam", placeName));
-
+			preConditions.push_back(PREDICATE_GOT_PATH_NAME);
+			
 			auto followPathTo = std::make_shared<FollowPathAction>(preConditions, postConditions, agent, navigationPath, mPrecision);
 
 			return followPathTo;
