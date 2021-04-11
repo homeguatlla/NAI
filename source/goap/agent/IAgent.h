@@ -30,12 +30,13 @@ namespace NAI
 			virtual std::string WhereIam() const = 0;
 			virtual void OnNewPredicate(std::shared_ptr<IPredicate> predicate) = 0;
 			virtual void OnUpdatePredicate(std::shared_ptr<IPredicate> predicate) = 0;
-			virtual void RemovePredicate(int id) = 0;
+			virtual void OnRemovePredicate(std::shared_ptr<IPredicate> predicate) = 0;
 			virtual const std::vector<std::shared_ptr<IGoal>>& GetGoals() const = 0;
 			virtual const std::vector<std::shared_ptr<IPredicate>>& GetPredicates() const = 0;
 			virtual glm::vec3 GetPosition() const = 0;
 			virtual void MoveTo(float elapsedTime, const glm::vec3& point) = 0;
 			virtual const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const = 0;
+			virtual std::vector<int> GetPredicatesIdsToRemove() const = 0;
 			virtual void AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold) = 0;
 			virtual std::map<std::string, std::shared_ptr<IThreshold>> GetSensoryThresholds() const = 0;
 			virtual void AddNewGoal(std::shared_ptr<IGoal> goal) = 0;

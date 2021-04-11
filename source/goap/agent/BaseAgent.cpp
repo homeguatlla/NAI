@@ -89,9 +89,11 @@ namespace NAI
 			mAgentContext->SetPredicatesHandler(mPredicatesHandler);
 		}
 
-		void BaseAgent::RemovePredicate(int id)
+		void BaseAgent::OnRemovePredicate(std::shared_ptr<IPredicate> predicate)
 		{
-			mPredicatesHandler.Remove(id);
+			mPredicatesHandler.Remove(predicate->GetID());
+			mAgentContext->SetPredicatesHandler(mPredicatesHandler);
+			NotifyPredicatesListChangedToProcessState();
 		}
 
 		const std::vector<std::shared_ptr<IPredicate>> BaseAgent::TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const
@@ -111,9 +113,32 @@ namespace NAI
 			return predicates;
 		}
 
+		std::vector<int> BaseAgent::GetPredicatesIdsToRemove() const
+		{
+			std::vector<int> predicatesIdsToRemove;
+			
+			for(auto&& goal : mGoals)
+			{
+				auto predicatesIds = goal->GetPredicatesIdsToRemove();
+				predicatesIdsToRemove.insert(predicatesIdsToRemove.end(), predicatesIds.begin(), predicatesIds.end());	
+			}
+			/*
+			const auto currentState = mStatesMachine->GetCurrentState();
+			if (currentState != nullptr && currentState->GetID() == AgentState::STATE_PROCESSING)
+			{
+				const auto context = mStatesMachine->GetContext();
+				if(context->HasPlan())
+				{
+					return context->GetPlan()->GetPredicatesIdsToRemove();	
+				}
+			}*/
+			
+			return predicatesIdsToRemove;
+		}
+
 		void BaseAgent::NotifyPredicatesListChangedToProcessState()
 		{
-			auto currentState = mStatesMachine->GetCurrentState();
+			const auto currentState = mStatesMachine->GetCurrentState();
 			if (currentState != nullptr && currentState->GetID() == AgentState::STATE_PROCESSING)
 			{
 				auto processingState = std::static_pointer_cast<Processing>(currentState);

@@ -30,6 +30,7 @@ namespace NAI
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
 			std::shared_ptr<IPredicate>	TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const override;
+			std::vector<int> GetPredicatesIdsToRemove() const override;
 		
 		protected:
 			virtual void DoCreate(const std::shared_ptr<IAgent>& agent) {}
@@ -37,6 +38,8 @@ namespace NAI
 			virtual void DoCancel(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
 			virtual void DoReset(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
 			virtual std::shared_ptr<IPredicate>	DoTransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const { return {}; }
+			virtual std::vector<int> DoGetPredicatesIdsToRemove() const { return {}; }
+		
 		private:
 			void CalculateCost();
 

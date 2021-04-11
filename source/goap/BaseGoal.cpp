@@ -160,5 +160,10 @@ namespace NAI
 		{
 			return DoTransformStimulusIntoPredicates(memory);
 		}
+
+		std::vector<int> BaseGoal::GetPredicatesIdsToRemove() const
+		{
+			return DoGetPredicatesIdsToRemove();	
+		}
 	}
 }

@@ -15,10 +15,14 @@ namespace NAI
             CognitiveSystem() = default;
             ~CognitiveSystem() = default;
 
-            void Update(
+           void Update(
                 float elapsedTime, 
                 ShortTermMemory<IStimulus>& memory, 
                 std::shared_ptr<IAgent> agent);
+
+        private:
+            void AddPredicatesFromStimulus(ShortTermMemory<IStimulus>& memory, std::shared_ptr<IAgent> agent);
+            void RemovePredicatesFromStimulus(std::shared_ptr<IAgent> agent);
         };
     }
 }

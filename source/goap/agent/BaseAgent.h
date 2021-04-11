@@ -37,10 +37,11 @@ namespace NAI
 			std::string WhereIam() const override;
 			void OnNewPredicate(std::shared_ptr<IPredicate> predicate) override;
 			void OnUpdatePredicate(std::shared_ptr<IPredicate> predicate) override;
-			void RemovePredicate(int id) override;
+			void OnRemovePredicate(std::shared_ptr<IPredicate> predicate) override;
 			const std::vector<std::shared_ptr<IGoal>>& GetGoals() const override { return mGoals; }
 			const std::vector<std::shared_ptr<IPredicate>>& GetPredicates() const override { return mPredicatesHandler.GetPredicatesList(); }
 			const std::vector<std::shared_ptr<IPredicate>> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const override;
+			std::vector<int> GetPredicatesIdsToRemove() const override;
 			std::map<std::string, std::shared_ptr<IThreshold>> GetSensoryThresholds() const override { return mThresholds; }
 			void AddSensoryThreshold(const std::string& stimulusClassName, std::shared_ptr<IThreshold> threshold) override;
 			void AddNewGoal(std::shared_ptr<IGoal> goal) override;
