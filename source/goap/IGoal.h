@@ -23,7 +23,7 @@ namespace NAI
 			virtual std::shared_ptr<IAction> GetNextAction() = 0;
 			virtual bool HasActions() const = 0;
 			virtual unsigned int GetCost() const = 0;
-			virtual unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const = 0;
+			virtual unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates, std::vector<std::shared_ptr<IPredicate>>& accomplishedPredicates) const = 0;
 			virtual bool SatisfyActions(const std::vector<std::shared_ptr<IPredicate>>& inputPredicates) = 0;
 			virtual void Accomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;
 			virtual void Cancel(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;

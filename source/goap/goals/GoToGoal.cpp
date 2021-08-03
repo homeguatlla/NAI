@@ -39,13 +39,13 @@ namespace NAI
 			Utils::RemovePredicateWith(predicates, PREDICATE_GOT_PATH_NAME);
 		}
 
-		unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const
+		unsigned int GoToGoal::GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates, std::vector<std::shared_ptr<IPredicate>>& accomplishedPredicates) const
 		{
-			if(!inputPredicates.empty())
+			if(!accomplishedPredicates.empty())
 			{ 
 				if(const auto agent = mAgent.lock())
 				{
-					const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(inputPredicates[0]);
+					const auto goToPredicate = std::static_pointer_cast<GoToPredicate>(accomplishedPredicates[0]);
 					const glm::vec3 destination = GetDestination(goToPredicate);
 					
 					return mNavigationPlanner->GetAproxCost(agent->GetPosition(), destination);

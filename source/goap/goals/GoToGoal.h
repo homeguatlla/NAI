@@ -27,7 +27,7 @@ namespace NAI
 			GoToGoal(const std::shared_ptr<Navigation::INavigationPlanner>& navigationPlanner, float precision = 0.01f);
 			~GoToGoal() override = default;
 			void OnNavigationPath(const std::string& placeName, const std::shared_ptr<Navigation::INavigationPath>& path) override;
-			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override;
+			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates, std::vector<std::shared_ptr<IPredicate>>& accomplishedPredicates) const override;
 			glm::vec3 GetDestination(const std::shared_ptr<IPredicate> predicate) const override;
 		
 		protected:

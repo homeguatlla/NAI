@@ -22,7 +22,7 @@ namespace NAI
 			std::shared_ptr<IAction> GetNextAction() override;
 			bool HasActions() const override { return mCurrentActionIndex < mActions.size(); }
 			unsigned int GetCost() const override { return mCost; }
-			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates) const override { return mCost; }
+			unsigned int GetCost(std::vector<std::shared_ptr<IPredicate>>& inputPredicates, std::vector<std::shared_ptr<IPredicate>>& accomplishedPredicates) const override { return mCost; }
 			bool SatisfyActions(const std::vector<std::shared_ptr<IPredicate>>& inputPredicates) override;
 			void Accomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;
 			void Cancel(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;

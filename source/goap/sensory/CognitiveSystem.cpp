@@ -30,7 +30,7 @@ namespace NAI
 
                 for(auto&& predicate : newPredicatesList)
                 {
-                    auto found = std::find_if(predicatesList.begin(), predicatesList.end(),
+                    const auto found = std::find_if(predicatesList.begin(), predicatesList.end(),
                                               [predicate](const std::shared_ptr<IPredicate> p)
                                               {
                                                   return predicate->GetID() == p->GetID();

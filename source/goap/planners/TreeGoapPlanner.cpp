@@ -28,7 +28,7 @@ namespace NAI
 						if(goalSatisfied)
 						{
 							auto predicatesAccomplished = goal->GetPredicatesSatisfyPreconditions(newPredicates);
-							const auto cost = goal->GetCost(predicatesAccomplished);
+							const auto cost = goal->GetCost(inputPredicates, predicatesAccomplished);
 							if(lessCostGoal == nullptr ||  cost < lessCost)
 							{
 								lessCost = cost;
