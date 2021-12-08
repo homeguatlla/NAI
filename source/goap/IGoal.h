@@ -30,7 +30,7 @@ namespace NAI
 			virtual void Reset(std::vector<std::shared_ptr<IPredicate>>& predicates) = 0;
 			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) = 0;
 			virtual std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) = 0;
-			virtual std::shared_ptr<IPredicate> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const = 0;
+			virtual std::shared_ptr<IPredicate> TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) = 0;
 			virtual std::vector<int> GetPredicatesIdsToRemove() const = 0;
 		};
 	}

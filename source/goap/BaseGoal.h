@@ -29,7 +29,7 @@ namespace NAI
 			void Reset(std::vector<std::shared_ptr<IPredicate>>& predicates) final override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesCanBeAccomplished(std::vector<std::shared_ptr<IPredicate>> desiredPredicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPreconditions(std::vector<std::shared_ptr<IPredicate>> inputPredicates) override;
-			std::shared_ptr<IPredicate>	TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const override;
+			std::shared_ptr<IPredicate>	TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) override;
 			std::vector<int> GetPredicatesIdsToRemove() const override;
 		
 		protected:
@@ -37,7 +37,7 @@ namespace NAI
 			virtual void DoAccomplished(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
 			virtual void DoCancel(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
 			virtual void DoReset(std::vector<std::shared_ptr<IPredicate>>& predicates) {}
-			virtual std::shared_ptr<IPredicate>	DoTransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const { return {}; }
+			virtual std::shared_ptr<IPredicate>	DoTransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) { return {}; }
 			virtual std::vector<int> DoGetPredicatesIdsToRemove() const { return {}; }
 		
 		private:

@@ -21,6 +21,7 @@ namespace NAI
 			unsigned int GetCost() const override { return mCost; }
 			void Process(float elapsedTime) override;
 			bool HasAccomplished() const override { return mHasAccomplished;}
+			bool HasCancelled() const override { return mHasCancelled; }
 			bool SatisfyPrecondition(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			bool SatisfyPostcondition(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
 			std::vector<std::shared_ptr<IPredicate>> GetPredicatesSatisfyPostconditions(const std::vector<std::shared_ptr<IPredicate>>& predicates) override;
@@ -49,6 +50,7 @@ namespace NAI
 
 		protected:
 			bool mHasAccomplished;
+			bool mHasCancelled;
 		};
 	}
 }

@@ -22,7 +22,7 @@ namespace NAI
 
 		void Processing::OnUpdate(float deltaTime)
 		{
-			if (!mCurrentAction)
+			if (!mCurrentAction || mCurrentAction->HasCancelled())
 			{
 				Abort();
 			}

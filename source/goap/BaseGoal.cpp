@@ -156,7 +156,7 @@ namespace NAI
 			return result;
 		}
 
-		std::shared_ptr<IPredicate> BaseGoal::TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory) const
+		std::shared_ptr<IPredicate> BaseGoal::TransformStimulusIntoPredicates(const ShortTermMemory<IStimulus>& memory)
 		{
 			return DoTransformStimulusIntoPredicates(memory);
 		}

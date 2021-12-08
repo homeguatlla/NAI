@@ -14,7 +14,8 @@ namespace NAI
 			mPreConditions{ preConditions },
 			mPostConditions{ postConditions },
 			mCost{ cost },
-			mHasAccomplished { true }
+			mHasAccomplished { true },
+			mHasCancelled { false }
 		{
 		}
 
@@ -109,6 +110,7 @@ namespace NAI
 
 		void BaseAction::Cancel()
 		{
+			mHasCancelled = true;
 		}
 
 		const std::shared_ptr<IPredicate> BaseAction::GetPredicateMatchedPreconditionWithText(
